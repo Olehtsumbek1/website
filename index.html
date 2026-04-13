@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oleh Tsumbek — Political & Economic Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0e0d0b;
+      --paper: #f5f0e8;
+      --gold: #c9973a;
+      --gold-light: #e8c07a;
+      --muted: #8a8070;
+      --rule: #d4cbbf;
+      --red: #8b2020;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(245, 240, 232, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 5rem;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 4rem 6rem 4rem;
+      border-right: 1px solid var(--rule);
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-rule {
+      width: 4rem;
+      height: 1px;
+      background: var(--gold);
+      margin: 2rem 0;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 34ch;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    .hero-tagline strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .hero-cta {
+      margin-top: 2.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 0.3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 1s forwards;
+      transition: color 0.2s, gap 0.2s;
+    }
+
+    .hero-cta:hover { color: var(--gold); gap: 1.2rem; }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 6rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14rem;
+      font-weight: 600;
+      color: rgba(0,0,0,0.04);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .hero-stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      opacity: 0;
+      animation: fadeUp 0.8s 1.1s forwards;
+    }
+
+    .hero-stat {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 2rem;
+    }
+
+    .hero-stat:nth-child(2) { background: var(--gold); color: var(--ink); }
+    .hero-stat:nth-child(3) { background: #2a2520; }
+    .hero-stat:nth-child(4) { background: var(--ink); }
+
+    .hero-stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    /* ── TICKER ── */
+    .ticker {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.7rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ticker-inner {
+      display: inline-block;
+      animation: ticker 25s linear infinite;
+    }
+
+    .ticker-item {
+      display: inline-block;
+      margin: 0 3rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .ticker-item span {
+      color: rgba(245,240,232,0.4);
+      margin: 0 0.5rem;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .about-label {
+      padding: 5rem 4rem;
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: flex-start;
+      padding-top: 5rem;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    .about-content {
+      padding: 5rem 4rem;
+    }
+
+    .about-intro {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 300;
+      line-height: 1.4;
+      color: var(--ink);
+      margin-bottom: 2rem;
+      max-width: 55ch;
+    }
+
+    .about-intro em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .about-body {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 60ch;
+      line-height: 1.9;
+    }
+
+    .about-body p + p { margin-top: 1.2rem; }
+
+    .mariupol-tag {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── ARTICLES ── */
+    .articles {
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .articles-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 3rem 4rem 2rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .articles-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+    }
+
+    .articles-header a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .articles-header a:hover { color: var(--gold); }
+
+    .article-list { }
+
+    .article-item {
+      display: grid;
+      grid-template-columns: 5rem 1fr auto;
+      align-items: start;
+      gap: 2rem;
+      padding: 2.5rem 4rem;
+      border-bottom: 1px solid var(--rule);
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .article-item:hover { background: rgba(201,151,58,0.05); }
+    .article-item:hover .article-arrow { opacity: 1; transform: translateX(0); }
+
+    .article-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      padding-top: 0.4rem;
+      letter-spacing: 0.1em;
+    }
+
+    .article-tag {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+
+    .article-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .article-item:hover .article-title { color: var(--gold); }
+
+    .article-excerpt {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 65ch;
+    }
+
+    .article-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+      padding-top: 0.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+
+    .article-arrow {
+      font-size: 1rem;
+      color: var(--gold);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    /* Featured article */
+    .article-featured {
+      background: var(--ink);
+      color: var(--paper);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 300px;
+    }
+
+    .article-featured-content {
+      padding: 3rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .article-featured-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .article-featured-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin: 1rem 0;
+    }
+
+    .article-featured-excerpt {
+      font-size: 0.88rem;
+      color: rgba(245,240,232,0.6);
+      line-height: 1.8;
+    }
+
+    .article-featured-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .article-featured-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: rgba(245,240,232,0.4);
+    }
+
+    .read-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border: 1px solid var(--gold);
+      padding: 0.5rem 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .read-btn:hover { background: var(--gold); color: var(--ink); }
+
+    .article-featured-visual {
+      background: #1a1612;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .featured-map-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8rem;
+      font-weight: 300;
+      color: rgba(201,151,58,0.12);
+      user-select: none;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      background: var(--gold);
+      padding: 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .newsletter-left h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .newsletter-left p {
+      font-size: 0.85rem;
+      color: rgba(14,13,11,0.65);
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      flex: 1;
+      max-width: 420px;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 0.85rem 1.2rem;
+      background: rgba(14,13,11,0.1);
+      border: 1px solid rgba(14,13,11,0.2);
+      border-right: none;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.85rem;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .newsletter-input::placeholder { color: rgba(14,13,11,0.4); }
+
+    .newsletter-btn {
+      padding: 0.85rem 1.5rem;
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .newsletter-btn:hover { background: #2a2520; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+    }
+
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-copy {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 7rem 1.5rem 3rem; border-right: none; border-bottom: 1px solid var(--rule); }
+      .hero-right { padding: 2rem 1.5rem 3rem; }
+      .hero-stat-grid { grid-template-columns: 1fr 1fr; }
+      .about { grid-template-columns: 1fr; }
+      .about-label { display: none; }
+      .about-content { padding: 3rem 1.5rem; }
+      .articles-header { padding: 2rem 1.5rem; }
+      .article-item { grid-template-columns: 1fr; padding: 2rem 1.5rem; gap: 0.5rem; }
+      .article-number { display: none; }
+      .article-meta { flex-direction: row; align-items: center; }
+      .article-featured { grid-template-columns: 1fr; }
+      .article-featured-visual { display: none; }
+      .article-featured-content { padding: 2rem 1.5rem; }
+      .newsletter { flex-direction: column; padding: 2.5rem 1.5rem; align-items: flex-start; }
+      .newsletter-form { max-width: 100%; width: 100%; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">O. Tsumbek</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#articles">Analysis</a></li>
+      <li><a href="#newsletter">Subscribe</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Political &amp; Economic Analysis</div>
+      <h1 class="hero-name">Oleh<br><em>Tsumbek</em></h1>
+      <div class="hero-rule"></div>
+      <p class="hero-tagline">
+        Writing on <strong>global order, conflict, and power</strong> — from someone who watched a city disappear. Based in Pittsburgh. From Mariupol.
+      </p>
+      <a class="hero-cta" href="#articles">Read the latest analysis →</a>
+    </div>
+    <div class="hero-right">
+      <div class="hero-bg-text">UA</div>
+      <div class="hero-stat-grid">
+        <div class="hero-stat">
+          <div class="hero-stat-number">1</div>
+          <div class="hero-stat-label">Deep analysis / month</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">19</div>
+          <div class="hero-stat-label">Years old. Eyewitness.</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">Pitt</div>
+          <div class="hero-stat-label">Pol. Science & Economics</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">MKP</div>
+          <div class="hero-stat-label">Mariupol, Ukraine</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item">Ukraine<span>✦</span></span>
+      <span class="ticker-item">Geopolitics<span>✦</span></span>
+      <span class="ticker-item">International Law<span>✦</span></span>
+      <span class="ticker-item">Economic Warfare<span>✦</span></span>
+      <span class="ticker-item">European Security<span>✦</span></span>
+      <span class="ticker-item">Post-War Reconstruction<span>✦</span></span>
+      <span class="ticker-item">Diplomacy<span>✦</span></span>
+      <span class="ticker-item">Global Order<span>✦</span></span>
+      <span class="ticker-item">Ukraine<span>✦</span></span>
+      <span class="ticker-item">Geopolitics<span>✦</span></span>
+      <span class="ticker-item">International Law<span>✦</span></span>
+      <span class="ticker-item">Economic Warfare<span>✦</span></span>
+      <span class="ticker-item">European Security<span>✦</span></span>
+      <span class="ticker-item">Post-War Reconstruction<span>✦</span></span>
+      <span class="ticker-item">Diplomacy<span>✦</span></span>
+      <span class="ticker-item">Global Order<span>✦</span></span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-label">
+      <span class="section-label">About the author</span>
+    </div>
+    <div class="about-content">
+      <div class="mariupol-tag">Mariupol, 2022</div>
+      <p class="about-intro">
+        I write about the world's <em>hardest problems</em> — not from a distance, but from inside them.
+      </p>
+      <div class="about-body">
+        <p>I was in Mariupol when Russia's full-scale invasion began in February 2022. That experience didn't just give me a perspective — it gave me a responsibility. When I write about war, sanctions, reconstruction, or international law, I'm not working from textbooks alone.</p>
+        <p>Now studying Political Science and Economics at the University of Pittsburgh, I publish one major analytical piece each month — long-form, evidence-based, and written for people who want to understand what's actually happening and why it matters.</p>
+        <p>My work has been shaped by conversations with EU and US diplomats, involvement in the Pittsburgh Summit for Ukraine, and the belief that good analysis can change what people believe — and what they do.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLES -->
+  <section class="articles" id="articles">
+    <div class="articles-header">
+      <h2>Analysis</h2>
+      <a href="#">View all essays →</a>
+    </div>
+
+    <!-- Featured -->
+    <div class="article-featured">
+      <div class="article-featured-content">
+        <div>
+          <div class="article-featured-tag">✦ Featured — April 2026</div>
+          <h2 class="article-featured-title">What Mariupol's Fall Tells Us About the Future of Urban Warfare</h2>
+          <p class="article-featured-excerpt">The siege that destroyed my city wasn't just a military operation — it was a test case for how authoritarian regimes use urban destruction as a political instrument. The lessons for international law and future conflicts are ones we cannot afford to ignore.</p>
+        </div>
+        <div class="article-featured-footer">
+          <span class="article-featured-date">April 2026 — 12 min read</span>
+          <a class="read-btn" href="#">Read Essay →</a>
+        </div>
+      </div>
+      <div class="article-featured-visual">
+        <div class="featured-map-text">MKP</div>
+      </div>
+    </div>
+
+    <!-- Article list -->
+    <a class="article-item" href="#">
+      <div class="article-number">02</div>
+      <div>
+        <div class="article-tag">✦ Economic Policy</div>
+        <div class="article-title">Sanctions Without Strategy: Why Western Pressure on Russia Has Underperformed</div>
+        <p class="article-excerpt">Three years of sweeping sanctions have failed to produce the economic collapse the West predicted. Understanding why requires rethinking how modern economies absorb external shocks.</p>
+      </div>
+      <div class="article-meta">
+        <span>Mar 2026</span>
+        <span>10 min</span>
+        <span class="article-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="article-item" href="#">
+      <div class="article-number">03</div>
+      <div>
+        <div class="article-tag">✦ Diplomacy</div>
+        <div class="article-title">The EU's Enlargement Paradox: Why Admitting Ukraine May Break the Union It's Meant to Strengthen</div>
+        <p class="article-excerpt">Ukrainian accession could be the most transformative — and destabilizing — shift in European political architecture since the fall of the Soviet Union. Here's what Brussels isn't saying out loud.</p>
+      </div>
+      <div class="article-meta">
+        <span>Feb 2026</span>
+        <span>14 min</span>
+        <span class="article-arrow">→</span>
+      </div>
+    </a>
+
+    <a class="article-item" href="#">
+      <div class="article-number">04</div>
+      <div>
+        <div class="article-tag">✦ International Law</div>
+        <div class="article-title">Reparations, Frozen Assets, and the Legal Frontier of Post-War Accountability</div>
+        <p class="article-excerpt">Over $300 billion in Russian sovereign assets are frozen across Western financial systems. The question of what to do with them is as much about international legal order as it is about Ukraine.</p>
+      </div>
+      <div class="article-meta">
+        <span>Jan 2026</span>
+        <span>11 min</span>
+        <span class="article-arrow">→</span>
+      </div>
+    </a>
+
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter" id="newsletter">
+    <div class="newsletter-left">
+      <h3>One essay. Once a month.</h3>
+      <p>No noise. Just rigorous analysis delivered to your inbox.</p>
+    </div>
+    <div class="newsletter-form">
+      <input class="newsletter-input" type="email" placeholder="your@email.com" />
+      <button class="newsletter-btn">Subscribe</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Oleh Tsumbek</div>
+    <span class="footer-copy">© 2026 — olehtsumbek.com</span>
+    <ul class="footer-links">
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">Twitter</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>
