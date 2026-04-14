@@ -361,6 +361,75 @@ nav{
 .cb:hover{color:#000;border-color:#fff}
 .cb:hover::before{transform:scaleY(1)}
  
+/* ═══ NAV SUPPORT BTN ═══ */
+.nav-support{
+  font-family:'Azeret Mono',monospace;font-size:.55rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  padding:8px 18px;border:1px solid #fff;
+  background:transparent;color:#fff;text-decoration:none;
+  transition:all .3s;cursor:none;
+}
+.nav-support:hover{background:#fff;color:#000}
+ 
+/* ═══ DONATE SECTION ═══ */
+.donate-sec{
+  padding:120px 56px;
+  border-top:1px solid var(--faint);
+  border-bottom:1px solid var(--faint);
+}
+.donate-inner{
+  max-width:1000px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  align-items:center;
+}
+.donate-left .donate-flag{
+  font-size:3rem;margin-bottom:20px;display:block;
+}
+.donate-left h2{
+  font-family:'Libre Franklin',sans-serif;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:800;line-height:1.1;margin-bottom:16px;
+  letter-spacing:-.02em;
+}
+.donate-left h2 em{
+  font-family:'Instrument Serif',serif;
+  font-weight:400;font-style:italic;
+}
+.donate-left p{
+  font-size:1rem;color:var(--mid);line-height:1.8;
+  font-family:'Instrument Serif',serif;
+}
+.donate-cards{display:flex;flex-direction:column;gap:12px}
+.donate-card{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px;
+  border:1px solid var(--faint);
+  background:var(--surface);
+  transition:all .4s;
+  text-decoration:none;
+  cursor:none;
+}
+.donate-card:hover{
+  border-color:#fff;
+  background:rgba(255,255,255,.04);
+  transform:translateX(6px);
+}
+.dc-info{display:flex;flex-direction:column;gap:2px}
+.dc-name{
+  font-family:'Libre Franklin',sans-serif;
+  font-size:.9rem;font-weight:600;color:#fff;
+}
+.dc-desc{
+  font-family:'Instrument Serif',serif;
+  font-size:.82rem;color:var(--dim);font-style:italic;
+}
+.dc-arrow{
+  font-family:'Libre Franklin',sans-serif;
+  font-size:1rem;color:var(--dim);
+  transition:all .3s;
+}
+.donate-card:hover .dc-arrow{color:#fff;transform:translateX(4px)}
+ 
 /* ═══ FOOTER ═══ */
 footer{
   padding:24px 56px;border-top:1px solid var(--faint);
@@ -383,6 +452,9 @@ footer span{
   .globe-hd{padding:0 24px}
   .chips{padding:0 24px}
   .np{max-height:380px}
+  .donate-sec{padding:80px 24px}
+  .donate-inner{grid-template-columns:1fr;gap:40px}
+  .nav-support{display:none}
   .fi{grid-template-columns:1fr;gap:4px}
   .fn,.fa{display:none}
   .fd{grid-column:1}
@@ -405,6 +477,7 @@ footer span{
     <li><a href="#globe">World Desk</a></li>
     <li><a href="#focus">Research</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#support" class="nav-support">Support Ukraine 🇺🇦</a></li>
   </ul>
 </nav>
  
@@ -511,9 +584,50 @@ footer span{
   </div>
 </section>
  
+<!-- SUPPORT UKRAINE -->
+<section class="donate-sec" id="support">
+  <div class="donate-inner">
+    <div class="donate-left" data-r>
+      <span class="donate-flag">🇺🇦</span>
+      <h2>Support <em>Ukraine.</em></h2>
+      <p>Millions of Ukrainians remain displaced by the ongoing war. These verified organizations deliver humanitarian aid, shelter, medical care, and support to refugees and families in need. Every contribution makes a difference.</p>
+    </div>
+    <div class="donate-cards">
+      <a href="https://novaukraine.org/donate/" target="_blank" rel="noopener" class="donate-card" data-r data-d="1">
+        <div class="dc-info">
+          <span class="dc-name">Nova Ukraine</span>
+          <span class="dc-desc">Over $180M raised · Humanitarian aid across Ukraine</span>
+        </div>
+        <span class="dc-arrow">→</span>
+      </a>
+      <a href="https://donate.unhcr.org/int/en/ukraine-emergency" target="_blank" rel="noopener" class="donate-card" data-r data-d="2">
+        <div class="dc-info">
+          <span class="dc-name">UNHCR — UN Refugee Agency</span>
+          <span class="dc-desc">Shelter, protection & essentials for displaced families</span>
+        </div>
+        <span class="dc-arrow">→</span>
+      </a>
+      <a href="https://www.unicefusa.org/what-unicef-does/where-unicef-works/europe/ukraine" target="_blank" rel="noopener" class="donate-card" data-r data-d="3">
+        <div class="dc-info">
+          <span class="dc-name">UNICEF — For Ukraine's Children</span>
+          <span class="dc-desc">Healthcare, education & protection for children</span>
+        </div>
+        <span class="dc-arrow">→</span>
+      </a>
+      <a href="https://www.razomforukraine.org/donate/" target="_blank" rel="noopener" class="donate-card" data-r data-d="4">
+        <div class="dc-info">
+          <span class="dc-name">Razom for Ukraine</span>
+          <span class="dc-desc">Medical supplies, tech & civil society support</span>
+        </div>
+        <span class="dc-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+ 
 <!-- CONTACT -->
 <section class="cta-sec" id="contact">
-  <div class="sn" data-r style="justify-content:center">04 — CONNECT</div>
+  <div class="sn" data-r style="justify-content:center">05 — CONNECT</div>
   <h2 class="cta-h" data-r data-d="1">Let's build<br><em>something real.</em></h2>
   <p class="cta-p" data-r data-d="2">Open to editorial collaborations, policy research partnerships, and conversations that push boundaries.</p>
   <div class="cta-btns" data-r data-d="3">
@@ -782,7 +896,7 @@ const cur=document.getElementById('cur'),cdt=document.getElementById('dot');
 let mx=0,my=0,cx=0,cy=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cdt.style.left=mx+'px';cdt.style.top=my+'px'});
 (function cl(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(cl)})();
-document.querySelectorAll('a,button,.chip,.cb,.fi').forEach(el=>{
+document.querySelectorAll('a,button,.chip,.cb,.fi,.donate-card,.nav-support').forEach(el=>{
   el.addEventListener('mouseenter',()=>cur.classList.add('big'));
   el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
 });
