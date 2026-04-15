@@ -9,24 +9,29 @@
  
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#000;
-  --fg:#f2f2f2;
-  --mid:#666;
-  --dim:#333;
-  --faint:rgba(255,255,255,.07);
-  --surface:#0a0a0a;
+  --bg:#08080c;
+  --fg:#f5f5f2;
+  --mid:#bbb;
+  --dim:#777;
+  --faint:rgba(255,255,255,.14);
+  --surface:#131318;
+  --glow:rgba(255,255,255,.05);
+  --navy:#3d5a80;
+  --navy-light:#5a7faa;
+  --navy-glow:rgba(61,90,128,.15);
+  --navy-deep:#1b2d45;
 }
 html{overflow-x:hidden;scroll-behavior:auto}
 body{
   background:var(--bg);color:var(--fg);
   font-family:'Instrument Serif',serif;
-  overflow-x:hidden;cursor:none;
+  overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
  
 /* ═══ PRELOADER ═══ */
 #pre{
-  position:fixed;inset:0;z-index:10000;background:#000;
+  position:fixed;inset:0;z-index:10000;background:#08080c;
   display:flex;align-items:center;justify-content:center;
   flex-direction:column;gap:20px;
   transition:clip-path .7s cubic-bezier(.77,0,.18,1),opacity .5s;
@@ -36,29 +41,12 @@ body{
 #pre .bar{width:160px;height:1px;background:var(--dim);position:relative;overflow:hidden}
 #pre .bar::after{
   content:'';position:absolute;left:0;top:0;height:100%;width:0;
-  background:#fff;animation:preBar 1.8s .3s cubic-bezier(.77,0,.18,1) forwards;
+  background:var(--navy-light);animation:preBar 1.8s .3s cubic-bezier(.77,0,.18,1) forwards;
 }
 @keyframes preBar{to{width:100%}}
 #pre p{
   font-family:'Azeret Mono',monospace;font-size:.55rem;
   letter-spacing:.3em;text-transform:uppercase;color:var(--mid);
-}
- 
-/* ═══ CURSOR ═══ */
-#cur{
-  position:fixed;width:16px;height:16px;
-  border:1.5px solid #fff;border-radius:50%;
-  pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);
-  transition:width .3s,height .3s,background .3s;
-  mix-blend-mode:difference;
-}
-#cur.big{width:56px;height:56px;background:rgba(255,255,255,.08)}
-#dot{
-  position:fixed;width:3px;height:3px;
-  background:#fff;border-radius:50%;
-  pointer-events:none;z-index:10000;
-  transform:translate(-50%,-50%);
 }
  
 /* ═══ NOISE ═══ */
@@ -71,41 +59,75 @@ body{
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   padding:28px 56px;
-  display:flex;justify-content:space-between;align-items:center;
+  display:flex;justify-content:center;align-items:center;
   mix-blend-mode:difference;
 }
-.logo{
-  font-family:'Libre Franklin',sans-serif;font-weight:800;
-  font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;
-}
-.nl{display:flex;gap:36px;list-style:none}
-.nl a{
+.nav-links{display:flex;gap:32px;list-style:none;align-items:center}
+.nl-a{
   font-family:'Azeret Mono',monospace;font-size:.6rem;
   letter-spacing:.2em;text-transform:uppercase;
   color:var(--mid);text-decoration:none;
   position:relative;
 }
-.nl a::after{
+.nl-a::after{
   content:'';position:absolute;bottom:-3px;left:0;
-  width:0;height:1px;background:#fff;
+  width:0;height:1px;background:var(--navy-light);
   transition:width .4s cubic-bezier(.16,1,.3,1);
 }
-.nl a:hover{color:#fff}
-.nl a:hover::after{width:100%}
+.nl-a:hover{color:#fff}
+.nl-a:hover::after{width:100%}
  
 /* ═══ HERO ═══ */
 .hero{
   min-height:100vh;display:flex;align-items:flex-end;
   padding:0 56px 96px;position:relative;overflow:hidden;
+  background:
+    radial-gradient(ellipse 50% 40% at 30% 60%,rgba(61,90,128,.06),transparent),
+    radial-gradient(ellipse 40% 30% at 70% 30%,rgba(255,255,255,.035),transparent),
+    radial-gradient(ellipse 30% 30% at 60% 70%,rgba(61,90,128,.04),transparent);
 }
-.hero-wm{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  font-family:'Libre Franklin',sans-serif;font-weight:900;
-  font-size:30vw;color:transparent;
-  -webkit-text-stroke:1px rgba(255,255,255,.025);
-  white-space:nowrap;user-select:none;pointer-events:none;
+.hero-logo-inline{
+  width:80px;height:80px;
+  margin-bottom:32px;
+  opacity:0;
+  animation:logoAppear 1s 2s cubic-bezier(.16,1,.3,1) forwards;
+  position:relative;
 }
+.hero-logo-inline::after{
+  content:'';position:absolute;inset:-12px;
+  border-radius:50%;
+  background:radial-gradient(circle,var(--navy-glow),transparent 70%);
+  animation:logoPulse 3s 3.5s ease-in-out infinite;
+  opacity:0;
+}
+.hero-logo-inline svg{width:100%;height:100%;position:relative;z-index:1}
+@keyframes logoAppear{to{opacity:1}}
+@keyframes logoPulse{
+  0%,100%{opacity:0;transform:scale(.9)}
+  50%{opacity:1;transform:scale(1.15)}
+}
+.hl-arc{
+  stroke-dasharray:200;stroke-dashoffset:200;
+  animation:drawArc 1.5s 2.2s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hl-split{
+  opacity:0;animation:fadeStroke .6s 3.2s forwards;
+}
+.hl-t1{
+  stroke-dasharray:60;stroke-dashoffset:60;
+  animation:drawLine .8s 3.4s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hl-t2{
+  stroke-dasharray:80;stroke-dashoffset:80;
+  animation:drawLine .8s 3.55s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hl-t3{
+  stroke-dasharray:30;stroke-dashoffset:30;
+  animation:drawLine .5s 3.7s cubic-bezier(.16,1,.3,1) forwards;
+}
+@keyframes drawArc{to{stroke-dashoffset:0}}
+@keyframes drawLine{to{stroke-dashoffset:0}}
+@keyframes fadeStroke{to{opacity:.3}}
 .hero-inner{position:relative;z-index:2;max-width:880px}
 .hero-tag{
   font-family:'Azeret Mono',monospace;font-size:.58rem;
@@ -139,7 +161,7 @@ nav{
   opacity:0;animation:fi 1s 3.2s forwards;
 }
 .hero-sc::after{
-  content:'';width:1px;height:48px;background:#fff;
+  content:'';width:1px;height:48px;background:var(--navy-light);
   animation:sPulse 2.5s infinite;
 }
 @keyframes sU{to{transform:translateY(0)}}
@@ -155,9 +177,9 @@ nav{
 .tape-in{display:inline-flex;gap:36px;animation:tm 28s linear infinite}
 .tape-in span{
   font-family:'Azeret Mono',monospace;font-size:.5rem;
-  letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.1);flex-shrink:0;
+  letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);flex-shrink:0;
 }
-.tape-in .d{color:var(--dim);font-size:.4rem}
+.tape-in .d{color:var(--navy-light);font-size:.4rem}
 @keyframes tm{from{transform:translateX(0)}to{transform:translateX(-50%)}}
  
 /* ═══ REVEAL ═══ */
@@ -168,12 +190,17 @@ nav{
  
 /* ═══ SECTION ═══ */
 .sec{padding:140px 56px;position:relative}
+.sec::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:radial-gradient(ellipse 60% 40% at 20% 30%,rgba(61,90,128,.04),transparent);
+  pointer-events:none;
+}
 .sn{
   font-family:'Azeret Mono',monospace;font-size:.5rem;
-  letter-spacing:.35em;color:var(--mid);
+  letter-spacing:.35em;color:var(--navy-light);
   display:flex;align-items:center;gap:12px;margin-bottom:16px;
 }
-.sn::after{content:'';width:36px;height:1px;background:var(--dim)}
+.sn::after{content:'';width:36px;height:1px;background:var(--navy)}
 .sh{
   font-family:'Libre Franklin',sans-serif;
   font-size:clamp(2rem,4.5vw,3.5rem);
@@ -196,11 +223,12 @@ nav{
 .ab-block{
   border-left:1px solid var(--dim);padding:4px 0 4px 24px;
   transition:border-color .4s;
+  background:linear-gradient(90deg,rgba(61,90,128,.04),transparent);
 }
-.ab-block:hover{border-color:#fff}
+.ab-block:hover{border-color:var(--navy-light)}
 .ab-block label{
   font-family:'Azeret Mono',monospace;font-size:.5rem;
-  letter-spacing:.25em;text-transform:uppercase;color:var(--mid);
+  letter-spacing:.25em;text-transform:uppercase;color:var(--navy-light);
   display:block;margin-bottom:6px;
 }
 .ab-block p{
@@ -209,42 +237,66 @@ nav{
 }
  
 /* ═══ GLOBE SECTION ═══ */
-.globe-sec{padding:80px 0 120px;position:relative}
+.globe-sec{
+  padding:80px 0 120px;position:relative;
+  background:radial-gradient(ellipse 50% 50% at 40% 50%,rgba(61,90,128,.06),transparent);
+}
 .globe-hd{text-align:center;padding:0 56px;margin-bottom:20px}
 .globe-lay{
-  display:grid;grid-template-columns:1fr 400px;
-  max-width:1300px;margin:0 auto;min-height:560px;
-  padding:0 56px;gap:0;
+  display:grid;grid-template-columns:1fr 420px;
+  max-width:1400px;margin:0 auto;min-height:600px;
+  padding:0 56px;gap:24px;
+  align-items:center;
 }
 .globe-wrap{
   position:relative;display:flex;
   align-items:center;justify-content:center;
 }
-#gc{display:block;max-width:100%}
+#gc{display:block;max-width:100%;cursor:grab}
+#gc:active{cursor:grabbing}
+#gc.pointer{cursor:pointer}
 .globe-hint{
   position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
   font-family:'Azeret Mono',monospace;font-size:.5rem;
   letter-spacing:.2em;text-transform:uppercase;color:var(--dim);opacity:.5;
 }
+.globe-tooltip{
+  position:absolute;
+  padding:6px 14px;
+  background:rgba(10,10,16,.9);
+  border:1px solid var(--navy);
+  font-family:'Azeret Mono',monospace;font-size:.6rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:#fff;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .15s;
+  white-space:nowrap;
+  z-index:10;
+}
+.globe-tooltip.show{opacity:1}
  
 /* CHIPS */
 .chips{
-  display:flex;flex-wrap:wrap;gap:6px;justify-content:center;
-  max-width:800px;margin:16px auto 0;padding:0 56px;
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  max-width:900px;margin:16px auto 0;padding:0 56px;
 }
 .chip{
   font-family:'Azeret Mono',monospace;font-size:.55rem;
   letter-spacing:.08em;text-transform:uppercase;
-  padding:7px 14px;border:1px solid var(--faint);
-  background:transparent;color:var(--dim);cursor:none;
-  transition:all .3s;
+  padding:8px 16px;border:1px solid var(--faint);
+  background:transparent;color:var(--dim);cursor:pointer;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
 }
-.chip:hover,.chip.on{border-color:#fff;color:#fff;background:rgba(255,255,255,.05)}
+.chip:hover{border-color:var(--navy-light);color:#fff;background:var(--navy-glow);transform:translateY(-2px)}
+.chip.on{border-color:var(--navy-light);color:#fff;background:var(--navy-glow)}
  
 /* NEWS PANEL */
 .np{
-  background:var(--surface);border:1px solid var(--faint);
-  padding:36px;overflow-y:auto;max-height:600px;
+  background:#12121a;
+  border:1px solid rgba(61,90,128,.2);
+  border-radius:2px;
+  padding:36px;overflow-y:auto;max-height:640px;
   display:flex;flex-direction:column;
 }
 .np-title{
@@ -254,7 +306,7 @@ nav{
 .np-title .fl{font-size:1.2rem}
 .np-sub{
   font-family:'Azeret Mono',monospace;font-size:.5rem;
-  letter-spacing:.15em;color:var(--mid);text-transform:uppercase;margin-bottom:24px;
+  letter-spacing:.15em;color:var(--navy-light);text-transform:uppercase;margin-bottom:24px;
 }
 .np-ph{
   flex:1;display:flex;align-items:center;justify-content:center;
@@ -264,7 +316,7 @@ nav{
 .np-ld{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:14px}
 .np-ld .dts{display:flex;gap:5px}
 .np-ld .dts span{
-  width:5px;height:5px;border-radius:50%;background:#fff;
+  width:5px;height:5px;border-radius:50%;background:var(--navy-light);
   animation:dp 1.2s infinite;
 }
 .np-ld .dts span:nth-child(2){animation-delay:.2s}
@@ -303,7 +355,7 @@ nav{
 .fi:hover{padding-left:14px}
 .fi:hover .ft{color:#fff}
 .fi:hover .fa{transform:translateX(6px);color:#fff}
-.fn{font-family:'Azeret Mono',monospace;font-size:.55rem;letter-spacing:.2em;color:var(--dim)}
+.fn{font-family:'Azeret Mono',monospace;font-size:.55rem;letter-spacing:.2em;color:var(--navy)}
 .ft{
   font-family:'Libre Franklin',sans-serif;font-size:clamp(1.05rem,2vw,1.5rem);
   font-weight:600;transition:color .3s;color:var(--mid);
@@ -316,22 +368,79 @@ nav{
 }
 .fi:hover .fd{max-height:150px;opacity:1}
  
-/* ═══ STATEMENT ═══ */
-.stmt{
-  padding:180px 56px;display:flex;justify-content:center;text-align:center;
-  position:relative;
+/* ═══ ARTICLES ═══ */
+.articles-sec{
+  padding:140px 56px;position:relative;
+  background:radial-gradient(ellipse 60% 40% at 50% 40%,rgba(61,90,128,.05),transparent);
 }
-.stmt-text{
+.articles-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:24px;max-width:1100px;margin:0 auto;
+}
+.article-card{
+  border:1px solid rgba(255,255,255,.12);
+  background:#101018;
+  padding:36px 30px;
+  display:flex;flex-direction:column;
+  transition:all .5s cubic-bezier(.16,1,.3,1);
+  text-decoration:none;color:inherit;
+  position:relative;overflow:hidden;
+}
+.article-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;
+  height:2px;background:var(--navy-light);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .5s cubic-bezier(.16,1,.3,1);
+}
+.article-card:hover{
+  border-color:rgba(255,255,255,.3);
+  background:#161622;
+  transform:translateY(-6px);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.article-card:hover::before{transform:scaleX(1)}
+.ac-tag{
+  font-family:'Azeret Mono',monospace;font-size:.5rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+}
+.ac-tag .ac-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--navy-light);
+}
+.ac-title{
+  font-family:'Libre Franklin',sans-serif;
+  font-size:1.1rem;font-weight:700;line-height:1.35;
+  margin-bottom:12px;color:#fff;
+  transition:color .3s;
+}
+.article-card:hover .ac-title{color:#fff}
+.ac-excerpt{
   font-family:'Instrument Serif',serif;
-  font-size:clamp(1.8rem,4vw,3.5rem);
-  font-weight:400;font-style:italic;line-height:1.55;
-  max-width:850px;color:var(--mid);
+  font-size:.92rem;color:var(--mid);line-height:1.7;
+  margin-bottom:20px;flex:1;
 }
-.stmt-text strong{color:#fff;font-weight:600;font-style:normal}
-.stmt::before{
-  content:'\201C';position:absolute;top:80px;
-  font-family:'Instrument Serif',serif;font-size:14rem;
-  color:rgba(255,255,255,.03);line-height:1;
+.ac-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:16px;border-top:1px solid rgba(255,255,255,.06);
+}
+.ac-date{
+  font-family:'Azeret Mono',monospace;font-size:.5rem;
+  letter-spacing:.1em;color:var(--dim);text-transform:uppercase;
+}
+.ac-read{
+  font-family:'Azeret Mono',monospace;font-size:.5rem;
+  letter-spacing:.1em;color:var(--dim);text-transform:uppercase;
+  transition:color .3s;
+}
+.article-card:hover .ac-read{color:#fff}
+.articles-coming{
+  grid-column:1/-1;text-align:center;
+  padding:40px;border:1px dashed rgba(255,255,255,.1);
+  color:var(--dim);
+  font-family:'Instrument Serif',serif;
+  font-size:1rem;font-style:italic;
 }
  
 /* ═══ CONTACT ═══ */
@@ -349,33 +458,34 @@ nav{
   letter-spacing:.14em;text-transform:uppercase;
   padding:14px 32px;border:1px solid var(--dim);
   background:transparent;color:var(--mid);text-decoration:none;
-  position:relative;overflow:hidden;cursor:none;
+  position:relative;overflow:hidden;cursor:pointer;
   transition:color .4s,border-color .4s;
 }
 .cb::before{
-  content:'';position:absolute;inset:0;background:#fff;
+  content:'';position:absolute;inset:0;background:var(--navy);
   transform:scaleY(0);transform-origin:bottom;
   transition:transform .5s cubic-bezier(.16,1,.3,1);z-index:0;
 }
 .cb span{position:relative;z-index:1}
-.cb:hover{color:#000;border-color:#fff}
+.cb:hover{color:#fff;border-color:var(--navy-light)}
 .cb:hover::before{transform:scaleY(1)}
  
 /* ═══ NAV SUPPORT BTN ═══ */
 .nav-support{
   font-family:'Azeret Mono',monospace;font-size:.55rem;
   letter-spacing:.12em;text-transform:uppercase;
-  padding:8px 18px;border:1px solid #fff;
-  background:transparent;color:#fff;text-decoration:none;
-  transition:all .3s;cursor:none;
+  padding:8px 18px;border:1px solid var(--navy-light);
+  background:transparent;color:var(--navy-light);text-decoration:none;
+  transition:all .3s;cursor:pointer;
 }
-.nav-support:hover{background:#fff;color:#000}
+.nav-support:hover{background:var(--navy);color:#fff}
  
 /* ═══ DONATE SECTION ═══ */
 .donate-sec{
   padding:120px 56px;
   border-top:1px solid var(--faint);
   border-bottom:1px solid var(--faint);
+  background:linear-gradient(180deg,rgba(61,90,128,.04) 0%,transparent 40%,transparent 60%,rgba(61,90,128,.04) 100%);
 }
 .donate-inner{
   max-width:1000px;margin:0 auto;
@@ -403,15 +513,15 @@ nav{
 .donate-card{
   display:flex;align-items:center;justify-content:space-between;
   padding:20px 24px;
-  border:1px solid var(--faint);
-  background:var(--surface);
+  border:1px solid rgba(255,255,255,.1);
+  background:#121218;
   transition:all .4s;
   text-decoration:none;
-  cursor:none;
+  cursor:pointer;
 }
 .donate-card:hover{
-  border-color:#fff;
-  background:rgba(255,255,255,.04);
+  border-color:var(--navy-light);
+  background:var(--navy-glow);
   transform:translateX(6px);
 }
 .dc-info{display:flex;flex-direction:column;gap:2px}
@@ -432,18 +542,33 @@ nav{
  
 /* ═══ FOOTER ═══ */
 footer{
-  padding:24px 56px;border-top:1px solid var(--faint);
-  display:flex;justify-content:space-between;align-items:center;
+  padding:40px 56px 32px;border-top:1px solid var(--faint);
+  display:flex;flex-direction:column;align-items:center;gap:16px;
 }
-footer span{
+.footer-sig{
+  display:flex;align-items:center;gap:12px;
+}
+.footer-sig svg{width:20px;height:20px;opacity:.7}
+.footer-sig span{
+  font-family:'Libre Franklin',sans-serif;font-size:.8rem;
+  font-weight:600;letter-spacing:.08em;color:var(--fg);
+}
+.footer-row{
+  display:flex;gap:24px;align-items:center;
+}
+.footer-row span{
   font-family:'Azeret Mono',monospace;font-size:.5rem;
   letter-spacing:.1em;color:var(--dim);text-transform:uppercase;
+}
+.footer-row .dot{
+  width:3px;height:3px;border-radius:50%;
+  background:var(--dim);
 }
  
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:1000px){
   nav{padding:20px 24px}
-  .nl{display:none}
+  .nav-links{display:none}
   .hero{padding:0 24px 60px}
   .hero-sc{display:none}
   .sec{padding:100px 24px}
@@ -451,40 +576,51 @@ footer span{
   .globe-lay{grid-template-columns:1fr;gap:20px;padding:0 24px}
   .globe-hd{padding:0 24px}
   .chips{padding:0 24px}
-  .np{max-height:380px}
+  .np{max-height:400px}
+  .globe-tooltip{display:none}
   .donate-sec{padding:80px 24px}
   .donate-inner{grid-template-columns:1fr;gap:40px}
   .nav-support{display:none}
   .fi{grid-template-columns:1fr;gap:4px}
   .fn,.fa{display:none}
   .fd{grid-column:1}
+  .articles-sec{padding:100px 24px}
+  .articles-grid{grid-template-columns:1fr}
   .stmt{padding:100px 24px}
   .cta-sec{padding:100px 24px}
-  footer{padding:20px 24px;flex-direction:column;gap:8px}
+  footer{padding:24px 24px}
+  .footer-row{flex-wrap:wrap;justify-content:center;gap:12px}
 }
 </style>
 </head>
 <body>
  
-<div id="pre"><div class="bar"></div><p>Oleh Tsumbek</p></div>
+<div id="pre"><div class="bar"></div></div>
 <div class="noise"></div>
-<div id="cur"></div><div id="dot"></div>
  
 <nav>
-  <div class="logo">Oleh Tsumbek</div>
-  <ul class="nl">
-    <li><a href="#about">About</a></li>
-    <li><a href="#globe">World Desk</a></li>
-    <li><a href="#focus">Research</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#support" class="nav-support">Support Ukraine 🇺🇦</a></li>
+  <ul class="nav-links">
+    <li><a href="#about" class="nl-a">About</a></li>
+    <li><a href="#globe" class="nl-a">World Desk</a></li>
+    <li><a href="#articles" class="nl-a">Articles</a></li>
+    <li><a href="#focus" class="nl-a">Research</a></li>
+    <li><a href="#contact" class="nl-a">Contact</a></li>
+    <li><a href="#support" class="nl-a nav-support">Support Ukraine 🇺🇦</a></li>
   </ul>
 </nav>
  
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-wm">OT</div>
   <div class="hero-inner">
+    <div class="hero-logo-inline">
+      <svg viewBox="0 0 80 80" fill="none">
+        <path class="hl-arc" d="M40,4 A36,36 0 0,0 40,76" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+        <line class="hl-split" x1="40" y1="0" x2="40" y2="80" stroke="#fff" stroke-width="0.5"/>
+        <line class="hl-t1" x1="40" y1="18" x2="72" y2="18" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+        <line class="hl-t2" x1="56" y1="18" x2="56" y2="58" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+        <line class="hl-t3" x1="48" y1="58" x2="64" y2="58" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
     <div class="hero-tag"><span>International Affairs · Policy · Law</span></div>
     <h1 class="hero-h">
       <span class="ln"><span class="li">Analyzing</span></span>
@@ -550,7 +686,8 @@ footer span{
   <div class="chips" data-r data-d="3" id="chips"></div>
   <div class="globe-lay" style="margin-top:28px">
     <div class="globe-wrap">
-      <canvas id="gc" width="600" height="600"></canvas>
+      <canvas id="gc" width="640" height="640"></canvas>
+      <div class="globe-tooltip" id="gtt"></div>
       <div class="globe-hint">drag to rotate · click a country</div>
     </div>
     <div class="np" id="np">
@@ -561,15 +698,47 @@ footer span{
   </div>
 </section>
  
-<!-- STATEMENT -->
-<div class="stmt" data-r>
-  <p class="stmt-text">"I don't write about conflict from a textbook. I write about it because I <strong>lived</strong> it — and because the world needs voices that refuse to let <strong>Mariupol</strong> become just another headline."</p>
-</div>
+<!-- ARTICLES -->
+<section class="articles-sec" id="articles">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="sn" data-r>03 — WRITING</div>
+    <h2 class="sh" data-r data-d="1">Recent <em>articles.</em></h2>
+  </div>
+  <div class="articles-grid">
+    <a href="#" class="article-card" data-r data-d="1">
+      <div class="ac-tag"><span class="ac-dot"></span>Geopolitics</div>
+      <h3 class="ac-title">The Architecture of Impunity: Why International Courts Struggle with Wartime Accountability</h3>
+      <p class="ac-excerpt">An examination of the structural barriers preventing the ICC from delivering justice in active conflict zones, and what reforms could change the equation.</p>
+      <div class="ac-meta">
+        <span class="ac-date">Coming Soon</span>
+        <span class="ac-read">Read →</span>
+      </div>
+    </a>
+    <a href="#" class="article-card" data-r data-d="2">
+      <div class="ac-tag"><span class="ac-dot"></span>Ukraine</div>
+      <h3 class="ac-title">Mariupol After the Siege: Memory, Identity, and the Politics of Reconstruction</h3>
+      <p class="ac-excerpt">How a city rebuilds not just its infrastructure but its collective memory — and why the politics of reconstruction matter as much as the bricks.</p>
+      <div class="ac-meta">
+        <span class="ac-date">Coming Soon</span>
+        <span class="ac-read">Read →</span>
+      </div>
+    </a>
+    <a href="#" class="article-card" data-r data-d="3">
+      <div class="ac-tag"><span class="ac-dot"></span>Policy</div>
+      <h3 class="ac-title">NATO's Eastern Flank: What the Next Decade of European Security Looks Like</h3>
+      <p class="ac-excerpt">Analyzing the shifting security posture along NATO's eastern border and the diplomatic calculus driving alliance strategy in 2026 and beyond.</p>
+      <div class="ac-meta">
+        <span class="ac-date">Coming Soon</span>
+        <span class="ac-read">Read →</span>
+      </div>
+    </a>
+  </div>
+</section>
  
 <!-- FOCUS -->
 <section class="sec" id="focus">
   <div style="max-width:950px;margin:0 auto">
-    <div class="sn" data-r>03 — RESEARCH FOCUS</div>
+    <div class="sn" data-r>04 — RESEARCH FOCUS</div>
     <h2 class="sh" data-r data-d="1">Where scholarship<br>meets <em>urgency.</em></h2>
   </div>
   <div class="fl">
@@ -627,8 +796,8 @@ footer span{
  
 <!-- CONTACT -->
 <section class="cta-sec" id="contact">
-  <div class="sn" data-r style="justify-content:center">05 — CONNECT</div>
-  <h2 class="cta-h" data-r data-d="1">Let's build<br><em>something real.</em></h2>
+  <div class="sn" data-r style="justify-content:center">06 — CONNECT</div>
+  <h2 class="cta-h" data-r data-d="1">Get <em>in touch.</em></h2>
   <p class="cta-p" data-r data-d="2">Open to editorial collaborations, policy research partnerships, and conversations that push boundaries.</p>
   <div class="cta-btns" data-r data-d="3">
     <a href="mailto:oleh@example.com" class="cb"><span>Email</span></a>
@@ -638,8 +807,23 @@ footer span{
 </section>
  
 <footer>
-  <span>© 2026 Oleh Tsumbek</span>
-  <span>All rights reserved</span>
+  <div class="footer-sig">
+    <svg viewBox="0 0 80 80" fill="none">
+      <path d="M40,4 A36,36 0 0,0 40,76" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="40" y1="0" x2="40" y2="80" stroke="#fff" stroke-width="0.5" opacity="0.2"/>
+      <line x1="40" y1="18" x2="72" y2="18" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="56" y1="18" x2="56" y2="58" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="48" y1="58" x2="64" y2="58" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <span>Oleh Tsumbek</span>
+  </div>
+  <div class="footer-row">
+    <span>© 2026</span>
+    <div class="dot"></div>
+    <span>All rights reserved</span>
+    <div class="dot"></div>
+    <span>Built by Oleh Tsumbek</span>
+  </div>
 </footer>
  
 <!-- D3 + TopoJSON for real country borders -->
@@ -649,6 +833,7 @@ footer span{
 /* ═══ COUNTRIES ═══ */
 const countries=[
   {name:'Ukraine',flag:'🇺🇦',id:'804'},
+  {name:'Russia',flag:'🇷🇺',id:'643'},
   {name:'United States',flag:'🇺🇸',id:'840'},
   {name:'United Kingdom',flag:'🇬🇧',id:'826'},
   {name:'France',flag:'🇫🇷',id:'250'},
@@ -679,16 +864,18 @@ countries.forEach(c=>{
 /* ═══ D3 GLOBE ═══ */
 const canvas=document.getElementById('gc');
 const ctx=canvas.getContext('2d');
-const W=600,H=600;
-let scale=280;
+const tooltip=document.getElementById('gtt');
+const W=640,H=640;
+let scale=300;
 const proj=d3.geoOrthographic().scale(scale).translate([W/2,H/2]).clipAngle(90);
 const path=d3.geoPath(proj,ctx);
 const graticule=d3.geoGraticule10();
 let land=null,countriesGeo=null,borders=null;
 let rot=[0,-15,0];
 let dragging=false,dragStart=[0,0],rotStart=[0,0];
-let autoRot=true,velX=0;
+let autoRot=true,velX=0,velY=0;
 let worldData=null;
+let hoverCountry=null;
  
 // Load world data
 d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world=>{
@@ -699,11 +886,27 @@ d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(w
   draw();
   startLoop();
 }).catch(()=>{
-  // Fallback: draw a simple sphere
   ctx.strokeStyle='#333';ctx.lineWidth=.5;
   ctx.beginPath();ctx.arc(W/2,H/2,scale,0,Math.PI*2);ctx.stroke();
   startLoop();
 });
+ 
+function getCountryAtPoint(cx,cy){
+  if(!countriesGeo)return null;
+  const rect=canvas.getBoundingClientRect();
+  const sx=(cx-rect.left)*(W/rect.width);
+  const sy=(cy-rect.top)*(H/rect.height);
+  const coords=proj.invert([sx,sy]);
+  if(!coords)return null;
+  for(const f of countriesGeo){
+    if(d3.geoContains(f,coords)){
+      const cid=String(f.id||f.properties?.id);
+      const match=countries.find(c=>String(c.id)===cid);
+      if(match)return match;
+    }
+  }
+  return null;
+}
  
 function draw(){
   ctx.clearRect(0,0,W,H);
@@ -712,53 +915,56 @@ function draw(){
   // Ocean
   ctx.beginPath();
   path({type:'Sphere'});
-  ctx.fillStyle='#0a0a0a';
+  ctx.fillStyle='#0c0c14';
   ctx.fill();
-  ctx.strokeStyle='#1a1a1a';
+  ctx.strokeStyle='#1e1e2a';
   ctx.lineWidth=1;
   ctx.stroke();
  
   // Graticule
   ctx.beginPath();
   path(graticule);
-  ctx.strokeStyle='rgba(255,255,255,.04)';
-  ctx.lineWidth=.5;
+  ctx.strokeStyle='rgba(61,90,128,.12)';
+  ctx.lineWidth=.4;
   ctx.stroke();
  
   if(countriesGeo){
-    // Country fills — non-selected first
     countriesGeo.forEach(f=>{
       const cid=f.id||f.properties?.id;
       const isSel=selCountry&&String(cid)===String(selCountry.id);
-      if(isSel) return; // draw selected last for glow on top
+      if(isSel) return;
       ctx.beginPath();
       path(f);
       const isHighlight=countries.some(c=>String(c.id)===String(cid));
-      ctx.fillStyle=isHighlight?'rgba(255,255,255,.12)':'#151515';
+      const isHover=hoverCountry&&String(cid)===String(hoverCountry.id);
+      if(isHover){
+        ctx.fillStyle='rgba(90,127,170,.3)';
+      } else if(isHighlight){
+        ctx.fillStyle='rgba(61,90,128,.2)';
+      } else {
+        ctx.fillStyle='#161620';
+      }
       ctx.fill();
     });
  
-    // Borders
     if(borders){
       ctx.beginPath();
       path(borders);
-      ctx.strokeStyle='rgba(255,255,255,.15)';
-      ctx.lineWidth=.6;
+      ctx.strokeStyle='rgba(255,255,255,.2)';
+      ctx.lineWidth=.5;
       ctx.stroke();
     }
  
-    // Selected country — bright white with pulsing glow
+    // Selected country glow
     if(selCountry){
       const selFeature=countriesGeo.find(f=>{
         const cid=f.id||f.properties?.id;
         return String(cid)===String(selCountry.id);
       });
       if(selFeature){
-        const pulse=.7+Math.sin(Date.now()*.003)*.3; // 0.4–1.0 breathing
- 
-        // Outer glow layer (wide, soft, pulsing)
+        const pulse=.7+Math.sin(Date.now()*.003)*.3;
         ctx.save();
-        ctx.shadowColor=`rgba(255,255,255,${.5*pulse})`;
+        ctx.shadowColor=`rgba(90,127,170,${.6*pulse})`;
         ctx.shadowBlur=30+20*pulse;
         ctx.beginPath();
         path(selFeature);
@@ -766,7 +972,6 @@ function draw(){
         ctx.fill();
         ctx.restore();
  
-        // Inner glow layer (tight, bright)
         ctx.save();
         ctx.shadowColor='#fff';
         ctx.shadowBlur=12+8*pulse;
@@ -776,7 +981,6 @@ function draw(){
         ctx.fill();
         ctx.restore();
  
-        // White border on selected
         ctx.beginPath();
         path(selFeature);
         ctx.strokeStyle=`rgba(255,255,255,${.6+.4*pulse})`;
@@ -786,58 +990,105 @@ function draw(){
     }
   }
  
-  // Outline
+  // Outer ring with navy tint
   ctx.beginPath();
   path({type:'Sphere'});
-  ctx.strokeStyle='rgba(255,255,255,.08)';
+  ctx.strokeStyle='rgba(61,90,128,.25)';
   ctx.lineWidth=1.5;
   ctx.stroke();
 }
  
 function startLoop(){
   (function loop(){
-    if(autoRot) rot[0]+=.15;
-    else { rot[0]+=velX; velX*=.94; }
+    if(autoRot) rot[0]+=.12;
+    else {
+      rot[0]+=velX;
+      rot[1]+=velY;
+      rot[1]=Math.max(-60,Math.min(60,rot[1]));
+      velX*=.95;velY*=.95;
+      if(Math.abs(velX)<.001&&Math.abs(velY)<.001&&!dragging){
+        autoRot=true;
+      }
+    }
     draw();
     requestAnimationFrame(loop);
   })();
 }
  
-// Drag rotation
+// Drag — mouse
 canvas.addEventListener('mousedown',e=>{
   dragging=true;autoRot=false;
   dragStart=[e.clientX,e.clientY];
   rotStart=[rot[0],rot[1]];
+  velX=0;velY=0;
 });
 window.addEventListener('mousemove',e=>{
-  if(!dragging)return;
-  const dx=e.clientX-dragStart[0];
-  const dy=e.clientY-dragStart[1];
-  rot[0]=rotStart[0]+dx*.3;
-  rot[1]=Math.max(-60,Math.min(60,rotStart[1]-dy*.3));
-  velX=dx*.01;
+  if(dragging){
+    const dx=e.clientX-dragStart[0];
+    const dy=e.clientY-dragStart[1];
+    rot[0]=rotStart[0]+dx*.35;
+    rot[1]=Math.max(-60,Math.min(60,rotStart[1]-dy*.35));
+    velX=(e.clientX-dragStart[0])*.005;
+    velY=-(e.clientY-dragStart[1])*.005;
+    dragStart=[e.clientX,e.clientY];
+    rotStart=[rot[0],rot[1]];
+  } else {
+    // Hover detection
+    const c=getCountryAtPoint(e.clientX,e.clientY);
+    hoverCountry=c;
+    if(c){
+      canvas.classList.add('pointer');
+      tooltip.textContent=c.flag+' '+c.name;
+      tooltip.classList.add('show');
+      const rect=canvas.getBoundingClientRect();
+      tooltip.style.left=(e.clientX-rect.left+12)+'px';
+      tooltip.style.top=(e.clientY-rect.top-30)+'px';
+    } else {
+      canvas.classList.remove('pointer');
+      tooltip.classList.remove('show');
+    }
+  }
 });
 window.addEventListener('mouseup',()=>{dragging=false});
  
+// Touch support
+canvas.addEventListener('touchstart',e=>{
+  if(e.touches.length===1){
+    dragging=true;autoRot=false;
+    const t=e.touches[0];
+    dragStart=[t.clientX,t.clientY];
+    rotStart=[rot[0],rot[1]];
+    velX=0;velY=0;
+    e.preventDefault();
+  }
+},{passive:false});
+canvas.addEventListener('touchmove',e=>{
+  if(dragging&&e.touches.length===1){
+    const t=e.touches[0];
+    const dx=t.clientX-dragStart[0];
+    const dy=t.clientY-dragStart[1];
+    rot[0]=rotStart[0]+dx*.35;
+    rot[1]=Math.max(-60,Math.min(60,rotStart[1]-dy*.35));
+    velX=dx*.005;velY=-dy*.005;
+    dragStart=[t.clientX,t.clientY];
+    rotStart=[rot[0],rot[1]];
+    e.preventDefault();
+  }
+},{passive:false});
+canvas.addEventListener('touchend',e=>{
+  if(e.changedTouches.length===1){
+    dragging=false;
+    const t=e.changedTouches[0];
+    const c=getCountryAtPoint(t.clientX,t.clientY);
+    if(c&&Math.abs(velX)<.01&&Math.abs(velY)<.01) pickCountry(c);
+  }
+});
+ 
 // Click country
 canvas.addEventListener('click',e=>{
-  if(!countriesGeo)return;
-  const rect=canvas.getBoundingClientRect();
-  const sx=(e.clientX-rect.left)*(W/rect.width);
-  const sy=(e.clientY-rect.top)*(H/rect.height);
-  const coords=proj.invert([sx,sy]);
-  if(!coords)return;
- 
-  for(const f of countriesGeo){
-    if(d3.geoContains(f,coords)){
-      const cid=String(f.id||f.properties?.id);
-      const match=countries.find(c=>String(c.id)===cid);
-      if(match){
-        pickCountry(match);
-        return;
-      }
-    }
-  }
+  if(Math.abs(velX)>.01)return;
+  const c=getCountryAtPoint(e.clientX,e.clientY);
+  if(c) pickCountry(c);
 });
  
 /* ═══ NEWS ═══ */
@@ -891,26 +1142,11 @@ async function pickCountry(c){
 /* ═══ PRELOADER ═══ */
 window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('pre').classList.add('go'),2000)});
  
-/* ═══ CURSOR ═══ */
-const cur=document.getElementById('cur'),cdt=document.getElementById('dot');
-let mx=0,my=0,cx=0,cy=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cdt.style.left=mx+'px';cdt.style.top=my+'px'});
-(function cl(){cx+=(mx-cx)*.12;cy+=(my-cy)*.12;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(cl)})();
-document.querySelectorAll('a,button,.chip,.cb,.fi,.donate-card,.nav-support').forEach(el=>{
-  el.addEventListener('mouseenter',()=>cur.classList.add('big'));
-  el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
-});
- 
 /* ═══ REVEAL ═══ */
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
 document.querySelectorAll('[data-r]').forEach(el=>obs.observe(el));
  
 /* ═══ PARALLAX ═══ */
-window.addEventListener('scroll',()=>{
-  const s=window.scrollY;
-  const w=document.querySelector('.hero-wm');
-  if(w)w.style.transform=`translate(-50%,calc(-50% + ${s*.2}px))`;
-});
  
 /* ═══ SMOOTH SCROLL ═══ */
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
@@ -925,7 +1161,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 function rg(){
   const wr=document.querySelector('.globe-wrap');
   if(!wr)return;
-  const w=Math.min(600,wr.clientWidth);
+  const w=Math.min(640,wr.clientWidth);
   canvas.style.width=w+'px';canvas.style.height=w+'px';
 }
 window.addEventListener('resize',rg);setTimeout(rg,100);
