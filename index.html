@@ -9,15 +9,15 @@
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#101827;
-  --fg:#f3f8ff;
-  --body:#c7d4e2;
-  --muted:#8094aa;
-  --line:rgba(207,226,247,.12);
-  --card:#162133;
-  --blue:#73a6d9;
-  --blue-h:#dbeaf8;
-  --blue-bg:rgba(115,166,217,.1);
+  --bg:#020203;
+  --fg:#f6f6f6;
+  --body:#cfcfcf;
+  --muted:#8d8d8d;
+  --line:rgba(255,255,255,.12);
+  --card:#09090b;
+  --blue:#ffffff;
+  --blue-h:#ebebeb;
+  --blue-bg:rgba(255,255,255,.08);
 }
 html{overflow-x:hidden}
 body{background:var(--bg);color:var(--fg);font-family:'Source Serif 4',Georgia,serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:17px;line-height:1.75}
@@ -425,11 +425,762 @@ nav.hidden{transform:translate(-50%,-110%)}
 .cb:hover{transform:translateY(-2px)}
 footer{border-top:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.015)}
 
+/* MONOCHROME SHADER PASS */
+:root{
+  --bg:#020203;
+  --fg:#f6f6f6;
+  --body:#cfcfcf;
+  --muted:#8d8d8d;
+  --line:rgba(255,255,255,.12);
+  --card:#09090b;
+  --blue:#ffffff;
+  --blue-h:#ebebeb;
+  --blue-bg:rgba(255,255,255,.08);
+  --chrome-edge:rgba(255,255,255,.18);
+  --chrome-soft:rgba(255,255,255,.06);
+}
+body{
+  background:
+    radial-gradient(circle at 14% 16%,rgba(255,255,255,.1),transparent 20%),
+    radial-gradient(circle at 82% 12%,rgba(255,255,255,.06),transparent 24%),
+    radial-gradient(circle at 50% 70%,rgba(255,255,255,.03),transparent 32%),
+    linear-gradient(180deg,#111214 0%,#060607 42%,#020203 100%);
+  background-size:120% 120%,130% 130%,120% 120%,100% 100%;
+}
+body::before{
+  background:
+    linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+  background-size:110px 110px;
+  opacity:.24;
+}
+body::after{
+  background:
+    radial-gradient(circle at 22% 26%,rgba(255,255,255,.07),transparent 18%),
+    radial-gradient(circle at 74% 34%,rgba(255,255,255,.08),transparent 22%),
+    radial-gradient(circle at 54% 78%,rgba(255,255,255,.05),transparent 30%);
+  filter:blur(30px);
+}
+nav{
+  background:rgba(8,8,9,.76);
+  border-color:rgba(255,255,255,.1);
+  box-shadow:0 28px 90px rgba(0,0,0,.46),inset 0 1px 0 rgba(255,255,255,.05);
+}
+.pitt-badge{filter:grayscale(1) brightness(1.2) contrast(1.05);opacity:.55}
+.nav-mark::before{
+  background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.95),rgba(255,255,255,.35) 58%,transparent 78%);
+  box-shadow:0 0 18px rgba(255,255,255,.32);
+}
+.hero-light{
+  background:radial-gradient(circle,rgba(255,255,255,.08),rgba(255,255,255,.02) 34%,transparent 68%);
+}
+.hero::before{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.018)),
+    radial-gradient(circle at 16% 18%,rgba(255,255,255,.12),transparent 24%),
+    radial-gradient(circle at 82% 20%,rgba(255,255,255,.06),transparent 18%);
+  border-color:rgba(255,255,255,.08);
+  box-shadow:0 42px 130px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.hero::after{border-color:rgba(255,255,255,.04)}
+.hero-eyebrow,.cta-kicker,.cta-email,.hero-panel,.hero-stat,.hero-mini,.ab-block,.np,.article-card,.donate-card,.fi,.cta-shell{
+  border-color:rgba(255,255,255,.09);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.018)),
+    linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,0));
+  box-shadow:0 26px 70px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.hero-eyebrow::before,.cta-kicker::before{
+  background:radial-gradient(circle,rgba(255,255,255,.96),rgba(255,255,255,.25) 70%,transparent 76%);
+  box-shadow:0 0 14px rgba(255,255,255,.28);
+}
+.hero-tag,.globe-kicker,.sn,.np-sub,.np-stat label,.np-topics-label,.np-topic-num,.np-news-headline,.np-news-source,.fn,.ac-tag,.ac-read,.hero-panel-top span,.hero-mini label,.hero-stat label,.ab-block label{
+  color:#ffffff;
+}
+.hero-h .it,.sh em,.cta-h em,.donate-left h2 em{color:#efefef;text-shadow:0 0 24px rgba(255,255,255,.14)}
+.hero-lead,.hero-p,.hero-panel-note,.cta-p{color:#d6d6d6}
+.hero-panel{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.018)),
+    radial-gradient(circle at top right,rgba(255,255,255,.1),transparent 34%);
+}
+.hero-panel-orbit{
+  background:radial-gradient(circle,rgba(255,255,255,.13),transparent 66%);
+  border-color:rgba(255,255,255,.11);
+}
+.hero-panel-orbit::after,.hero-orbit::before{border-color:rgba(255,255,255,.24)}
+.hero-orbit,.hero-orbit::after,.hero-gridlines,.hero::after,.globe-wrap::before,.hero-panel::before,#about .ab-grid::before,.donate-inner::before{
+  border-color:rgba(255,255,255,.05);
+}
+.hero-orbit,.hero-orbit::before,.hero-orbit::after{opacity:.82}
+#about .ab-grid,.donate-inner{
+  border-color:rgba(255,255,255,.08);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.014)),
+    radial-gradient(circle at top right,rgba(255,255,255,.05),transparent 28%);
+  box-shadow:0 28px 80px rgba(0,0,0,.24);
+}
+.globe-wrap{
+  border-color:rgba(255,255,255,.1);
+  background:
+    radial-gradient(circle at 34% 20%,rgba(255,255,255,.14),transparent 16%),
+    radial-gradient(circle at 50% 42%,rgba(255,255,255,.16),transparent 28%),
+    radial-gradient(circle at 50% 60%,rgba(255,255,255,.05),transparent 58%),
+    linear-gradient(180deg,rgba(23,23,25,.98),rgba(8,8,9,.99));
+  box-shadow:0 34px 90px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.globe-wrap::after{
+  background:
+    radial-gradient(circle at 18% 20%,rgba(255,255,255,.08),transparent 16%),
+    radial-gradient(circle at 78% 28%,rgba(255,255,255,.08),transparent 20%),
+    radial-gradient(circle at 52% 78%,rgba(255,255,255,.04),transparent 24%);
+}
+.globe-stage::before{
+  background:
+    radial-gradient(circle at 36% 30%,rgba(255,255,255,.16),transparent 18%),
+    radial-gradient(circle at 70% 68%,rgba(255,255,255,.08),transparent 26%);
+}
+.globe-stage::after{
+  content:'';
+  position:absolute;
+  inset:8%;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:inset 0 0 80px rgba(255,255,255,.04),0 0 36px rgba(255,255,255,.08);
+  z-index:1;
+  pointer-events:none;
+  animation:gmesh 9s ease-in-out infinite;
+}
+.globe-stage canvas{filter:drop-shadow(0 36px 86px rgba(0,0,0,.62))}
+.globe-core{
+  background:radial-gradient(circle,rgba(255,255,255,.18),rgba(255,255,255,.05) 56%,transparent 74%);
+  filter:blur(10px);
+}
+.globe-aura{
+  border-color:rgba(255,255,255,.14);
+  box-shadow:0 0 96px rgba(255,255,255,.08) inset,0 0 84px rgba(255,255,255,.05);
+}
+.globe-orbit-dot,.globe-orbit-dot-2,.globe-orbit-dot-3{
+  background:rgba(255,255,255,.88);
+  box-shadow:0 0 18px rgba(255,255,255,.24);
+}
+.globe-rings path,.globe-rings-2 path{stroke:rgba(255,255,255,.34) !important}
+.globe-rings circle,.globe-rings-2 circle{fill:rgba(255,255,255,.82) !important}
+.np{background:linear-gradient(180deg,rgba(19,19,20,.98),rgba(7,7,8,.98))}
+.np-news-item,.np-stat,.np-news-state,.globe-tooltip{
+  border-color:rgba(255,255,255,.09);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02)),
+    linear-gradient(135deg,rgba(255,255,255,.02),rgba(255,255,255,0));
+}
+.article-card:hover,.np-news-item:hover,.donate-card:hover,.fi:hover,.ab-block:hover{
+  border-color:rgba(255,255,255,.16);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.025)),
+    linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,0));
+}
+.nav-support,.hero-btn,.cb,.cta-email,.chip,.np-close,.btt{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  border:1px solid rgba(255,255,255,.14);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.15),rgba(255,255,255,.04) 48%,rgba(0,0,0,.12)),
+    linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,0));
+  color:var(--fg);
+  box-shadow:
+    0 20px 34px rgba(0,0,0,.34),
+    0 7px 0 rgba(0,0,0,.3),
+    inset 0 1px 0 rgba(255,255,255,.26),
+    inset 0 -16px 24px rgba(0,0,0,.28);
+  transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease,background .24s ease,color .24s ease;
+}
+.nav-support::before,.hero-btn::before,.cb::before,.cta-email::before,.chip::before,.np-close::before,.btt::before{
+  content:'';
+  position:absolute;
+  left:1px;
+  right:1px;
+  top:1px;
+  height:48%;
+  border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,0));
+  pointer-events:none;
+  opacity:.75;
+}
+.nav-support::after,.hero-btn::after,.cb::after,.cta-email::after,.chip::after,.np-close::after,.btt::after{
+  content:'';
+  position:absolute;
+  inset:auto 18% 9% 18%;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);
+  opacity:.65;
+  pointer-events:none;
+}
+.nav-support:hover,.hero-btn:hover,.cb:hover,.cta-email:hover,.chip:hover,.np-close:hover,.btt:hover{
+  transform:translateY(-4px);
+  border-color:rgba(255,255,255,.28);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.08) 48%,rgba(0,0,0,.14)),
+    linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,0));
+  box-shadow:
+    0 26px 42px rgba(0,0,0,.42),
+    0 9px 0 rgba(0,0,0,.26),
+    inset 0 1px 0 rgba(255,255,255,.32),
+    inset 0 -18px 26px rgba(0,0,0,.3);
+}
+.nav-support:active,.hero-btn:active,.cb:active,.cta-email:active,.chip:active,.np-close:active,.btt:active{
+  transform:translateY(2px);
+  box-shadow:
+    0 10px 18px rgba(0,0,0,.28),
+    0 3px 0 rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.2),
+    inset 0 -10px 18px rgba(0,0,0,.28);
+}
+.hero-btn.pri,.nav-support,.chip.on{
+  border-color:rgba(255,255,255,.24);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.24),rgba(255,255,255,.08) 52%,rgba(0,0,0,.12)),
+    linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,0));
+}
+.hero-btn,.cb,.cta-email{letter-spacing:.14em}
+.chip{backdrop-filter:blur(14px)}
+.np-close,.btt{
+  backdrop-filter:blur(18px);
+  color:var(--fg);
+}
+.nav-support:hover,.hero-btn:hover,.cb:hover,.cta-email:hover,.chip:hover,.np-close:hover,.btt:hover{color:#fff}
+
+/* REFINEMENT PASS */
+.hero::before{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.014)),
+    radial-gradient(circle at 14% 16%,rgba(255,255,255,.14),transparent 20%),
+    radial-gradient(circle at 84% 18%,rgba(255,255,255,.07),transparent 20%);
+  box-shadow:0 46px 140px rgba(0,0,0,.46),inset 0 1px 0 rgba(255,255,255,.07);
+}
+.hero-gridlines{opacity:.55}
+.hero-panel,.cta-shell,.article-card,.np,#about .ab-grid,.donate-inner{
+  backdrop-filter:blur(26px);
+}
+.hero-panel,.cta-shell{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.018)),
+    radial-gradient(circle at top right,rgba(255,255,255,.08),transparent 34%);
+}
+.hero-stat,.hero-mini,.ab-block,.donate-card,.fi{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.018)),
+    linear-gradient(135deg,rgba(255,255,255,.025),rgba(255,255,255,0));
+}
+.article-card{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015)),
+    radial-gradient(circle at 14% 12%,rgba(255,255,255,.07),transparent 26%);
+  box-shadow:0 22px 56px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.05);
+}
+.article-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 28px 70px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.nav-support,.hero-btn,.cb,.cta-email,.chip,.np-close,.btt{
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.025)),
+    linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,0));
+  box-shadow:0 14px 34px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter:blur(18px);
+  transition:transform .24s ease,background .24s ease,border-color .24s ease,box-shadow .24s ease,color .24s ease;
+}
+.nav-support::before,.hero-btn::before,.cb::before,.cta-email::before,.chip::before,.np-close::before,.btt::before{
+  left:-36%;
+  right:auto;
+  top:-20%;
+  bottom:-20%;
+  width:32%;
+  height:auto;
+  border-radius:0;
+  transform:skewX(-22deg);
+  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.16),rgba(255,255,255,0));
+  opacity:.42;
+  transition:transform .45s ease,opacity .3s ease;
+}
+.nav-support::after,.hero-btn::after,.cb::after,.cta-email::after,.chip::after,.np-close::after,.btt::after{
+  inset:auto 14px 0 14px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
+  opacity:.55;
+}
+.nav-support:hover,.hero-btn:hover,.cb:hover,.cta-email:hover,.chip:hover,.np-close:hover,.btt:hover{
+  transform:translateY(-1px);
+  border-color:rgba(255,255,255,.18);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.035)),
+    linear-gradient(135deg,rgba(255,255,255,.05),rgba(255,255,255,0));
+  box-shadow:0 18px 38px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.1);
+}
+.nav-support:hover::before,.hero-btn:hover::before,.cb:hover::before,.cta-email:hover::before,.chip:hover::before,.np-close:hover::before,.btt:hover::before{
+  transform:translateX(220%) skewX(-22deg);
+  opacity:.62;
+}
+.nav-support:active,.hero-btn:active,.cb:active,.cta-email:active,.chip:active,.np-close:active,.btt:active{
+  transform:translateY(0);
+  box-shadow:0 10px 24px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.hero-btn.pri,.nav-support,.chip.on{
+  border-color:rgba(255,255,255,.22);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.05)),
+    linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,0));
+}
+.hero-btn.pri:hover,.nav-support:hover,.chip.on:hover{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.07)),
+    linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,0));
+}
+.chip{
+  border-radius:999px;
+  padding:9px 16px;
+  letter-spacing:.08em;
+}
+.np-close,.btt{
+  width:40px;
+  height:40px;
+  border-radius:999px;
+}
+.globe-wrap{
+  background:
+    radial-gradient(circle at 50% 18%,rgba(255,255,255,.18),transparent 18%),
+    radial-gradient(circle at 18% 18%,rgba(255,255,255,.08),transparent 20%),
+    radial-gradient(circle at 80% 22%,rgba(255,255,255,.06),transparent 20%),
+    radial-gradient(circle at 50% 58%,rgba(255,255,255,.05),transparent 56%),
+    linear-gradient(180deg,rgba(22,22,24,.98),rgba(6,6,7,.995));
+  box-shadow:0 38px 96px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.07);
+}
+.globe-wrap::before{
+  inset:18px;
+  border-color:rgba(255,255,255,.05);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.015);
+}
+.globe-wrap::after{
+  inset:-10%;
+  background:
+    radial-gradient(circle at 50% 12%,rgba(255,255,255,.12),transparent 18%),
+    radial-gradient(circle at 18% 24%,rgba(255,255,255,.07),transparent 18%),
+    radial-gradient(circle at 82% 28%,rgba(255,255,255,.07),transparent 20%),
+    radial-gradient(circle at 52% 82%,rgba(255,255,255,.045),transparent 22%);
+}
+.globe-scene::before{
+  content:'';
+  position:absolute;
+  left:10%;
+  right:10%;
+  bottom:8%;
+  height:22%;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.08),rgba(255,255,255,.012) 46%,transparent 70%);
+  filter:blur(20px);
+  pointer-events:none;
+  z-index:0;
+}
+.globe-stage{
+  width:min(100%,660px);
+  animation:gfloat 7.4s ease-in-out infinite;
+}
+.globe-stage::before{
+  inset:9%;
+  background:
+    radial-gradient(circle at 34% 26%,rgba(255,255,255,.18),transparent 18%),
+    radial-gradient(circle at 68% 68%,rgba(255,255,255,.09),transparent 26%);
+}
+.globe-stage::after{
+  inset:6%;
+  border-color:rgba(255,255,255,.1);
+  box-shadow:inset 0 0 100px rgba(255,255,255,.04),0 0 42px rgba(255,255,255,.06);
+}
+.globe-core{width:72%}
+.globe-aura{width:80%}
+.globe-meta > div{
+  padding:12px 14px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.06);
+  background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.015));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+}
+.globe-hint,.globe-caption{
+  padding:10px 14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.05);
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+.globe-hint{color:rgba(255,255,255,.46)}
+.globe-caption{max-width:250px;color:#b8b8b8}
+.np{
+  background:
+    linear-gradient(180deg,rgba(18,18,19,.985),rgba(7,7,8,.99)),
+    radial-gradient(circle at top right,rgba(255,255,255,.055),transparent 28%);
+}
+.np-title{font-size:1.28rem}
+.np-desc{
+  font-size:.94rem;
+  color:#d2d2d2;
+}
+.np-signal-block{
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.np-signal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
+}
+.np-signal-head strong{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.5rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:#fff;
+}
+.np-signal-head span{
+  font-family:'Inter',sans-serif;
+  font-size:.72rem;
+  color:var(--muted);
+  text-align:right;
+}
+.np-signal-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.np-signal{
+  padding:14px 14px 12px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.07);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015)),
+    linear-gradient(135deg,rgba(255,255,255,.02),rgba(255,255,255,0));
+}
+.np-signal-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:10px;
+  margin-bottom:10px;
+}
+.np-signal-top label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.48rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#fff;
+}
+.np-signal-top strong{
+  font-family:'Inter',sans-serif;
+  font-size:1rem;
+  color:var(--fg);
+}
+.np-signal-track{
+  height:6px;
+  border-radius:999px;
+  background:rgba(255,255,255,.07);
+  overflow:hidden;
+}
+.np-signal-track span{
+  display:block;
+  height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg,rgba(255,255,255,.32),rgba(255,255,255,.98));
+  box-shadow:0 0 14px rgba(255,255,255,.16);
+}
+.np-signal-note{
+  margin-top:10px;
+  font-size:.74rem;
+  line-height:1.55;
+  color:var(--muted);
+}
+.np-source-note{
+  margin-top:10px;
+  font-size:.72rem;
+  line-height:1.7;
+  color:var(--muted);
+}
+.footer-row{
+  gap:0;
+}
+.footer-row .dot{
+  display:none;
+}
+
+/* CLARITY PASS */
+.noise,.particles{display:none}
+body{
+  background-size:100% 100%,100% 100%,100% 100%,100% 100%;
+  animation:none;
+}
+body::before,body::after,.globe-wrap::after{
+  animation:none;
+}
+.hero-light{display:none}
+.hero-orbit{opacity:.44}
+.hero-panel,.cta-shell,.np{
+  backdrop-filter:blur(14px);
+}
+#about .ab-grid,.donate-inner,.article-card{
+  backdrop-filter:none;
+}
+.globe-rings,.globe-rings-2{
+  animation:none;
+  opacity:.48;
+}
+.globe-orbit-dot,.globe-orbit-dot-2,.globe-orbit-dot-3{
+  display:none;
+}
+.globe-stage,.globe-stage::after,.globe-core,.globe-aura{
+  animation:none;
+}
+.section-note{
+  max-width:720px;
+  margin:14px 0 0;
+  color:var(--muted);
+  font-family:'Inter',sans-serif;
+  font-size:.92rem;
+  line-height:1.8;
+}
+.section-note strong{
+  color:var(--fg);
+  font-weight:600;
+}
+.hero-positioning{
+  max-width:640px;
+  margin-top:12px;
+  color:var(--fg);
+  font-family:'Inter',sans-serif;
+  font-size:1.02rem;
+  line-height:1.72;
+}
+.hero-positioning strong{
+  font-weight:600;
+}
+.hero-panel,.cta-shell,.np{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.02)),
+    radial-gradient(circle at top right,rgba(255,255,255,.065),transparent 34%);
+}
+#about .ab-grid,.donate-inner,.article-card{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.016)),
+    linear-gradient(135deg,rgba(255,255,255,.02),rgba(255,255,255,0));
+}
+.globe-wrap{
+  background:
+    radial-gradient(circle at 50% 18%,rgba(255,255,255,.16),transparent 18%),
+    radial-gradient(circle at 18% 18%,rgba(255,255,255,.06),transparent 20%),
+    radial-gradient(circle at 80% 22%,rgba(255,255,255,.05),transparent 20%),
+    radial-gradient(circle at 50% 58%,rgba(255,255,255,.04),transparent 56%),
+    linear-gradient(180deg,rgba(18,18,20,.985),rgba(4,4,5,.995));
+}
+.hero::before{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.012)),
+    radial-gradient(circle at 14% 16%,rgba(255,255,255,.12),transparent 20%),
+    radial-gradient(circle at 84% 18%,rgba(255,255,255,.055),transparent 20%);
+  box-shadow:0 46px 140px rgba(0,0,0,.56),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.hero-lead,.hero-positioning,.cta-p,.hero-panel-note{
+  color:#d0d0d0;
+}
+.pitt-badge{
+  top:28px;
+  right:48px;
+  opacity:.58;
+  filter:grayscale(.12) brightness(1.03) saturate(.9);
+  transition:opacity .28s ease,filter .28s ease,transform .28s ease;
+}
+.pitt-badge:hover{
+  opacity:1;
+  transform:translateY(-1px);
+  filter:
+    grayscale(0)
+    brightness(1.06)
+    saturate(1.12)
+    drop-shadow(0 0 10px rgba(205,184,124,.46))
+    drop-shadow(0 0 20px rgba(0,53,148,.32));
+}
+body{
+  background:
+    radial-gradient(circle at 14% 16%,rgba(255,255,255,.1),transparent 20%),
+    radial-gradient(circle at 82% 12%,rgba(36,58,96,.16),transparent 24%),
+    radial-gradient(circle at 52% 72%,rgba(32,48,82,.12),transparent 30%),
+    linear-gradient(180deg,#0f1218 0%,#050608 42%,#020203 100%);
+}
+.hero::before{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.012)),
+    radial-gradient(circle at 14% 16%,rgba(255,255,255,.12),transparent 20%),
+    radial-gradient(circle at 84% 18%,rgba(50,76,124,.16),transparent 22%);
+}
+.hero-panel,.cta-shell,.np{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.02)),
+    radial-gradient(circle at top right,rgba(56,84,132,.14),transparent 34%);
+}
+#about .ab-grid,.donate-inner,.article-card{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.016)),
+    radial-gradient(circle at top right,rgba(34,54,90,.09),transparent 28%);
+}
+.globe-wrap{
+  background:
+    radial-gradient(circle at 50% 18%,rgba(198,206,220,.045),transparent 18%),
+    radial-gradient(circle at 18% 18%,rgba(26,34,52,.14),transparent 22%),
+    radial-gradient(circle at 80% 22%,rgba(194,206,224,.02),transparent 20%),
+    radial-gradient(circle at 50% 58%,rgba(20,28,46,.12),transparent 58%),
+    linear-gradient(180deg,rgba(8,11,17,.995),rgba(1,2,4,1));
+}
+.globe-wrap::after{
+  background:
+    radial-gradient(circle at 50% 12%,rgba(210,220,234,.045),transparent 16%),
+    radial-gradient(circle at 18% 24%,rgba(38,54,86,.08),transparent 18%),
+    radial-gradient(circle at 82% 28%,rgba(206,218,236,.028),transparent 20%),
+    radial-gradient(circle at 52% 82%,rgba(26,40,66,.065),transparent 22%);
+}
+.globe-stage::before{
+  background:
+    radial-gradient(circle at 34% 26%,rgba(214,224,236,.05),transparent 16%),
+    radial-gradient(circle at 68% 68%,rgba(40,58,90,.08),transparent 24%);
+}
+.globe-core{
+  background:radial-gradient(circle,rgba(112,126,154,.11),rgba(54,68,94,.035) 54%,transparent 74%);
+  filter:blur(12px);
+}
+.globe-aura{
+  border-color:rgba(108,124,154,.075);
+  box-shadow:0 0 72px rgba(42,54,78,.05) inset,0 0 48px rgba(36,50,72,.032);
+}
+.globe-rings path,.globe-rings-2 path{stroke:rgba(196,206,220,.16) !important}
+.globe-rings circle,.globe-rings-2 circle{fill:rgba(204,214,228,.32) !important}
+.hero-actions{
+  gap:10px;
+  margin-top:26px;
+}
+.hero-panel-note{
+  color:#c8c8c8;
+}
+.nav-support,.hero-btn,.cb,.cta-email,.chip,.np-close,.btt{
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.035);
+  box-shadow:none;
+  backdrop-filter:none;
+  color:var(--fg);
+}
+.nav-support::before,.hero-btn::before,.cb::before,.cta-email::before,.chip::before,.np-close::before,.btt::before,
+.nav-support::after,.hero-btn::after,.cb::after,.cta-email::after,.chip::after,.np-close::after,.btt::after{
+  display:none;
+}
+.hero-btn,.cb,.cta-email,.nav-support{
+  font-family:'Inter',sans-serif;
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.01em;
+  text-transform:none;
+  padding:14px 20px;
+}
+.chip{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.54rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:8px 14px;
+}
+.np-close,.btt{
+  width:40px;
+  height:40px;
+  padding:0;
+  font-size:1rem;
+}
+.nav-support:hover,.hero-btn:hover,.cb:hover,.cta-email:hover,.chip:hover,.np-close:hover,.btt:hover{
+  transform:none;
+  border-color:rgba(255,255,255,.2);
+  background:rgba(255,255,255,.06);
+  box-shadow:none;
+}
+.nav-support:active,.hero-btn:active,.cb:active,.cta-email:active,.chip:active,.np-close:active,.btt:active{
+  transform:none;
+  box-shadow:none;
+}
+.hero-btn.pri,.cb.pri{
+  background:#f5f5f5;
+  color:#070707;
+  border-color:#f5f5f5;
+}
+.hero-btn.pri:hover,.cb.pri:hover{
+  background:#ffffff;
+  color:#050505;
+  border-color:#ffffff;
+}
+.cta-email{
+  font-size:.74rem;
+  letter-spacing:.02em;
+}
+.articles-grid{
+  gap:14px;
+}
+.article-card,
+.article-card:first-child{
+  min-height:auto;
+}
+.article-card:first-child{
+  grid-column:auto;
+}
+.article-card .ac-read{
+  color:#d8d8d8;
+  font-size:0;
+}
+.articles-grid .article-card:nth-child(1) .ac-read::before{
+  content:'Publishing Track';
+}
+.articles-grid .article-card:nth-child(2) .ac-read::before{
+  content:'In Development';
+}
+.articles-grid .article-card:nth-child(3) .ac-read::before{
+  content:'Research Active';
+}
+.article-card .ac-read::before{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.46rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.cta-focus{
+  margin-top:12px;
+  color:var(--muted);
+  font-family:'Inter',sans-serif;
+  font-size:.88rem;
+  line-height:1.75;
+}
+.cta-focus strong{
+  color:var(--fg);
+  font-weight:600;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation:none !important;
+    transition:none !important;
+    scroll-behavior:auto !important;
+  }
+}
+
 @media(max-width:1000px){
   nav{padding:16px 18px;width:calc(100% - 20px)}
   .nav-links{display:none}
   .nav-mark{font-size:.54rem}
-  .pitt-badge{width:24px;height:24px;right:24px;top:16px}
+  .pitt-badge{width:24px;height:24px;right:24px;top:22px}
   .hero{padding:110px 24px 60px}
   .hero::before{inset:42px 0 26px;border-radius:26px}
   .hero::after,.hero-orbit{display:none}
@@ -453,6 +1204,7 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.0
   .chips{padding:0 16px}
   .np{max-height:380px}
   .np-stats{grid-template-columns:1fr}
+  .np-signal-grid{grid-template-columns:1fr}
   .np-news-head{flex-direction:column;align-items:flex-start}
   .np-news-note{text-align:left}
   .globe-tooltip{display:none}
@@ -520,7 +1272,7 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.0
   <div class="hero-orbit"></div>
   <div class="hero-grid">
   <div class="hero-inner">
-    <div class="hero-eyebrow">Mariupol-born perspective, globally framed</div>
+    <div class="hero-eyebrow">International analysis, policy writing, public impact</div>
     <div class="hero-logo-inline">
       <svg viewBox="0 0 80 80" fill="none">
         <path class="hl-arc" d="M40,4 A36,36 0 0,0 40,76" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
@@ -536,12 +1288,13 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.0
       <span class="ln"><span class="li"><span class="it">conflict</span> to</span></span>
       <span class="ln"><span class="li">strategic clarity.</span></span>
     </h1>
-    <p class="hero-p">Scholar of international relations, pre-law student, and policy analyst — bridging firsthand experience with academic rigor to address the world's most pressing crises.</p>
-    <p class="hero-lead">Scholar of international relations, pre-law student, and policy analyst translating firsthand experience into a sharper language of security, accountability, and post-war policy design.</p>
+    <p class="hero-p">I study global political systems and work on international policy projects.</p>
+    <p class="hero-lead">I study global political systems and work on international policy projects.</p>
+    <p class="hero-positioning">My perspective is shaped by lived experience and my studies in political science and economics.</p>
     <div class="hero-actions">
-      <a href="#globe" class="hero-btn pri">Open World Desk</a>
-      <a href="#articles" class="hero-btn">Read Articles</a>
-      <a href="#contact" class="hero-btn">Start a Conversation</a>
+      <a href="#contact" class="hero-btn pri">Start a Conversation</a>
+      <a href="#globe" class="hero-btn">Explore World Desk</a>
+      <a href="#articles" class="hero-btn">View Publishing Pipeline</a>
     </div>
     <div class="hero-statline">
       <div class="hero-stat">
@@ -592,7 +1345,7 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.0
           <span>Built for analysis that carries weight</span>
         </div>
       </div>
-      <div class="hero-panel-note">This redesign leans into a sharper editorial aesthetic: premium surfaces, stronger hierarchy, and a more confident visual rhythm around your globe, writing, and contact sections.</div>
+      <div class="hero-panel-note">Primary focus: turning this site into a clear front door for research, writing, and collaboration in international policy.</div>
     </div>
   </aside>
   </div>
@@ -659,7 +1412,7 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.0
         <div class="globe-meta">
           <div>
             <div class="globe-kicker">Global Briefing Interface</div>
-            <div class="globe-status">Focused countries: <strong id="countryCount">27</strong></div>
+            <div class="globe-status">Focused countries: <strong id="countryCount">30</strong></div>
           </div>
           <div style="text-align:right">
             <div class="globe-kicker">Live Rotation</div>
@@ -685,21 +1438,23 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.0
             <circle cx="4" cy="100" r="1.4" fill="rgba(255,255,255,.38)"/>
           </svg>
           <svg class="globe-rings-2" viewBox="0 0 200 200" aria-hidden="true">
-            <path d="M 18 100 A 82 82 0 0 1 182 100" fill="none" stroke="rgba(75,123,170,.52)" stroke-width="0.9" stroke-linecap="round" stroke-dasharray="4 10"/>
-            <circle cx="18" cy="100" r="1.6" fill="rgba(75,123,170,.82)"/>
+            <path d="M 18 100 A 82 82 0 0 1 182 100" fill="none" stroke="rgba(255,255,255,.54)" stroke-width="0.9" stroke-linecap="round" stroke-dasharray="4 10"/>
+            <path d="M 46 42 A 84 84 0 0 1 154 158" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="18 12"/>
+            <circle cx="18" cy="100" r="1.6" fill="rgba(255,255,255,.84)"/>
+            <circle cx="46" cy="42" r="1.35" fill="rgba(255,255,255,.5)"/>
           </svg>
           <canvas id="gc"></canvas>
         </div>
         <div class="globe-tooltip" id="gtt"></div>
         <div class="globe-foot">
           <div class="globe-hint">drag to rotate · click a country</div>
-          <div class="globe-caption">A cleaner loader-style globe integrated into the site without changing the page's color language.</div>
+          <div class="globe-caption">A sharpened world desk with live briefings, latest headlines, and additional country signals layered into each selection.</div>
         </div>
       </div>
     </div>
     <div class="np" id="np" data-r data-d="1">
       <div class="np-ph" id="nph">
-        <div><span class="ico">◎</span>Select a country on the globe<br>to open its geopolitical snapshot and latest headlines.</div>
+        <div><span class="ico">◎</span>Select a country on the globe<br>to open its geopolitical snapshot, signals, and latest headlines.</div>
       </div>
     </div>
   </div>
@@ -710,37 +1465,38 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.0
 <!-- ARTICLES -->
 <section class="articles-sec" id="articles">
   <div style="max-width:1100px;margin:0 auto">
-    <div class="sn" data-r>WRITING</div>
-    <h2 class="sh" data-r data-d="1">Recent <em>articles.</em></h2>
+    <div class="sn" data-r>PUBLISHING</div>
+    <h2 class="sh" data-r data-d="1">Current <em>publishing pipeline.</em></h2>
+    <p class="section-note" data-r data-d="2">Instead of placeholder article links, this section now shows the briefs being developed into real public pieces. <strong>One strong release at a time</strong> will make the site feel more credible than a stack of empty posts.</p>
   </div>
   <div class="articles-grid">
-    <a href="#" class="article-card" data-r data-d="1">
+    <article class="article-card" data-r data-d="1">
       <div class="ac-tag"><span class="ac-dot"></span>Geopolitics</div>
       <h3 class="ac-title">The Architecture of Impunity: Why International Courts Struggle with Wartime Accountability</h3>
-      <p class="ac-excerpt">An examination of the structural barriers preventing the ICC from delivering justice in active conflict zones, and what reforms could change the equation.</p>
+      <p class="ac-excerpt">A flagship policy brief in development examining the structural barriers preventing the ICC from delivering justice in active conflict zones, and which institutional reforms could actually change the equation.</p>
       <div class="ac-meta">
-        <span class="ac-date">Coming Soon</span>
+        <span class="ac-date">Draft Memo</span>
         <span class="ac-read">Read →</span>
       </div>
-    </a>
-    <a href="#" class="article-card" data-r data-d="2">
+    </article>
+    <article class="article-card" data-r data-d="2">
       <div class="ac-tag"><span class="ac-dot"></span>Ukraine</div>
       <h3 class="ac-title">Mariupol After the Siege: Memory, Identity, and the Politics of Reconstruction</h3>
       <p class="ac-excerpt">How a city rebuilds not just its infrastructure but its collective memory — and why the politics of reconstruction matter as much as the bricks.</p>
       <div class="ac-meta">
-        <span class="ac-date">Coming Soon</span>
+        <span class="ac-date">Field Essay</span>
         <span class="ac-read">Read →</span>
       </div>
-    </a>
-    <a href="#" class="article-card" data-r data-d="3">
+    </article>
+    <article class="article-card" data-r data-d="3">
       <div class="ac-tag"><span class="ac-dot"></span>Policy</div>
       <h3 class="ac-title">NATO's Eastern Flank: What the Next Decade of European Security Looks Like</h3>
       <p class="ac-excerpt">Analyzing the shifting security posture along NATO's eastern border and the diplomatic calculus driving alliance strategy in 2026 and beyond.</p>
       <div class="ac-meta">
-        <span class="ac-date">Coming Soon</span>
+        <span class="ac-date">Next Release</span>
         <span class="ac-read">Read →</span>
       </div>
-    </a>
+    </article>
   </div>
 </section>
 
@@ -808,12 +1564,13 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.0
 <!-- CONTACT -->
 <section class="cta-sec" id="contact">
   <div class="cta-shell">
-    <div class="cta-kicker" data-r style="justify-content:center">CONNECT</div>
-    <h2 class="cta-h" data-r data-d="1">Let the site <em>lead somewhere real.</em></h2>
-    <p class="cta-p" data-r data-d="2">Open to editorial collaborations, speaking, research partnerships, and conversations around conflict analysis, international law, and post-war policy.</p>
+    <div class="cta-kicker" data-r style="justify-content:center">PRIMARY NEXT STEP</div>
+    <h2 class="cta-h" data-r data-d="1">Start with a <em>serious conversation.</em></h2>
+    <p class="cta-p" data-r data-d="2">The clearest next move on this site is collaboration: research support, policy writing, speaking, and international-affairs projects that need clarity, credibility, and strong framing.</p>
+    <p class="cta-focus" data-r data-d="2"><strong>Main focus:</strong> collaboration first. The globe, publishing pipeline, and research sections are here to show the quality of the work behind that conversation.</p>
     <a href="mailto:olehtsumbek1@gmail.com" class="cta-email" data-r data-d="2">olehtsumbek1@gmail.com</a>
     <div class="cta-btns" data-r data-d="3">
-      <a href="mailto:olehtsumbek1@gmail.com" class="cb"><span>Email</span></a>
+      <a href="mailto:olehtsumbek1@gmail.com" class="cb pri"><span>Email Me</span></a>
       <a href="https://www.linkedin.com/in/oleh-tsumbek-5044573ab" target="_blank" rel="noopener" class="cb"><span>LinkedIn</span></a>
     </div>
   </div>
@@ -831,8 +1588,6 @@ footer{border-top:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.0
     <span>Oleh Tsumbek</span>
   </div>
   <div class="footer-row">
-    <span>All rights reserved</span>
-    <div class="dot"></div>
     <span>Built by Oleh Tsumbek</span>
   </div>
 </footer>
@@ -875,6 +1630,7 @@ const COUNTRIES=[
   {name:'Australia',flag:'🇦🇺',id:'036',region:'Indo-Pacific',outlook:'Maritime partner',risk:'Moderate'},
   {name:'Canada',flag:'🇨🇦',id:'124',region:'North America',outlook:'Arctic and alliance actor',risk:'Moderate'},
   {name:'Brazil',flag:'🇧🇷',id:'076',region:'South America',outlook:'Global South heavyweight',risk:'Moderate'}
+  ,{name:'Iran',flag:'IR',id:'364',region:'Middle East',outlook:'Regional power under pressure',risk:'High'}
 ];
 const BRIEFINGS={
   'Ukraine':{d:'Ukraine remains the defining frontline in European security, linking battlefield endurance to EU integration, reconstruction planning, and long-term deterrence strategy.',t:['Frontline developments and force regeneration','EU accession benchmarks and reform capacity','Reconstruction finance and infrastructure security','Accountability mechanisms and war-crimes documentation']},
@@ -895,6 +1651,7 @@ const BRIEFINGS={
   'Lithuania':{d:'Lithuania remains highly alert to transit and escalation risks while deepening support for Ukraine and regional defense cooperation.',t:['Suwalki corridor and Kaliningrad pressure','Defense spending and force modernization','Transit controls and sanctions enforcement','Baltic-Polish strategic alignment']},
   'Romania':{d:'Romania is emerging as a vital Black Sea logistics and air-defense hub, connecting southeastern Europe to the wider war theater.',t:['Black Sea surveillance and naval exposure','Transit routes for grain, aid, and defense goods','Energy development in the region','Institutional reform and strategic investment']},
   'Turkey':{d:'Turkey is leveraging geography and autonomy to act simultaneously as NATO member, regional power broker, and transactional mediator.',t:['Black Sea leverage and Montreux diplomacy','Relations with NATO, Russia, and the Gulf','Defense industry growth and autonomy','Inflation, currency stress, and domestic politics']},
+  'Iran':{d:'Iran combines regional influence, coercive leverage, and domestic pressure in a posture shaped by sanctions, proxy networks, and competition with both Western and regional rivals.',t:['Regional partner networks and deterrence signaling','Sanctions pressure and economic adaptation','Nuclear diplomacy, escalation risk, and bargaining','Domestic legitimacy, repression, and elite balance']},
   'Israel':{d:'Israel remains centered on immediate security threats, regional escalation management, and a difficult balance between military aims and diplomatic pressure.',t:['Regional escalation and deterrence signaling','US support and international scrutiny','Iran-linked threat networks','Domestic cohesion and cabinet politics']},
   'United Arab Emirates':{d:'The UAE is consolidating its role as a commercial, financial, and diplomatic connector across the Gulf, South Asia, and Africa.',t:['Trade-corridor and logistics expansion','Investment diplomacy and strategic hedging','Security partnerships without overcommitment','Technology, finance, and diversification strategy']},
   'Kazakhstan':{d:'Kazakhstan is balancing between Russia, China, and the West while trying to preserve sovereignty, trade access, and domestic stability.',t:['Multi-vector diplomacy under pressure','Transit alternatives across Central Asia','Energy exports and infrastructure routes','State reform and elite management']},
@@ -917,10 +1674,47 @@ const COUNTRY_NEWS_QUERY={
   'United Arab Emirates':'"United Arab Emirates" OR UAE OR Abu Dhabi OR Dubai',
   'South Korea':'"South Korea" OR Seoul',
   'Taiwan':'Taiwan OR Taipei',
+  'Iran':'Iran OR Tehran',
   'Russia':'Russia OR Moscow',
   'Ukraine':'Ukraine OR Kyiv'
 };
 const NEWS_DATE_FORMATTER=new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric'});
+const REGION_SIGNAL_BASES={
+  'Eastern Europe':{influence:78,resilience:64,momentum:74},
+  'Eurasia':{influence:82,resilience:58,momentum:68},
+  'North America':{influence:88,resilience:76,momentum:72},
+  'Western Europe':{influence:76,resilience:72,momentum:66},
+  'Central Europe':{influence:72,resilience:68,momentum:65},
+  'Southern Europe':{influence:68,resilience:66,momentum:61},
+  'Nordics':{influence:70,resilience:78,momentum:64},
+  'Baltics':{influence:67,resilience:65,momentum:69},
+  'Black Sea':{influence:75,resilience:61,momentum:72},
+  'Black Sea / Middle East':{influence:81,resilience:60,momentum:74},
+  'Middle East':{influence:82,resilience:56,momentum:71},
+  'Gulf':{influence:74,resilience:72,momentum:70},
+  'Central Asia':{influence:63,resilience:61,momentum:64},
+  'East Asia':{influence:84,resilience:70,momentum:75},
+  'South Asia':{influence:80,resilience:67,momentum:76},
+  'Indo-Pacific':{influence:73,resilience:74,momentum:68},
+  'South America':{influence:71,resilience:65,momentum:67}
+};
+const SPECIAL_SIGNAL_TWEAKS={
+  'Ukraine':{exposure:6,influence:8,resilience:9,momentum:10},
+  'Russia':{exposure:8,influence:7,resilience:-4,momentum:4},
+  'United States':{exposure:-2,influence:10,resilience:8,momentum:5},
+  'China':{exposure:4,influence:10,resilience:6,momentum:8},
+  'United Kingdom':{influence:6,resilience:4,momentum:3},
+  'France':{influence:7,resilience:5,momentum:2},
+  'Germany':{influence:6,resilience:4,momentum:1},
+  'Poland':{exposure:6,influence:5,resilience:3,momentum:5},
+  'Turkey':{exposure:5,influence:7,resilience:-1,momentum:5},
+  'Iran':{exposure:8,influence:7,resilience:-1,momentum:5},
+  'Israel':{exposure:9,influence:6,resilience:1,momentum:4},
+  'Taiwan':{exposure:8,influence:8,resilience:5,momentum:6},
+  'India':{influence:8,resilience:5,momentum:8},
+  'Japan':{influence:6,resilience:8,momentum:5},
+  'Brazil':{influence:5,resilience:3,momentum:4}
+};
 
 const chipsEl=document.getElementById('chips');
 const countryCountEl=document.getElementById('countryCount');
@@ -928,7 +1722,49 @@ const activeCountryLabel=document.getElementById('activeCountryLabel');
 if(countryCountEl)countryCountEl.textContent=String(COUNTRIES.length);
 COUNTRIES.forEach(c=>{const b=document.createElement('button');b.className='chip';b.textContent=c.flag+' '+c.name;b.addEventListener('click',()=>selectCountry(c));chipsEl.appendChild(b)});
 
+function clampMetric(value,min=42,max=99){
+  return Math.max(min,Math.min(max,Math.round(value)));
+}
+function hashSeed(value=''){
+  return Array.from(String(value)).reduce((acc,char,idx)=>acc+(char.charCodeAt(0)*(idx+3)),0);
+}
+function getCountrySignals(country){
+  const seed=hashSeed(country.name);
+  const riskBase={Severe:92,High:81,Elevated:72,Moderate:60}[country.risk]||64;
+  const regionBase=REGION_SIGNAL_BASES[country.region]||{influence:68,resilience:64,momentum:62};
+  let exposure=riskBase+((seed%7)-3);
+  let influence=regionBase.influence+(((seed>>1)%9)-4);
+  let resilience=regionBase.resilience-Math.round((riskBase-60)*.28)+(((seed>>2)%7)-3);
+  let momentum=regionBase.momentum+(((seed>>3)%11)-5);
+  const outlook=country.outlook.toLowerCase();
+  if(/frontline|revisionist|transit pressure|security-centered|semiconductor center/.test(outlook))exposure+=6;
+  if(/alliance anchor|systemic challenger|strategic autonomy|multi-aligned|multi-vector broker/.test(outlook))influence+=7;
+  if(/trade|connector|industrial|tech|commercial|energy|maritime/.test(outlook)){resilience+=4;momentum+=3}
+  if(/border|flank|frontline|deterrence/.test(outlook)){resilience+=2;momentum+=4}
+  const tweak=SPECIAL_SIGNAL_TWEAKS[country.name];
+  if(tweak){
+    exposure+=tweak.exposure||0;
+    influence+=tweak.influence||0;
+    resilience+=tweak.resilience||0;
+    momentum+=tweak.momentum||0;
+  }
+  return {
+    exposure:clampMetric(exposure),
+    influence:clampMetric(influence),
+    resilience:clampMetric(resilience),
+    momentum:clampMetric(momentum)
+  };
+}
+function renderSignalCard(label,value,note){
+  return `<div class="np-signal"><div class="np-signal-top"><label>${escapeHtml(label)}</label><strong>${value}</strong></div><div class="np-signal-track"><span style="width:${value}%"></span></div><div class="np-signal-note">${escapeHtml(note)}</div></div>`;
+}
+
 /* ═══ GLOBE ═══ */
+const CUSTOM_GEO_FEATURES=[];
+function findGeoFeatureById(id){
+  if(!countriesGeo)return null;
+  return countriesGeo.features.find(feature=>String(feature.id)===String(id))||null;
+}
 const canvas=document.getElementById('gc');
 const ctx=canvas.getContext('2d');
 const tooltip=document.getElementById('gtt');
@@ -1058,10 +1894,17 @@ async function fetchCountryNews(country){
 }
 function renderCountryPanel(country,newsState){
   const briefing=BRIEFINGS[country.name];
+  const signals=getCountrySignals(country);
   let html='<button class="np-close" onclick="closePanel()">&times;</button>';
   html+=`<div class="np-title"><span class="fl">${country.flag}</span>${escapeHtml(country.name)}</div><div class="np-sub">Country briefing</div>`;
   html+=`<p class="np-desc">${escapeHtml(briefing.d)}</p>`;
   html+=`<div class="np-stats"><div class="np-stat"><label>Region</label><strong>${escapeHtml(country.region)}</strong><span>Strategic theatre</span></div><div class="np-stat"><label>Outlook</label><strong>${escapeHtml(country.outlook)}</strong><span>Current posture</span></div><div class="np-stat"><label>Risk</label><strong>${escapeHtml(country.risk)}</strong><span>Monitoring level</span></div></div>`;
+  html+='<div class="np-signal-block"><div class="np-signal-head"><strong>Strategic Signals</strong><span>Synthesized analyst metrics, scored out of 100 for a faster country read.</span></div><div class="np-signal-grid">';
+  html+=renderSignalCard('Exposure',signals.exposure,'Conflict intensity and geopolitical stress.');
+  html+=renderSignalCard('Influence',signals.influence,'How much this country shapes wider regional balance.');
+  html+=renderSignalCard('Resilience',signals.resilience,'Institutional and economic ability to absorb shocks.');
+  html+=renderSignalCard('Momentum',signals.momentum,'Current strategic movement, trajectory, and policy energy.');
+  html+='</div><div class="np-source-note">These added metrics are editorial signals designed to support quick comparison across the map.</div></div>';
   html+='<div class="np-topics-label">Key issues</div>';
   briefing.t.forEach((topic,index)=>{html+=`<div class="np-topic"><span class="np-topic-num">0${index+1}</span><span class="np-topic-text">${escapeHtml(topic)}</span></div>`;});
   html+='<div class="np-news-block"><div class="np-news-head"><div class="np-news-headline">Latest Headlines</div><div class="np-news-note">Filtered to major outlets such as Reuters, BBC, AP, Al Jazeera, FT, Bloomberg, CNN, DW, France 24, and The Guardian.</div></div>';
@@ -1096,9 +1939,9 @@ async function loadCountryNews(country){
   }
 }
 function hitTest(x,y){
-  if(!countriesGeo)return null;
   const p=projection.invert([x*DPR,y*DPR]);
   if(!p)return null;
+  if(!countriesGeo)return null;
   for(const f of countriesGeo.features){if(d3.geoContains(f,p))return f.id}
   return null;
 }
@@ -1109,18 +1952,23 @@ function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   const cx=W/2*DPR,cy=H/2*DPR,rad=Math.min(W,H)*scaleFactor*DPR;
   const glow=ctx.createRadialGradient(cx,cy,rad*.18,cx,cy,rad*1.65);
-  glow.addColorStop(0,'rgba(162,204,245,.24)');
-  glow.addColorStop(.38,'rgba(115,166,217,.16)');
-  glow.addColorStop(.72,'rgba(115,166,217,.05)');
+  glow.addColorStop(0,'rgba(158,168,184,.075)');
+  glow.addColorStop(.38,'rgba(88,100,122,.045)');
+  glow.addColorStop(.72,'rgba(54,64,84,.015)');
   glow.addColorStop(1,'transparent');
   ctx.beginPath();ctx.arc(cx,cy,rad*1.45,0,Math.PI*2);ctx.fillStyle=glow;ctx.fill();
+  const atmosphere=ctx.createRadialGradient(cx,cy,rad*.96,cx,cy,rad*1.22);
+  atmosphere.addColorStop(0,'rgba(255,255,255,0)');
+  atmosphere.addColorStop(.72,'rgba(126,140,164,.02)');
+  atmosphere.addColorStop(1,'rgba(118,132,154,.05)');
+  ctx.beginPath();ctx.arc(cx,cy,rad*1.12,0,Math.PI*2);ctx.fillStyle=atmosphere;ctx.fill();
 
   const ocean=ctx.createRadialGradient(cx-rad*.34,cy-rad*.44,rad*.08,cx,cy,rad*1.24);
-  ocean.addColorStop(0,'rgba(245,250,255,.22)');
-  ocean.addColorStop(.12,'rgba(169,208,244,.26)');
-  ocean.addColorStop(.36,'rgba(51,85,125,.94)');
-  ocean.addColorStop(.75,'rgba(19,35,57,.98)');
-  ocean.addColorStop(1,'rgba(11,20,32,1)');
+  ocean.addColorStop(0,'rgba(176,188,206,.08)');
+  ocean.addColorStop(.12,'rgba(76,90,116,.08)');
+  ocean.addColorStop(.36,'rgba(20,26,38,.78)');
+  ocean.addColorStop(.75,'rgba(4,6,10,.996)');
+  ocean.addColorStop(1,'rgba(2,3,5,1)');
   ctx.beginPath();pathGen({type:'Sphere'});ctx.fillStyle=ocean;ctx.fill();
 
   ctx.save();
@@ -1135,14 +1983,14 @@ function draw(){
 
   const night=ctx.createLinearGradient(cx-rad*.55,cy-rad*.1,cx+rad*.9,cy+rad*.3);
   night.addColorStop(0,'rgba(255,255,255,0)');
-  night.addColorStop(.54,'rgba(7,13,23,.02)');
-  night.addColorStop(1,'rgba(7,13,23,.26)');
+  night.addColorStop(.54,'rgba(0,0,0,.18)');
+  night.addColorStop(1,'rgba(0,0,0,.58)');
   ctx.fillStyle=night;
   ctx.fillRect(0,0,canvas.width,canvas.height);
   ctx.restore();
 
-  ctx.beginPath();pathGen(grat);ctx.lineWidth=.75*DPR;ctx.strokeStyle='rgba(139,188,235,.1)';ctx.stroke();
-  ctx.beginPath();pathGen(grat);ctx.lineWidth=.28*DPR;ctx.strokeStyle='rgba(255,255,255,.11)';ctx.stroke();
+  ctx.beginPath();pathGen(grat);ctx.lineWidth=.75*DPR;ctx.strokeStyle='rgba(255,255,255,.08)';ctx.stroke();
+  ctx.beginPath();pathGen(grat);ctx.lineWidth=.28*DPR;ctx.strokeStyle='rgba(255,255,255,.14)';ctx.stroke();
 
   if(countriesGeo){
     const sid=selCountry?selCountry.id:null;
@@ -1151,36 +1999,41 @@ function draw(){
       ctx.beginPath();pathGen(f);
       const hl=COUNTRIES.some(c=>String(c.id)===String(f.id));
       const hov=String(f.id)===String(hoverId);
-      ctx.fillStyle=hov?'rgba(149,202,247,.38)':hl?'rgba(115,166,217,.24)':'rgba(234,243,252,.055)';
+      ctx.fillStyle=hov?'rgba(188,196,210,.18)':hl?'rgba(114,122,140,.08)':'rgba(255,255,255,.035)';
       ctx.fill();
       if(hl||hov){
         ctx.beginPath();pathGen(f);
-        ctx.lineWidth=.8*DPR;ctx.strokeStyle=hov?'rgba(255,255,255,.52)':'rgba(115,166,217,.34)';ctx.stroke();
+        ctx.lineWidth=.8*DPR;ctx.strokeStyle=hov?'rgba(212,220,234,.3)':'rgba(148,158,176,.14)';ctx.stroke();
       }
     }
     if(bordersMesh){
-      ctx.beginPath();pathGen(bordersMesh);ctx.lineWidth=.55*DPR;ctx.strokeStyle='rgba(189,219,248,.12)';ctx.stroke();
-      ctx.beginPath();pathGen(bordersMesh);ctx.lineWidth=.22*DPR;ctx.strokeStyle='rgba(255,255,255,.16)';ctx.stroke();
+      ctx.beginPath();pathGen(bordersMesh);ctx.lineWidth=.55*DPR;ctx.strokeStyle='rgba(255,255,255,.12)';ctx.stroke();
+      ctx.beginPath();pathGen(bordersMesh);ctx.lineWidth=.22*DPR;ctx.strokeStyle='rgba(255,255,255,.18)';ctx.stroke();
     }
     if(selCountry){
-      const sf=countriesGeo.features.find(f=>String(f.id)===String(selCountry.id));
+      const sf=findGeoFeatureById(selCountry.id);
       if(sf){
         const p=.66+Math.sin(Date.now()*.0032)*.34;
-        ctx.save();ctx.shadowColor=`rgba(115,166,217,${.72*p})`;ctx.shadowBlur=(34+28*p)*DPR;
-        ctx.beginPath();pathGen(sf);ctx.fillStyle=`rgba(115,166,217,${.42+.18*p})`;ctx.fill();ctx.restore();
-        ctx.save();ctx.shadowColor='rgba(255,255,255,.5)';ctx.shadowBlur=12*DPR;
-        ctx.beginPath();pathGen(sf);ctx.fillStyle='rgba(248,252,255,.94)';ctx.fill();ctx.restore();
-        ctx.beginPath();pathGen(sf);ctx.lineWidth=1.15*DPR;ctx.strokeStyle=`rgba(255,255,255,${.6+.32*p})`;ctx.stroke();
+        ctx.save();ctx.shadowColor=`rgba(120,132,154,${.22*p})`;ctx.shadowBlur=(18+10*p)*DPR;
+        ctx.beginPath();pathGen(sf);ctx.fillStyle=`rgba(108,116,134,${.12+.05*p})`;ctx.fill();ctx.restore();
+        ctx.save();ctx.shadowColor='rgba(150,162,182,.1)';ctx.shadowBlur=6*DPR;
+        ctx.beginPath();pathGen(sf);ctx.fillStyle='rgba(132,142,160,.22)';ctx.fill();ctx.restore();
+        ctx.beginPath();pathGen(sf);ctx.lineWidth=1.05*DPR;ctx.strokeStyle=`rgba(216,224,236,${.2+.1*p})`;ctx.stroke();
       }
     }
   }
   const rim=ctx.createRadialGradient(cx,cy,rad*.92,cx,cy,rad*1.08);
   rim.addColorStop(0,'rgba(255,255,255,0)');
-  rim.addColorStop(.72,'rgba(179,216,247,.06)');
-  rim.addColorStop(1,'rgba(255,255,255,.24)');
+  rim.addColorStop(.72,'rgba(150,162,182,.03)');
+  rim.addColorStop(1,'rgba(172,184,206,.08)');
   ctx.beginPath();ctx.arc(cx,cy,rad*1.06,0,Math.PI*2);ctx.fillStyle=rim;ctx.fill();
-  ctx.beginPath();pathGen({type:'Sphere'});ctx.lineWidth=1.45*DPR;ctx.strokeStyle='rgba(246,251,255,.82)';ctx.stroke();
-  ctx.beginPath();pathGen({type:'Sphere'});ctx.lineWidth=.45*DPR;ctx.strokeStyle='rgba(115,166,217,.42)';ctx.stroke();
+  ctx.save();
+  ctx.shadowColor='rgba(120,136,162,.05)';
+  ctx.shadowBlur=10*DPR;
+  ctx.beginPath();pathGen({type:'Sphere'});ctx.lineWidth=1.15*DPR;ctx.strokeStyle='rgba(184,196,214,.1)';ctx.stroke();
+  ctx.restore();
+  ctx.beginPath();pathGen({type:'Sphere'});ctx.lineWidth=1.45*DPR;ctx.strokeStyle='rgba(206,214,228,.24)';ctx.stroke();
+  ctx.beginPath();pathGen({type:'Sphere'});ctx.lineWidth=.45*DPR;ctx.strokeStyle='rgba(160,172,194,.12)';ctx.stroke();
 }
 
 let lastT=performance.now();
@@ -1220,7 +2073,8 @@ function selectCountry(c){
   selCountry=c;
   document.querySelectorAll('.chip').forEach(ch=>ch.classList.toggle('on',ch.textContent.includes(c.name)));
   if(activeCountryLabel)activeCountryLabel.textContent=c.name;
-  if(countriesGeo){const f=countriesGeo.features.find(x=>String(x.id)===String(c.id));if(f){const cn=d3.geoCentroid(f);targetRot=[-cn[0],-cn[1],0];targetScale=.34;animating=true;autoRot=false}}
+  const f=findGeoFeatureById(c.id);
+  if(f){const cn=d3.geoCentroid(f);targetRot=[-cn[0],-cn[1],0];targetScale=.34;animating=true;autoRot=false}
   renderCountryPanel(c,{status:'loading',items:[]});
   loadCountryNews(c);
 }
@@ -1230,14 +2084,11 @@ function closePanel(){
   document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
   targetScale=.29;targetRot=[18,-16,0];animating=true;
   setTimeout(()=>{autoRot=true},1500);
-  document.getElementById('np').innerHTML='<div class="np-ph"><div><span class="ico">◎</span>Select a country on the globe<br>to open its geopolitical snapshot and latest headlines.</div></div>';
+  document.getElementById('np').innerHTML='<div class="np-ph"><div><span class="ico">◎</span>Select a country on the globe<br>to open its geopolitical snapshot, signals, and latest headlines.</div></div>';
   draw();
 }
 
 window.addEventListener('load',()=>{resize();setTimeout(()=>document.getElementById('pre').classList.add('go'),2000)});
-(function(){const c=document.getElementById('particles');if(!c)return;for(let i=0;i<20;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.top=Math.random()*100+'%';const s=1+Math.random()*1.5;p.style.width=s+'px';p.style.height=s+'px';p.style.opacity=Math.random()*.08;p.style.animation=`pf ${12+Math.random()*12}s ${Math.random()*5}s infinite ease-in-out`;c.appendChild(p)}const s=document.createElement('style');s.textContent='@keyframes pf{0%,100%{transform:translateY(0);opacity:.02}50%{transform:translateY(-30px);opacity:.08}}';document.head.appendChild(s)})();
-const hs=document.getElementById('hero-sec'),hl=document.getElementById('heroLight');
-if(hs&&hl)hs.addEventListener('mousemove',e=>{const r=hs.getBoundingClientRect();hl.style.left=(e.clientX-r.left)+'px';hl.style.top=(e.clientY-r.top)+'px'});
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('[data-r]').forEach(el=>obs.observe(el));
 const sects=document.querySelectorAll('section[id]'),nls=document.querySelectorAll('.nl-a');
@@ -1247,8 +2098,6 @@ const nav=document.querySelector('nav'),btt=document.getElementById('btt');let l
 window.addEventListener('scroll',()=>{const s=window.scrollY;nav.classList.toggle('hidden',s>ls&&s>300);btt.classList.toggle('show',s>500);ls=s});
 btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)window.scrollTo({top:t.offsetTop-60,behavior:'smooth'})})});
-const pb=document.querySelector('.pitt-badge');if(pb)setInterval(()=>{pb.style.filter='drop-shadow(0 0 6px rgba(205,184,124,.2))';setTimeout(()=>{pb.style.filter=''},1200)},5000);
-(function(){const el=document.querySelector('.hero-lead')||document.querySelector('.hero-p');if(!el)return;const o=el.textContent;const ch='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';let f=0;function r(){let s='';for(let i=0;i<o.length;i++){if(i<f)s+=o[i];else if(o[i]===' ')s+=' ';else s+=ch[Math.floor(Math.random()*ch.length)]}el.textContent=s;f+=2;if(f<=o.length+2)requestAnimationFrame(r);else el.textContent=o}setTimeout(r,3000)})();
 </script>
 </body>
 </html>
