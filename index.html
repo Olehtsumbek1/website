@@ -2,11 +2,48 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0a0f18">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <title>Oleh Tsumbek &mdash; International Affairs, Policy &amp; Law</title>
 <meta name="description" content="Mariupol-born political science and economics student focused on international affairs, conflict analysis, policy writing, and a pre-law path.">
+<link rel="canonical" href="https://olehtsumbek.com/">
 <meta property="og:title" content="Oleh Tsumbek - International Affairs, Policy &amp; Law">
 <meta property="og:description" content="Mariupol-born political science and economics student focused on international affairs, conflict analysis, policy writing, and a pre-law path.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://olehtsumbek.com/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Oleh Tsumbek - International Affairs, Policy &amp; Law">
+<meta name="twitter:description" content="Weekly briefings on Eastern European security, ICC accountability, and geopolitical risk for readers, researchers, and collaborators.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Oleh Tsumbek",
+  "url": "https://olehtsumbek.com/",
+  "email": "mailto:olehtsumbek1@gmail.com",
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of Pittsburgh"
+  },
+  "knowsAbout": [
+    "International affairs",
+    "Political science",
+    "Economics",
+    "Conflict analysis",
+    "Eastern European security",
+    "International law"
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/in/oleh-tsumbek-5044573ab",
+    "https://www.post-gazette.com/news/world/2026/02/23/ukraine-russia-summit-pittsburgh/stories/202602210058"
+  ]
+}
+</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&family=Space+Grotesk:wght@400;500;700&display=swap');
 
@@ -24,6 +61,17 @@
 }
 html{overflow-x:hidden}
 body{background:var(--bg);color:var(--fg);font-family:'Source Serif 4',Georgia,serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:17px;line-height:1.75}
+.sr-only{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
 
 /* ── LOADER ── */
 #pre{
@@ -5349,32 +5397,58 @@ nav.hidden{transform:translateY(-110%)}
   position:fixed;
   inset:0;
   z-index:10000;
-  display:none;
+  display:flex;
   align-items:center;
   justify-content:center;
   padding:28px;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  overflow:hidden;
+  contain:layout paint style;
+  transition:opacity .16s ease,visibility 0s linear .16s;
 }
 .briefing-modal.open{
-  display:flex;
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transition-delay:0s;
 }
 .briefing-backdrop{
   position:absolute;
   inset:0;
-  background:rgba(2,4,8,.78);
-  backdrop-filter:blur(18px);
+  background:
+    radial-gradient(circle at 52% 18%,rgba(78,108,168,.12),transparent 32%),
+    rgba(2,4,8,.84);
+  opacity:0;
+  transform:translateZ(0);
+  transition:opacity .16s ease;
+}
+.briefing-modal.open .briefing-backdrop{
+  opacity:1;
 }
 .briefing-dialog{
   position:relative;
   width:min(920px,100%);
   max-height:min(86vh,900px);
   overflow:auto;
+  overscroll-behavior:contain;
   padding:34px;
   border:1px solid rgba(214,228,244,.14);
   border-radius:22px;
   background:
     radial-gradient(circle at top right,rgba(144,174,222,.13),transparent 30%),
     linear-gradient(180deg,rgba(15,22,36,.98),rgba(4,7,12,.99));
-  box-shadow:0 40px 120px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06);
+  box-shadow:0 28px 82px rgba(0,0,0,.44),inset 0 1px 0 rgba(255,255,255,.06);
+  opacity:0;
+  transform:translate3d(0,10px,0) scale(.988);
+  contain:content;
+  will-change:transform,opacity;
+  transition:opacity .16s ease,transform .16s ease;
+}
+.briefing-modal.open .briefing-dialog{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
 }
 .briefing-close{
   position:absolute;
@@ -5455,7 +5529,14 @@ nav.hidden{transform:translateY(-110%)}
   line-height:1.75;
 }
 body.modal-open{
-  overflow:hidden;
+  overflow:clip;
+}
+@media(prefers-reduced-motion:reduce){
+  .briefing-modal,
+  .briefing-backdrop,
+  .briefing-dialog{
+    transition:none;
+  }
 }
 @media(max-width:1100px){
   .proof-grid{
@@ -5497,6 +5578,1679 @@ body.modal-open{
     grid-template-columns:1fr;
   }
 }
+/* COMPACT EDITORIAL PASS */
+.sec{
+  padding-top:96px;
+  padding-bottom:96px;
+}
+.sec-divider{
+  height:26px;
+}
+.lead-card,
+.recognition-card,
+.article-card,
+.contact-proof,
+.np,
+.desk-news-window{
+  border-radius:14px;
+}
+.lead-grid,
+.recognition-grid,
+.articles-grid{
+  gap:10px;
+}
+.lead-card,
+.recognition-card{
+  min-height:190px;
+  padding:20px;
+}
+.recognition-card h3,
+.lead-title{
+  margin-top:18px;
+}
+.recognition-card p,
+.lead-copy,
+.section-note,
+.contact-proof{
+  line-height:1.62;
+}
+.recognition-strip{
+  padding:12px;
+  border-radius:14px;
+}
+.lead-proof{
+  padding:18px 20px;
+  border-radius:14px;
+}
+.globe-sec,
+.articles-sec,
+.briefing-sec,
+.cta-sec{
+  padding-top:104px;
+  padding-bottom:104px;
+}
+.donate-sec{
+  padding-top:86px;
+  padding-bottom:86px;
+}
+@media(max-width:760px){
+  .sec,
+  .globe-sec,
+  .articles-sec,
+  .briefing-sec,
+  .cta-sec,
+  .donate-sec{
+    padding-top:72px;
+    padding-bottom:72px;
+  }
+}
+/* FINAL FOCUS PASS */
+.hero{
+  min-height:92vh;
+  padding-bottom:68px;
+}
+.hero-grid{
+  align-items:center;
+}
+.hero-inner{
+  max-width:820px;
+}
+.hero-h{
+  margin-bottom:22px;
+}
+.hero-lead{
+  max-width:640px;
+  font-size:1.08rem;
+  line-height:1.75;
+}
+.hero-positioning{
+  max-width:620px;
+}
+.hero-subscribe{
+  max-width:760px;
+  margin-top:20px;
+}
+.hero-actions{
+  margin-top:22px;
+}
+.hero-statline{
+  margin-top:22px;
+  max-width:720px;
+}
+.hero-stat{
+  padding:16px 16px 14px;
+  border-radius:14px;
+}
+.hero-panel{
+  border-radius:18px;
+}
+.hero-panel-note{
+  display:none;
+}
+.hero-mini-grid{
+  gap:10px;
+}
+.hero-mini{
+  border-radius:12px;
+}
+.tape{
+  padding:10px 0;
+}
+.tape-in span{
+  opacity:.82;
+}
+.lead-sec,
+.recognition-sec{
+  padding-top:82px;
+  padding-bottom:82px;
+}
+.recognition-intro p{
+  max-width:350px;
+}
+.recognition-card{
+  min-height:168px;
+}
+.recognition-card h3{
+  font-size:1rem;
+}
+.recognition-strip{
+  margin-top:2px;
+}
+.globe-hd p{
+  opacity:.92;
+}
+.globe-chapter{
+  max-width:1100px;
+}
+.desk-news-window{
+  max-width:1100px;
+}
+.briefing-main,
+.briefing-side{
+  border-radius:18px;
+}
+.briefing-title{
+  max-width:700px;
+  font-size:3.8rem;
+}
+.briefing-summary{
+  max-width:700px;
+}
+.article-card{
+  border-radius:16px;
+}
+.article-card:first-child{
+  min-height:300px;
+}
+.cta-shell{
+  border-radius:22px;
+}
+.contact-proof{
+  margin-top:10px;
+}
+@media(max-width:1000px){
+  .hero{
+    min-height:auto;
+    padding-bottom:76px;
+  }
+  .hero-aside{
+    margin-top:24px;
+  }
+}
+@media(max-width:760px){
+  .hero-statline{
+    gap:10px;
+  }
+  .briefing-title{
+    font-size:2.25rem;
+  }
+}
+/* GLOBE SURFACE PASS */
+.globe-wrap{
+  background:
+    radial-gradient(circle at 48% 42%,rgba(172,190,222,.08),transparent 18%),
+    radial-gradient(circle at 50% 56%,rgba(42,58,88,.16),transparent 48%),
+    linear-gradient(180deg,rgba(7,10,16,.992),rgba(2,3,6,.998));
+  box-shadow:
+    0 48px 130px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.045),
+    inset 0 0 0 1px rgba(255,255,255,.025);
+}
+.globe-wrap::before{
+  inset:18px;
+  border-color:rgba(224,234,248,.045);
+  box-shadow:inset 0 0 90px rgba(0,0,0,.24);
+}
+.globe-wrap::after{
+  opacity:.42;
+  animation:none;
+  background:
+    radial-gradient(circle at 28% 20%,rgba(255,255,255,.06),transparent 14%),
+    radial-gradient(circle at 72% 78%,rgba(86,112,166,.06),transparent 22%);
+}
+.globe-scene{
+  isolation:isolate;
+}
+.globe-stage{
+  transform:translateZ(0);
+}
+.globe-stage::before{
+  display:none;
+  inset:6%;
+  opacity:0;
+  filter:none;
+  background:none;
+}
+.globe-stage::after{
+  inset:10%;
+  border:1px solid rgba(220,232,248,.07);
+  box-shadow:
+    inset 0 0 78px rgba(0,0,0,.22),
+    inset 0 0 24px rgba(255,255,255,.025),
+    0 0 90px rgba(46,66,110,.1);
+  opacity:.72;
+}
+.globe-stage canvas{
+  filter:drop-shadow(0 44px 82px rgba(0,0,0,.54)) contrast(1.04) saturate(1.03);
+}
+.globe-core{
+  display:none;
+  width:78%;
+  opacity:0;
+  filter:none;
+  background:none;
+}
+.globe-aura{
+  width:86%;
+  opacity:.16;
+  border-color:rgba(218,232,252,.08);
+  box-shadow:inset 0 0 118px rgba(70,96,150,.1),0 0 70px rgba(38,56,96,.08);
+}
+.globe-meta > div,
+.globe-foot{
+  background:linear-gradient(180deg,rgba(8,12,20,.76),rgba(3,5,9,.58));
+  border-color:rgba(226,236,250,.08);
+}
+/* PREMIUM INTERFACE PASS */
+::selection{
+  background:rgba(210,226,250,.22);
+  color:#fff;
+}
+html{
+  scroll-behavior:smooth;
+}
+body{
+  background:
+    radial-gradient(circle at 10% 8%,rgba(78,104,158,.16),transparent 24%),
+    radial-gradient(circle at 90% 14%,rgba(255,255,255,.055),transparent 18%),
+    radial-gradient(circle at 50% 72%,rgba(70,92,138,.09),transparent 32%),
+    linear-gradient(180deg,#020305 0%,#05070b 42%,#020203 100%);
+}
+nav{
+  border-color:rgba(230,238,252,.105);
+  background:
+    linear-gradient(180deg,rgba(11,14,22,.92),rgba(4,5,8,.86)),
+    radial-gradient(circle at 80% 0%,rgba(176,198,232,.07),transparent 34%);
+  box-shadow:
+    0 18px 60px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.055);
+}
+.nl-a{
+  padding:9px 2px;
+  color:rgba(232,238,248,.58);
+}
+.nl-a:hover,
+.nl-a.active{
+  color:#f7fbff;
+  text-shadow:0 0 22px rgba(210,226,250,.12);
+}
+.nl-a::after{
+  bottom:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(242,247,255,.82),transparent);
+}
+.nav-support{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.026)),
+    radial-gradient(circle at 50% 0%,rgba(210,226,250,.1),transparent 56%);
+  border-color:rgba(235,242,252,.14);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 14px 32px rgba(0,0,0,.22);
+}
+.nav-support:hover{
+  border-color:rgba(245,249,255,.32);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.105),rgba(255,255,255,.04)),
+    radial-gradient(circle at 50% 0%,rgba(210,226,250,.18),transparent 58%);
+}
+.hero::before{
+  border-color:rgba(236,244,255,.08);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.008)),
+    radial-gradient(circle at 16% 14%,rgba(176,198,232,.08),transparent 26%),
+    radial-gradient(circle at 76% 24%,rgba(255,255,255,.045),transparent 24%);
+}
+.hero-eyebrow,
+.sn{
+  color:rgba(236,244,255,.78);
+}
+.hero-h{
+  text-shadow:0 18px 70px rgba(0,0,0,.34);
+}
+.hero-h .it,
+.sh em,
+.briefing-title em,
+.cta-h em{
+  text-shadow:0 0 34px rgba(198,218,248,.14);
+}
+.hero-lead,
+.hero-positioning,
+.section-note,
+.briefing-summary{
+  color:rgba(219,228,240,.82);
+}
+.hero-subscribe,
+.desk-news-window,
+.np,
+.briefing-main,
+.briefing-side,
+.contact-form,
+.cta-shell{
+  border-color:rgba(232,240,252,.115);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018)),
+    radial-gradient(circle at 100% 0%,rgba(152,178,222,.095),transparent 34%),
+    linear-gradient(180deg,rgba(9,13,21,.94),rgba(3,5,9,.96));
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.32),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+.hero-panel,
+.hero-stat,
+.hero-mini,
+.lead-card,
+.recognition-card,
+.article-card,
+.contact-proof,
+.donate-card,
+.desk-news-card,
+.np-news-item,
+.np-stat,
+.np-signal,
+.globe-ch-item,
+.publishing-note{
+  border-color:rgba(232,240,252,.095);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015)),
+    radial-gradient(circle at 100% 0%,rgba(152,178,222,.075),transparent 34%),
+    linear-gradient(180deg,rgba(9,12,19,.82),rgba(4,6,10,.9));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 18px 50px rgba(0,0,0,.2);
+}
+.lead-card,
+.recognition-card,
+.article-card,
+.desk-news-card,
+.np-news-item{
+  transition:border-color .22s ease,background .22s ease,transform .22s ease,box-shadow .22s ease;
+}
+.lead-card:hover,
+.recognition-card:hover,
+.article-card:hover,
+.desk-news-card:hover,
+.np-news-item:hover{
+  transform:translateY(-3px);
+  border-color:rgba(240,247,255,.2);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.072),rgba(255,255,255,.022)),
+    radial-gradient(circle at 100% 0%,rgba(174,198,232,.11),transparent 34%),
+    linear-gradient(180deg,rgba(11,15,24,.9),rgba(4,6,10,.96));
+  box-shadow:0 24px 68px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.07);
+}
+.hero-btn,
+.cb,
+.desk-news-refresh,
+.ac-open,
+.form-submit,
+.np-close,
+.btt{
+  border-color:rgba(236,244,255,.16);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.024));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 28px rgba(0,0,0,.2);
+}
+.hero-btn:hover,
+.cb:hover,
+.desk-news-refresh:hover,
+.ac-open:hover,
+.form-submit:hover,
+.np-close:hover,
+.btt:hover{
+  transform:translateY(-2px);
+  border-color:rgba(245,249,255,.34);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.095),rgba(255,255,255,.038));
+  box-shadow:0 18px 42px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.hero-btn.pri,
+.form-submit,
+.desk-news-refresh{
+  background:
+    linear-gradient(180deg,rgba(238,246,255,.18),rgba(238,246,255,.07)),
+    radial-gradient(circle at 50% 0%,rgba(255,255,255,.16),transparent 60%);
+  border-color:rgba(245,249,255,.24);
+}
+.hero-btn.pri:hover,
+.form-submit:hover,
+.desk-news-refresh:hover{
+  background:
+    linear-gradient(180deg,rgba(248,252,255,.24),rgba(238,246,255,.095)),
+    radial-gradient(circle at 50% 0%,rgba(255,255,255,.2),transparent 64%);
+}
+.hero-subscribe input,
+.contact-form input,
+.contact-form textarea{
+  border-color:rgba(232,240,252,.11);
+  background:rgba(0,0,0,.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+}
+.hero-subscribe input:focus,
+.contact-form input:focus,
+.contact-form textarea:focus{
+  border-color:rgba(238,246,255,.34);
+  box-shadow:0 0 0 4px rgba(180,204,242,.07),inset 0 1px 0 rgba(255,255,255,.055);
+}
+.globe-ch-item strong,
+.hero-mini strong,
+.recognition-card h3,
+.lead-title,
+.ac-title,
+.briefing-title,
+.desk-news-title{
+  color:#f8fbff;
+}
+.desk-news-card,
+.np-news-item{
+  position:relative;
+  overflow:hidden;
+}
+.desk-news-card::before,
+.np-news-item::before,
+.article-card::before,
+.recognition-card::before{
+  content:'';
+  position:absolute;
+  left:14px;
+  right:14px;
+  top:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(238,246,255,.36),transparent);
+  opacity:.48;
+  pointer-events:none;
+}
+.chip{
+  border-color:rgba(232,240,252,.1);
+  background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.018));
+}
+.chip:hover,
+.chip.on{
+  border-color:rgba(244,249,255,.24);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.03)),
+    radial-gradient(circle at 50% 0%,rgba(180,204,242,.12),transparent 62%);
+}
+.proof-link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  width:max-content;
+  margin-top:14px;
+  padding:9px 12px;
+  border:1px solid rgba(238,246,255,.13);
+  border-radius:999px;
+  color:#f5f9ff;
+  text-decoration:none;
+  font:650 .58rem/1 'IBM Plex Mono',monospace;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  transition:border-color .2s ease,background .2s ease,transform .2s ease;
+}
+.proof-link:hover{
+  transform:translateY(-1px);
+  border-color:rgba(245,249,255,.28);
+  background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035));
+}
+.section-fx{
+  opacity:.065;
+}
+.hero-fx-shell{
+  opacity:.72;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible{
+  outline:2px solid rgba(238,246,255,.58);
+  outline-offset:3px;
+}
+/* LIGHTER PERFORMANCE PASS */
+body{
+  background:
+    radial-gradient(circle at 10% 8%,rgba(96,124,184,.18),transparent 24%),
+    radial-gradient(circle at 90% 14%,rgba(255,255,255,.07),transparent 18%),
+    radial-gradient(circle at 50% 72%,rgba(82,108,158,.11),transparent 32%),
+    linear-gradient(180deg,#06090f 0%,#0a0f18 42%,#05070c 100%);
+}
+nav{
+  background:
+    linear-gradient(180deg,rgba(16,21,32,.93),rgba(8,11,18,.88)),
+    radial-gradient(circle at 80% 0%,rgba(190,210,240,.09),transparent 34%);
+}
+.hero-subscribe,
+.desk-news-window,
+.np,
+.briefing-main,
+.briefing-side,
+.contact-form,
+.cta-shell{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.024)),
+    radial-gradient(circle at 100% 0%,rgba(166,190,230,.11),transparent 34%),
+    linear-gradient(180deg,rgba(13,18,29,.95),rgba(7,10,17,.96));
+}
+.hero-panel,
+.hero-stat,
+.hero-mini,
+.lead-card,
+.recognition-card,
+.article-card,
+.contact-proof,
+.donate-card,
+.desk-news-card,
+.np-news-item,
+.np-stat,
+.np-signal,
+.globe-ch-item,
+.publishing-note{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.062),rgba(255,255,255,.02)),
+    radial-gradient(circle at 100% 0%,rgba(166,190,230,.09),transparent 34%),
+    linear-gradient(180deg,rgba(13,17,27,.86),rgba(7,10,16,.92));
+}
+.sec,
+.lead-sec,
+.recognition-sec,
+.globe-sec,
+.articles-sec,
+.briefing-sec,
+.cta-sec,
+.donate-sec{
+  content-visibility:auto;
+  contain-intrinsic-size:820px;
+}
+/* BUTTON / SCROLL SMOOTHNESS PASS */
+[data-r]{
+  transform:translate3d(0,22px,0);
+  transition:opacity .72s cubic-bezier(.16,1,.3,1),transform .72s cubic-bezier(.16,1,.3,1);
+}
+[data-r].v{
+  transform:translate3d(0,0,0);
+}
+.hero-btn,
+.cb,
+.desk-news-refresh,
+.ac-open,
+.form-submit,
+.nav-support,
+.np-close,
+.btt,
+.chip{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  transform:translate3d(0,0,0);
+  transition:
+    transform .22s cubic-bezier(.16,1,.3,1),
+    border-color .22s ease,
+    background-position .34s ease,
+    background-color .22s ease,
+    box-shadow .22s ease,
+    color .22s ease;
+}
+.hero-btn,
+.cb,
+.desk-news-refresh,
+.ac-open,
+.form-submit,
+.nav-support{
+  background-image:
+    linear-gradient(110deg,rgba(255,255,255,.1) 0%,rgba(255,255,255,.035) 42%,rgba(196,216,248,.11) 100%),
+    radial-gradient(circle at 50% 0%,rgba(255,255,255,.12),transparent 58%);
+  background-size:210% 100%,100% 100%;
+  background-position:0 0,50% 0;
+}
+.hero-btn.pri,
+.form-submit,
+.desk-news-refresh{
+  background-image:
+    linear-gradient(110deg,rgba(248,252,255,.22) 0%,rgba(218,232,252,.1) 44%,rgba(255,255,255,.26) 100%),
+    radial-gradient(circle at 50% 0%,rgba(255,255,255,.18),transparent 62%);
+}
+@media(hover:hover) and (pointer:fine){
+  .hero-btn:hover,
+  .cb:hover,
+  .desk-news-refresh:hover,
+  .ac-open:hover,
+  .form-submit:hover,
+  .nav-support:hover,
+  .chip:hover{
+    background-position:100% 0,50% 0;
+    transform:translate3d(0,-2px,0);
+  }
+}
+.hero-btn:active,
+.cb:active,
+.desk-news-refresh:active,
+.ac-open:active,
+.form-submit:active,
+.nav-support:active,
+.chip:active{
+  transform:translate3d(0,1px,0) scale(.985);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 8px 18px rgba(0,0,0,.2);
+}
+.hero-btn::after,
+.cb::after{
+  display:inline-grid;
+  place-items:center;
+  width:22px;
+  height:22px;
+  border-radius:999px;
+  background:rgba(255,255,255,.075);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+}
+@media(max-width:760px){
+  [data-r]{
+    transform:translate3d(0,14px,0);
+    transition-duration:.42s;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto;
+  }
+  .hero-fx-shell,
+  .section-fx{
+    display:none!important;
+  }
+}
+@media(hover:none), (pointer:coarse){
+  .lead-card:hover,
+  .recognition-card:hover,
+  .article-card:hover,
+  .desk-news-card:hover,
+  .np-news-item:hover,
+  .hero-btn:hover,
+  .cb:hover,
+  .desk-news-refresh:hover,
+  .ac-open:hover,
+  .form-submit:hover{
+    transform:none;
+  }
+}
+/* MOBILE EXPERIENCE PASS */
+@media(max-width:900px){
+  html{
+    scroll-padding-top:84px;
+  }
+  body{
+    font-size:16px;
+    line-height:1.68;
+  }
+  .noise,
+  .particles,
+  .hero-gridlines,
+  .hero-orbit,
+  .hero-light{
+    display:none!important;
+  }
+  nav{
+    left:8px;
+    right:8px;
+    top:calc(env(safe-area-inset-top, 0px) + 8px);
+    width:auto;
+    max-width:none;
+    transform:none;
+    justify-content:flex-start;
+    gap:8px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding:8px;
+    border-radius:18px;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  nav::-webkit-scrollbar{
+    display:none;
+  }
+  nav.hidden{
+    transform:translateY(-130%);
+  }
+  .nav-links{
+    display:flex!important;
+    flex:0 0 auto;
+    width:auto;
+    min-width:max-content;
+    gap:6px;
+    justify-content:flex-start;
+  }
+  .nl-a,
+  .nav-support{
+    min-height:42px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 12px;
+    border-radius:999px;
+    font-size:.57rem;
+    letter-spacing:.13em;
+    white-space:nowrap;
+    touch-action:manipulation;
+  }
+  .nav-support{
+    display:inline-flex!important;
+    flex:0 0 auto;
+    min-width:max-content;
+    margin-left:2px;
+  }
+  .pitt-badge{
+    width:34px;
+    height:34px;
+    top:calc(env(safe-area-inset-top, 0px) + 66px);
+    right:14px;
+    opacity:.66;
+  }
+  .hero{
+    min-height:auto;
+    padding:128px 18px 58px;
+  }
+  .hero-grid{
+    display:block;
+    max-width:100%;
+  }
+  .hero-inner{
+    max-width:100%;
+  }
+  .hero-architect-meta{
+    gap:8px;
+    margin-bottom:18px;
+    flex-wrap:wrap;
+  }
+  .hero-eyebrow,
+  .hero-tag span{
+    font-size:.55rem;
+    letter-spacing:.16em;
+  }
+  .hero-logo-inline{
+    width:54px;
+    height:54px;
+  }
+  .hero-h{
+    max-width:100%;
+    margin-bottom:18px;
+    font-size:3.1rem;
+    line-height:.96;
+    letter-spacing:-.055em;
+    overflow-wrap:break-word;
+  }
+  .hero-h .ln{
+    overflow:visible;
+  }
+  .hero-lead,
+  .hero-positioning{
+    max-width:100%;
+    font-size:.98rem;
+    line-height:1.65;
+  }
+  .hero-subscribe{
+    max-width:100%;
+    margin-top:18px;
+    padding:16px;
+    border-radius:16px;
+  }
+  .hero-subscribe-kicker{
+    width:100%;
+    justify-content:center;
+    text-align:center;
+    white-space:normal;
+    line-height:1.35;
+  }
+  .hero-subscribe-copy strong{
+    font-size:1rem;
+  }
+  .hero-subscribe-copy p{
+    font-size:.9rem;
+  }
+  .hero-subscribe-pills{
+    gap:6px;
+  }
+  .hero-subscribe-pills span{
+    flex:1 1 130px;
+    justify-content:center;
+    text-align:center;
+  }
+  .hero-subscribe-field{
+    grid-template-columns:1fr;
+    gap:10px;
+    padding:0;
+  }
+  .hero-subscribe input,
+  .hero-subscribe .subscribe-btn{
+    width:100%;
+    min-height:48px;
+  }
+  .hero-actions,
+  .briefing-actions{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .hero-btn,
+  .cb,
+  .desk-news-refresh,
+  .ac-open,
+  .form-submit{
+    min-height:46px;
+    justify-content:center;
+    text-align:center;
+    touch-action:manipulation;
+  }
+  .hero-statline{
+    grid-template-columns:1fr;
+    max-width:100%;
+    gap:10px;
+  }
+  .hero-stat{
+    padding:14px;
+  }
+  .hero-aside{
+    margin-top:22px;
+  }
+  .hero-panel,
+  .briefing-main,
+  .briefing-side,
+  .recognition-card,
+  .lead-card,
+  .article-card,
+  .contact-form,
+  .contact-proof,
+  .cta-shell,
+  .np,
+  .desk-news-window{
+    border-radius:16px;
+  }
+  .hero-panel{
+    padding:16px;
+  }
+  .hero-panel-top{
+    gap:12px;
+  }
+  .hero-mini-grid{
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+  .hero-sc,
+  .hero-serial{
+    display:none;
+  }
+  .tape{
+    padding:8px 0;
+  }
+  .tape-in{
+    gap:12px;
+    animation-duration:58s;
+  }
+  .tape-in span{
+    font-size:.58rem;
+    letter-spacing:.16em;
+  }
+  .sec,
+  .lead-sec,
+  .recognition-sec,
+  .globe-sec,
+  .articles-sec,
+  .briefing-sec,
+  .cta-sec,
+  .donate-sec{
+    padding:66px 18px;
+  }
+  .sec-divider{
+    height:18px;
+  }
+  .sn{
+    font-size:.58rem;
+    letter-spacing:.16em;
+  }
+  .sh,
+  .cta-h,
+  .donate-left h2{
+    font-size:2.35rem;
+    line-height:1.03;
+    letter-spacing:-.045em;
+  }
+  .section-note{
+    max-width:100%;
+    font-size:.98rem;
+  }
+  .lead-grid,
+  .recognition-shell,
+  .recognition-grid,
+  .articles-grid,
+  .briefing-shell,
+  .contact-grid,
+  .field-grid,
+  .donate-cards{
+    grid-template-columns:1fr!important;
+  }
+  .recognition-intro{
+    position:static;
+  }
+  .recognition-intro p{
+    max-width:100%;
+  }
+  .recognition-strip{
+    gap:8px;
+    padding:10px;
+  }
+  .recognition-strip span{
+    flex:1 1 150px;
+    justify-content:center;
+    text-align:center;
+  }
+  .publishing-note{
+    grid-template-columns:1fr;
+    padding:15px;
+    border-radius:16px;
+  }
+  .publishing-note-meta{
+    justify-self:start;
+  }
+  .globe-hd{
+    padding:0;
+    margin-bottom:18px;
+  }
+  .globe-chapter{
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin:22px auto 0;
+  }
+  .globe-ch-item{
+    min-height:92px;
+    padding:14px;
+  }
+  .desk-news-window{
+    margin:18px 0;
+    padding:16px;
+  }
+  .desk-news-head{
+    gap:14px;
+  }
+  .desk-news-list{
+    grid-template-columns:1fr;
+  }
+  .chips{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding:0 0 10px;
+    scroll-snap-type:x proximity;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .chips::-webkit-scrollbar{
+    display:none;
+  }
+  .chip{
+    flex:0 0 auto;
+    min-height:42px;
+    scroll-snap-align:start;
+  }
+  .globe-lay{
+    grid-template-columns:1fr!important;
+    padding:0!important;
+    gap:14px;
+    min-height:auto;
+  }
+  .globe-wrap{
+    min-height:auto;
+    border-radius:18px;
+  }
+  .globe-scene{
+    min-height:390px;
+    padding:18px;
+  }
+  .globe-stage{
+    width:min(100%,380px);
+  }
+  .globe-core{
+    display:none;
+    opacity:0;
+  }
+  .globe-aura{
+    opacity:.16;
+  }
+  .globe-meta,
+  .globe-foot{
+    display:none;
+  }
+  #gc{
+    touch-action:none;
+  }
+  .np{
+    padding:16px;
+    min-height:auto;
+    max-height:none;
+  }
+  .np-head{
+    gap:12px;
+  }
+  .np-title{
+    font-size:1.15rem;
+  }
+  .np-visual-media{
+    height:152px;
+  }
+  .np-stats,
+  .np-signal-grid,
+  .np-update-row{
+    grid-template-columns:1fr;
+  }
+  .briefing-title{
+    font-size:2.35rem;
+  }
+  .briefing-main,
+  .briefing-side,
+  .briefing-dialog{
+    padding:18px;
+  }
+  .briefing-dialog{
+    width:calc(100vw - 24px);
+    max-height:88vh;
+    overflow:auto;
+  }
+  .contact-form{
+    padding:18px;
+  }
+  .form-actions{
+    display:grid;
+    gap:10px;
+  }
+  .form-submit{
+    width:100%;
+    min-width:0;
+  }
+  footer{
+    padding:28px 18px;
+  }
+}
+@media(max-width:760px){
+  .hero-fx-shell,
+  .section-fx{
+    display:none!important;
+  }
+  .hero{
+    background:
+      radial-gradient(circle at 20% 10%,rgba(97,124,174,.13),transparent 28%),
+      linear-gradient(180deg,#05070b 0%,#020203 100%);
+  }
+  .pre-orbit{
+    width:260px;
+    height:260px;
+  }
+  .pre-logo-shell{
+    transform:scale(.88);
+  }
+}
+@media(max-width:520px){
+  nav{
+    left:6px;
+    right:6px;
+    padding:7px;
+    border-radius:16px;
+  }
+  .nl-a,
+  .nav-support{
+    min-height:40px;
+    padding:0 10px;
+    font-size:.52rem;
+  }
+  .pitt-badge{
+    width:30px;
+    height:30px;
+    top:calc(env(safe-area-inset-top, 0px) + 62px);
+    right:12px;
+  }
+  .hero{
+    padding:118px 14px 50px;
+  }
+  .hero-architect-meta{
+    display:none;
+  }
+  .hero-eyebrow{
+    display:inline-flex;
+    max-width:100%;
+    padding:8px 10px;
+    line-height:1.3;
+  }
+  .hero-logo-inline{
+    width:48px;
+    height:48px;
+  }
+  .hero-tag span{
+    line-height:1.4;
+  }
+  .hero-h{
+    font-size:2.62rem;
+    line-height:.98;
+  }
+  .hero-lead,
+  .hero-positioning{
+    font-size:.94rem;
+  }
+  .hero-subscribe{
+    padding:14px;
+  }
+  .hero-subscribe-pills{
+    display:none;
+  }
+  .hero-mini-grid,
+  .globe-chapter{
+    grid-template-columns:1fr;
+  }
+  .desk-news-head{
+    display:grid;
+  }
+  .desk-news-refresh{
+    width:100%;
+  }
+  .globe-scene{
+    min-height:340px;
+    padding:14px;
+  }
+  .globe-stage{
+    width:min(100%,320px);
+  }
+  .np-visual-media{
+    height:132px;
+  }
+  .sh,
+  .cta-h,
+  .donate-left h2{
+    font-size:2.05rem;
+  }
+  .briefing-title{
+    font-size:2rem;
+  }
+  .recognition-strip span{
+    flex-basis:100%;
+  }
+}
+@media(hover:none), (pointer:coarse){
+  .hero-btn:hover,
+  .cb:hover,
+  .desk-news-refresh:hover,
+  .ac-open:hover,
+  .form-submit:hover{
+    transform:none;
+  }
+}
+@media(max-width:760px), (prefers-reduced-motion:reduce){
+  .hero-fx-video,
+  .section-fx-video{
+    animation:none!important;
+  }
+}
+/* EDITORIAL PLATFORM VISUAL PASS */
+[data-section-num]{
+  position:relative;
+}
+[data-section-num]::before{
+  content:attr(data-section-num);
+  position:absolute;
+  top:42px;
+  left:max(24px,calc((100vw - 1180px)/2));
+  z-index:1;
+  font:600 .58rem/1 'IBM Plex Mono',monospace;
+  letter-spacing:.18em;
+  color:rgba(232,240,252,.3);
+  pointer-events:none;
+}
+.hero[data-section-num]::before{
+  top:126px;
+  color:rgba(232,240,252,.22);
+}
+.hero-proof-strip{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  max-width:720px;
+  margin:18px 0 0;
+  padding:10px 12px;
+  border:1px solid rgba(238,246,255,.12);
+  border-radius:999px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018)),
+    radial-gradient(circle at 0% 0%,rgba(178,200,234,.12),transparent 50%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+.hero-proof-strip a{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:#f7fbff;
+  text-decoration:none;
+  font:700 .58rem/1 'IBM Plex Mono',monospace;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.hero-proof-strip a::before{
+  content:'';
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:radial-gradient(circle,#fff,rgba(190,210,245,.36) 68%,transparent 76%);
+  box-shadow:0 0 16px rgba(190,210,245,.2);
+}
+.hero-proof-strip span{
+  color:rgba(219,228,240,.72);
+  font-size:.84rem;
+  line-height:1.45;
+}
+.hero-briefing-preview{
+  max-width:720px;
+  margin-top:14px;
+  padding:16px;
+  border:1px solid rgba(238,246,255,.12);
+  border-radius:18px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.064),rgba(255,255,255,.018)),
+    radial-gradient(circle at 100% 0%,rgba(178,200,234,.12),transparent 38%),
+    linear-gradient(180deg,rgba(14,19,30,.9),rgba(6,9,16,.96));
+  box-shadow:0 22px 56px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.briefing-preview-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:10px;
+}
+.briefing-preview-meta span{
+  padding:6px 8px;
+  border-radius:999px;
+  border:1px solid rgba(238,246,255,.1);
+  color:rgba(232,240,252,.72);
+  font:600 .5rem/1 'IBM Plex Mono',monospace;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.hero-briefing-preview strong{
+  display:block;
+  color:#f8fbff;
+  font:680 1.05rem/1.25 'Inter',sans-serif;
+  letter-spacing:-.02em;
+}
+.hero-briefing-preview p{
+  max-width:600px;
+  margin:7px 0 12px;
+  color:rgba(219,228,240,.76);
+  font-size:.92rem;
+  line-height:1.6;
+}
+.briefing-preview-link{
+  appearance:none;
+  border:0;
+  padding:0;
+  color:#fff;
+  background:transparent;
+  cursor:pointer;
+  font:700 .58rem/1 'IBM Plex Mono',monospace;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.briefing-preview-link::after{
+  content:' →';
+}
+.world-desk-statusbar{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  max-width:1100px;
+  margin:22px auto 18px;
+  overflow:hidden;
+  border:1px solid rgba(238,246,255,.105);
+  border-radius:18px;
+  background:rgba(255,255,255,.035);
+  box-shadow:0 20px 60px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.05);
+}
+.world-desk-statusbar div{
+  padding:15px 16px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.058),rgba(255,255,255,.018)),
+    linear-gradient(180deg,rgba(13,18,29,.86),rgba(7,10,16,.92));
+}
+.world-desk-statusbar span{
+  display:block;
+  margin-bottom:5px;
+  color:rgba(219,228,240,.54);
+  font:650 .48rem/1 'IBM Plex Mono',monospace;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.world-desk-statusbar strong{
+  color:#f7fbff;
+  font:650 .88rem/1.25 'Inter',sans-serif;
+  letter-spacing:-.01em;
+}
+.editorial-visual{
+  position:relative;
+  min-height:190px;
+  padding:18px;
+  overflow:hidden;
+  border:1px solid rgba(238,246,255,.11);
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 26% 28%,rgba(210,226,250,.13),transparent 18%),
+    linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.018)),
+    linear-gradient(180deg,rgba(12,17,28,.92),rgba(5,8,14,.96));
+  box-shadow:0 22px 58px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.055);
+}
+.ev-map{
+  position:absolute;
+  inset:0;
+  opacity:.5;
+  background:
+    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px),
+    radial-gradient(circle at 28% 48%,rgba(255,255,255,.18),transparent 4%),
+    radial-gradient(circle at 68% 34%,rgba(120,154,210,.18),transparent 5%);
+  background-size:34px 34px,34px 34px,100% 100%,100% 100%;
+  mask-image:radial-gradient(circle at 45% 46%,#000,transparent 76%);
+}
+.ev-map::before{
+  content:'';
+  position:absolute;
+  left:29%;
+  top:49%;
+  width:41%;
+  height:1px;
+  transform:rotate(-11deg);
+  background:linear-gradient(90deg,transparent,rgba(238,246,255,.45),transparent);
+}
+.ev-content{
+  position:relative;
+  z-index:1;
+  display:grid;
+  gap:8px;
+  align-content:end;
+  min-height:154px;
+}
+.ev-content span{
+  width:max-content;
+  padding:7px 9px;
+  border:1px solid rgba(238,246,255,.1);
+  border-radius:999px;
+  color:rgba(232,240,252,.72);
+  font:650 .48rem/1 'IBM Plex Mono',monospace;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.ev-content strong{
+  color:#f8fbff;
+  font:720 1.25rem/1.1 'Inter',sans-serif;
+  letter-spacing:-.04em;
+}
+.ev-content p{
+  max-width:280px;
+  color:rgba(219,228,240,.72);
+  font-size:.86rem;
+  line-height:1.55;
+}
+.lead-grid,
+.recognition-grid,
+.articles-grid{
+  gap:14px;
+}
+.lead-card,
+.recognition-card,
+.article-card{
+  min-height:auto;
+}
+.recognition-card p,
+.lead-copy,
+.ac-excerpt{
+  color:rgba(219,228,240,.74);
+}
+footer{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:20px;
+  align-items:center;
+}
+.footer-statement{
+  justify-self:center;
+  max-width:520px;
+  color:rgba(232,240,252,.74);
+  font:500 .92rem/1.5 'Source Serif 4',Georgia,serif;
+  text-align:center;
+}
+/* COUNTRY PANEL INSTANT VIEW PASS */
+@media(min-width:901px){
+  .globe-lay{
+    align-items:start;
+  }
+  .np{
+    position:sticky;
+    top:92px;
+    max-height:calc(100vh - 112px);
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    padding:18px;
+    scrollbar-width:thin;
+    scrollbar-color:rgba(232,240,252,.24) rgba(255,255,255,.04);
+  }
+  .np::-webkit-scrollbar{
+    width:8px;
+  }
+  .np::-webkit-scrollbar-track{
+    background:rgba(255,255,255,.035);
+    border-radius:999px;
+  }
+  .np::-webkit-scrollbar-thumb{
+    background:rgba(232,240,252,.22);
+    border-radius:999px;
+  }
+  .np-title{
+    padding-right:34px;
+    font-size:1.08rem;
+  }
+  .np-sub{
+    margin-bottom:8px;
+  }
+  .np-desc{
+    margin-bottom:12px;
+    font-size:.86rem;
+    line-height:1.58;
+  }
+  .np-visual{
+    margin-bottom:12px;
+  }
+  .np-visual-media{
+    height:126px;
+  }
+  .np-visual-summary{
+    display:none;
+  }
+  .np-update-row{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+    margin:10px 0;
+  }
+  .np-update,
+  .np-stat,
+  .np-signal{
+    padding:10px;
+  }
+  .np-why{
+    margin:10px 0;
+    padding:12px;
+  }
+  .np-why p{
+    line-height:1.55;
+  }
+  .np-stats{
+    gap:8px;
+    margin-bottom:12px;
+  }
+  .np-signal-block{
+    margin-top:12px;
+    padding-top:12px;
+  }
+  .np-signal-head{
+    margin-bottom:10px;
+  }
+  .np-signal-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+  }
+  .np-source-note{
+    margin-top:8px;
+  }
+  .np-topics-label{
+    margin-top:12px;
+  }
+  .np-topic{
+    padding:9px 10px;
+  }
+  .np-news-block{
+    margin-top:12px;
+    padding-top:12px;
+  }
+  .np-news-head{
+    margin-bottom:10px;
+  }
+  .np-news-note,
+  .np-news-summary{
+    display:none;
+  }
+  .np-news-list{
+    gap:8px;
+  }
+  .np-news-item{
+    padding:11px 12px;
+  }
+}
+@media(max-width:900px){
+  .np{
+    scroll-margin-top:88px;
+  }
+}
+@media(max-width:1000px){
+  .world-desk-statusbar{
+    grid-template-columns:repeat(2,1fr);
+  }
+  footer{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+}
+@media(max-width:760px){
+  [data-section-num]::before{
+    top:26px;
+    left:18px;
+  }
+  .hero[data-section-num]::before{
+    top:92px;
+    left:16px;
+  }
+  .hero-proof-strip{
+    align-items:flex-start;
+    border-radius:16px;
+  }
+  .hero-proof-strip a,
+  .hero-proof-strip span{
+    width:100%;
+  }
+  .hero-briefing-preview{
+    padding:14px;
+  }
+  .world-desk-statusbar{
+    grid-template-columns:1fr;
+    border-radius:16px;
+  }
+  .editorial-visual{
+    min-height:170px;
+  }
+  .footer-statement{
+    order:-1;
+  }
+}
+
+/* WORLD DESK CONTROL PANEL ORGANIZATION */
+.world-desk-control-panel{
+  width:min(1180px,calc(100% - 48px));
+  margin:24px auto 28px;
+  padding:10px;
+  border:1px solid rgba(232,240,252,.105);
+  border-radius:30px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.042),rgba(255,255,255,.014)),
+    radial-gradient(circle at 12% 0%,rgba(130,162,220,.075),transparent 34%),
+    linear-gradient(180deg,rgba(8,12,20,.84),rgba(3,5,9,.92));
+  box-shadow:0 24px 72px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.045);
+  display:grid;
+  gap:10px;
+}
+.world-desk-control-panel .world-desk-statusbar,
+.world-desk-control-panel .globe-chapter{
+  max-width:none;
+  width:100%;
+  margin:0;
+  gap:10px;
+}
+.world-desk-control-panel .world-desk-statusbar{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  overflow:visible;
+  border-radius:0;
+  background:none;
+  border:0;
+}
+.world-desk-control-panel .world-desk-statusbar div,
+.world-desk-control-panel .globe-ch-item{
+  min-height:88px;
+  padding:16px 18px;
+  border:1px solid rgba(232,240,252,.09);
+  border-radius:20px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.016)),
+    radial-gradient(circle at 100% 0%,rgba(142,170,220,.07),transparent 38%),
+    linear-gradient(180deg,rgba(10,14,23,.84),rgba(5,8,14,.9));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.world-desk-control-panel .world-desk-statusbar span,
+.world-desk-control-panel .globe-ch-item span{
+  margin:0;
+  color:rgba(219,228,240,.58);
+  font:700 .48rem/1 'IBM Plex Mono',monospace;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+}
+.world-desk-control-panel .world-desk-statusbar strong,
+.world-desk-control-panel .globe-ch-item strong{
+  margin-top:12px;
+  color:#f6faff;
+  font:650 clamp(.88rem,1vw,1.02rem)/1.28 'Inter',sans-serif;
+  letter-spacing:-.018em;
+}
+.world-desk-control-panel .globe-chapter{
+  display:grid;
+  grid-template-columns:1.2fr 1fr 1.2fr 1fr;
+}
+.world-desk-control-panel .globe-ch-item:first-child{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.018)),
+    radial-gradient(circle at 100% 0%,rgba(170,196,236,.1),transparent 42%),
+    linear-gradient(180deg,rgba(13,18,30,.9),rgba(6,9,16,.92));
+}
+@media(max-width:980px){
+  .world-desk-control-panel{
+    width:min(100% - 36px,820px);
+  }
+  .world-desk-control-panel .world-desk-statusbar,
+  .world-desk-control-panel .globe-chapter{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:560px){
+  .world-desk-control-panel{
+    width:calc(100% - 24px);
+    padding:8px;
+    border-radius:22px;
+  }
+  .world-desk-control-panel .world-desk-statusbar,
+  .world-desk-control-panel .globe-chapter{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .world-desk-control-panel .world-desk-statusbar div,
+  .world-desk-control-panel .globe-ch-item{
+    min-height:auto;
+    padding:14px 15px;
+    border-radius:16px;
+  }
+}
 </style>
 <body>
 
@@ -5522,7 +7276,7 @@ body.modal-open{
 <div class="scroll-progress" aria-hidden="true"><span id="scrollProgressBar"></span></div>
 
 <!-- PITT BADGE -->
-<a href="https://www.pitt.edu" target="_blank" rel="noopener" class="pitt-badge" title="University of Pittsburgh">
+<a href="https://www.pitt.edu" target="_blank" rel="noopener" class="pitt-badge" title="University of Pittsburgh" aria-label="University of Pittsburgh website">
   <svg viewBox="0 0 80 96" fill="none">
     <!-- Shield shape -->
     <path d="M4,4 L40,0 L76,4 L76,56 Q76,80 40,96 Q4,80 4,56 Z" fill="#003594" stroke="#CDB87C" stroke-width="2"/>
@@ -5544,16 +7298,16 @@ body.modal-open{
     <li><a href="#focus" class="nl-a">Research</a></li>
     <li><a href="#contact" class="nl-a">Contact</a></li>
   </ul>
-  <a href="#support" class="nav-support nav-cta">Support Ukraine ua</a>
+  <a href="#support" class="nav-support nav-cta">Support Ukraine</a>
 </nav>
 
 <!-- HERO -->
-<section class="hero" id="hero-sec">
+<section class="hero" id="hero-sec" data-section-num="00">
   <div class="particles" id="particles"></div>
   <div class="hero-light" id="heroLight"></div>
   <div class="hero-fx-shell" aria-hidden="true">
     <video class="hero-fx-video" autoplay muted loop playsinline preload="metadata" data-fx-video>
-      <source src="a2_remix (1).webm" type="video/webm">
+      <source data-src="a2_remix (1).webm" type="video/webm">
     </video>
   </div>
   <div class="hero-serial" aria-hidden="true">01</div>
@@ -5584,6 +7338,20 @@ body.modal-open{
     </h1>
     <p class="hero-lead">Weekly briefings on Eastern European security, ICC accountability, and geopolitical risk.</p>
     <p class="hero-positioning">Built for readers, researchers, and collaborators following conflict, diplomacy, and international law.</p>
+    <div class="hero-proof-strip" data-r data-d="2">
+      <a href="https://www.post-gazette.com/news/world/2026/02/23/ukraine-russia-summit-pittsburgh/stories/202602210058" target="_blank" rel="noopener">Featured in Pittsburgh Post-Gazette</a>
+      <span>Interview on Mariupol, displacement, and Ukrainian resilience.</span>
+    </div>
+    <article class="hero-briefing-preview" data-r data-d="2">
+      <div class="briefing-preview-meta">
+        <span>Latest Briefing</span>
+        <span>Apr 26, 2026</span>
+        <span>6 min read</span>
+      </div>
+      <strong>Eastern Europe's security problem is now a logistics problem.</strong>
+      <p>NATO's eastern flank, ICC accountability, and Ukraine's long-war reality in one concise policy read.</p>
+      <button class="briefing-preview-link" type="button" data-briefing-open>Read the briefing</button>
+    </article>
     <form class="hero-subscribe" id="subscribeForm" data-r data-d="3">
       <div class="hero-subscribe-copy">
         <span class="hero-subscribe-kicker">Subscribe to World Desk briefings</span>
@@ -5594,15 +7362,17 @@ body.modal-open{
           <span>Policy</span>
           <span>World Desk</span>
         </div>
-        <span class="hero-subscribe-status" aria-live="polite">Early access to new briefings, essays, and launch notes.</span>
+        <span class="hero-subscribe-status" id="subscribeStatus" aria-live="polite">Early access to new briefings, essays, and launch notes.</span>
         <span class="hero-subscribe-confirm">Request received</span>
       </div>
       <div class="hero-subscribe-field">
         <input type="hidden" name="_subject" value="World Desk briefings signup">
         <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_url" value="">
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" data-honey aria-hidden="true">
-        <input id="subscribeEmail" name="email" type="email" placeholder="Email address" autocomplete="email" required aria-label="Email address">
+        <label class="sr-only" for="subscribeEmail">Email address for World Desk briefings</label>
+        <input id="subscribeEmail" name="email" type="email" placeholder="Email address" autocomplete="email" required aria-describedby="subscribeStatus">
         <button class="hero-btn pri subscribe-btn" type="submit">Subscribe</button>
       </div>
     </form>
@@ -5626,20 +7396,6 @@ body.modal-open{
         <label>Focus</label>
         <strong>Law + Policy</strong>
         <span>Conflict, accountability, reconstruction</span>
-      </div>
-    </div>
-    <div class="hero-rail" data-r data-d="4">
-      <div class="hero-rail-item">
-        <span>Chapter 01</span>
-        <strong>International Affairs Portfolio</strong>
-      </div>
-      <div class="hero-rail-item">
-        <span>Working Mode</span>
-        <strong>Research, writing, strategic framing</strong>
-      </div>
-      <div class="hero-rail-item">
-        <span>Primary CTA</span>
-        <strong>Serious collaboration and conversation</strong>
       </div>
     </div>
   </div>
@@ -5676,16 +7432,6 @@ body.modal-open{
       </div>
       <div class="hero-panel-note">Primary focus: turning this site into a clear front door for research, writing, and collaboration in international policy.</div>
     </div>
-    <div class="hero-project-strip" data-r data-d="3">
-      <article class="hero-project-card">
-        <span>Current Build</span>
-        <strong>3D world desk with briefings, headlines, and country signals.</strong>
-      </article>
-      <article class="hero-project-card">
-        <span>Next Layer</span>
-        <strong>Publishing this portfolio as a sharper archive of essays, projects, and public-facing work.</strong>
-      </article>
-    </div>
   </aside>
   </div>
   <div class="hero-sc">Scroll</div>
@@ -5712,18 +7458,18 @@ body.modal-open{
 </div>
 
 <!-- ABOUT -->
-<section class="sec" id="about">
+<section class="sec" id="about" data-section-num="01">
   <div class="ab-grid">
     <div class="section-fx about-fx" aria-hidden="true">
       <video class="section-fx-video" autoplay muted loop playsinline preload="metadata" data-fx-video>
-        <source src="a2_remix (1).webm" type="video/webm">
+        <source data-src="a2_remix (1).webm" type="video/webm">
       </video>
     </div>
     <div class="ab-text">
       <div class="sn" data-r>ABOUT</div>
       <h2 class="sh" data-r data-d="1">A perspective <em>forged</em> in the real world.</h2>
-      <p data-r data-d="2">I grew up in <strong>Mariupol, Ukraine</strong> — a city whose name now evokes both devastation and defiance. In 2022, I experienced the war firsthand. That experience became the intellectual and moral foundation of everything I pursue.</p>
-      <p data-r data-d="3">Now studying <strong>Political Science and Economics</strong> at the University of Pittsburgh, I work at the intersection of <strong>international law, diplomacy, and conflict analysis</strong> — combining academic inquiry with a voice that carries the weight of lived experience.</p>
+      <p data-r data-d="2">I grew up in <strong>Mariupol, Ukraine</strong>, and that experience shapes how I study war, accountability, and public policy.</p>
+      <p data-r data-d="3">At the University of Pittsburgh, I study <strong>Political Science and Economics</strong> with a focus on international law, diplomacy, and conflict analysis.</p>
     </div>
     <div class="ab-side">
       <div class="ab-block" data-r data-d="1">
@@ -5738,6 +7484,14 @@ body.modal-open{
         <label>Editorial</label>
         <p>Associate Editor<br>Undergraduate Law Review</p>
       </div>
+      <div class="editorial-visual" data-r data-d="4" aria-label="Editorial visual connecting Mariupol, Pittsburgh, and policy work">
+        <div class="ev-map" aria-hidden="true"></div>
+        <div class="ev-content">
+          <span>Archive / Memory / Policy</span>
+          <strong>Mariupol → Pittsburgh</strong>
+          <p>A visual thread between lived experience, academic work, and public-facing analysis.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -5745,111 +7499,71 @@ body.modal-open{
 <div class="sec-divider" data-r></div>
 
 <!-- LEADERSHIP -->
-<section class="sec lead-sec" id="leadership">
+<section class="sec lead-sec" id="leadership" data-section-num="02">
   <div class="lead-shell">
     <div class="lead-top">
       <div class="sn" data-r>LEADERSHIP / INITIATIVES</div>
       <h2 class="sh" data-r data-d="1">Real work behind the <em>portfolio.</em></h2>
-      <p class="section-note" data-r data-d="2">The strongest trust signals on this site should not be abstract. They should show real leadership, editorial responsibility, and public-facing work already underway.</p>
+      <p class="section-note" data-r data-d="2">Leadership, editorial responsibility, and public-facing work already underway.</p>
     </div>
     <div class="lead-grid">
       <article class="lead-card" data-r data-d="1">
         <div class="lead-label">Leadership</div>
         <h3 class="lead-title">Co-Director, Pittsburgh Summit for Ukraine</h3>
-        <p class="lead-copy">Helped lead a summit that brought together 200+ participants across student, nonprofit, and media spaces around Ukraine-focused public engagement, advocacy, and civic action.</p>
+        <p class="lead-copy">Co-led a Ukraine-focused summit with 200+ participants across student, nonprofit, media, and civic spaces.</p>
         <div class="lead-meta">Public-facing initiative</div>
       </article>
       <article class="lead-card" data-r data-d="2">
         <div class="lead-label">Editorial</div>
         <h3 class="lead-title">Associate Editor, Undergraduate Law Review</h3>
-        <p class="lead-copy">Working on legal scholarship through editing, argument-sharpening, and publication standards that strengthen credibility across policy and pre-law writing.</p>
+        <p class="lead-copy">Edited legal scholarship, sharpened arguments, and supported publication standards through Bluebook-centered work.</p>
         <div class="lead-meta">Law and publication work</div>
       </article>
       <article class="lead-card" data-r data-d="3">
         <div class="lead-label">Platform</div>
         <h3 class="lead-title">World Desk / Policy Portfolio</h3>
-        <p class="lead-copy">Building a live country-briefing interface and research-led digital platform that translates international-affairs study into a clearer public-facing analysis experience.</p>
+        <p class="lead-copy">Building a live country-briefing interface that turns international-affairs study into public analysis.</p>
         <div class="lead-meta">Independent analytical build</div>
       </article>
     </div>
-    <div class="lead-proof" data-r data-d="4"><strong>Current proof points:</strong> leadership, editorial responsibility, and a live policy interface are already visible here. The next credibility layer is turning the publishing pipeline into a steady archive of real public writing.</div>
-  </div>
-</section>
-
-<div class="sec-divider" data-r></div>
-
-<!-- PROOF -->
-<section class="sec proof-sec" id="proof">
-  <div class="proof-shell">
-    <div class="proof-top">
-      <div>
-        <div class="sn" data-r>FEATURED / COLLABORATED / ACADEMIC WORK</div>
-        <h2 class="sh" data-r data-d="1">Credibility that can be <em>read quickly.</em></h2>
-      </div>
-      <p class="proof-note" data-r data-d="2">A strong policy portfolio should make trust visible in seconds: initiative leadership, editorial work, public-facing writing, and clear collaboration channels.</p>
-    </div>
-    <div class="proof-grid">
-      <article class="proof-card" data-r data-d="1">
-        <div class="proof-label">Speaking / Initiative</div>
-        <h3>Pittsburgh Summit for Ukraine</h3>
-        <p>Co-Director of a public-facing Ukraine initiative connecting student leadership, civic engagement, media attention, and community action.</p>
-        <strong>200+ participants</strong>
-      </article>
-      <article class="proof-card" data-r data-d="2">
-        <div class="proof-label">Academic Work</div>
-        <h3>Undergraduate Law Review</h3>
-        <p>Associate Editor experience focused on legal argument, source discipline, editing standards, and publication-ready analytical writing.</p>
-        <strong>Law + editorial rigor</strong>
-      </article>
-      <article class="proof-card" data-r data-d="3">
-        <div class="proof-label">Writing Product</div>
-        <h3>World Desk Briefings</h3>
-        <p>A live country-briefing interface turning international affairs research into readable, fast-moving public analysis.</p>
-        <strong>30 country signals</strong>
-      </article>
-      <article class="proof-card" data-r data-d="4">
-        <div class="proof-label">Collaboration</div>
-        <h3>Research, policy, speaking</h3>
-        <p>Open for serious collaboration around Eastern Europe, accountability, conflict analysis, public writing, and international policy projects.</p>
-        <strong>Direct contact open</strong>
-      </article>
-    </div>
+    <div class="lead-proof" data-r data-d="4"><strong>Current proof points:</strong> leadership, law review editing, public speaking, and a live policy interface.</div>
   </div>
 </section>
 
 <div class="sec-divider" data-r></div>
 
 <!-- RECOGNITION -->
-<section class="sec recognition-sec" id="recognition">
+<section class="sec recognition-sec" id="recognition" data-section-num="03">
   <div class="recognition-shell">
     <div class="recognition-intro">
       <div class="sn" data-r>RECOGNITION / PUBLIC WORK</div>
       <h2 class="sh" data-r data-d="1">Public-facing work with <em>real signals.</em></h2>
-      <p data-r data-d="2">This section turns the resume into visible proof: media, policy exposure, conference speaking, student leadership, and legal editorial work.</p>
+      <p data-r data-d="2">Concrete proof from media, policy exposure, conference speaking, student leadership, and legal editorial work.</p>
     </div>
     <div class="recognition-grid">
       <article class="recognition-card" data-r data-d="1">
         <div class="recognition-kicker"><span>Media</span><span>Press</span></div>
         <h3>Featured in Pittsburgh Post-Gazette</h3>
-        <p>Shared a firsthand account of surviving the siege of Mariupol and displacement from Ukraine, connecting personal experience to public understanding of the war.</p>
+        <p>Interviewed about lived experience in Mariupol, displacement, and why Ukrainian resilience remains personal.</p>
         <strong>Firsthand witness + public storytelling</strong>
+        <a class="proof-link" href="https://www.post-gazette.com/news/world/2026/02/23/ukraine-russia-summit-pittsburgh/stories/202602210058" target="_blank" rel="noopener">Read interview</a>
       </article>
       <article class="recognition-card" data-r data-d="2">
         <div class="recognition-kicker"><span>Policy Exposure</span><span>Washington, D.C.</span></div>
         <h3>State Department, World Bank, EU diplomacy</h3>
-        <p>Selected for academic and policy-focused travel to Washington, D.C., with engagement across major institutions and a private meeting with the Deputy Ambassador of the EU.</p>
+        <p>Selected for policy-focused travel with exposure to major institutions and EU diplomacy.</p>
         <strong>Institutional exposure beyond campus</strong>
       </article>
       <article class="recognition-card" data-r data-d="3">
         <div class="recognition-kicker"><span>Speaking</span><span>100+ attendees</span></div>
         <h3>Global Problems Conference representative</h3>
-        <p>Presented on Mariupol, displacement, human rights, immigrant adaptation, and the human context behind global conflict.</p>
+        <p>Presented on Mariupol, displacement, human rights, and immigrant adaptation.</p>
         <strong>Selected Ukrainian student voice</strong>
       </article>
       <article class="recognition-card" data-r data-d="4">
         <div class="recognition-kicker"><span>Campus Leadership</span><span>Growth</span></div>
         <h3>Ukrainian Student Association at Pitt</h3>
-        <p>Organized student programming, managed event logistics, supported fundraising, and helped grow club membership by three times.</p>
+        <p>Organized programming, supported fundraising, and helped grow club membership.</p>
         <strong>3x membership growth</strong>
       </article>
       <div class="recognition-strip" data-r data-d="5">
@@ -5866,28 +7580,36 @@ body.modal-open{
 <div class="sec-divider" data-r></div>
 
 <!-- GLOBE -->
-<section class="globe-sec" id="globe">
+<section class="globe-sec" id="globe" data-section-num="04">
   <div class="globe-hd">
     <div class="sn" data-r style="justify-content:center">WORLD DESK</div>
     <h2 class="sh" data-r data-d="1" style="margin:0 auto 10px;text-align:center">Track the map.<br><em>Read the balance.</em></h2>
-    <p data-r data-d="2" style="color:var(--body);text-align:center;max-width:560px;margin:0 auto 12px;font-size:.95rem;line-height:1.7;font-family:'Source Serif 4',serif">Your globe is now the centerpiece: cleaner orbit design, the same restrained palette, and a broader set of countries for quick geopolitical context.</p>
+    <p data-r data-d="2" style="color:var(--body);text-align:center;max-width:560px;margin:0 auto 12px;font-size:.95rem;line-height:1.7;font-family:'Source Serif 4',serif">A live country desk for quick geopolitical context, latest headlines, and strategic signals.</p>
   </div>
-  <div class="globe-chapter" data-r data-d="3">
-    <div class="globe-ch-item">
-      <span>Chapter 02</span>
-      <strong>Interactive World Desk</strong>
+  <div class="world-desk-control-panel" data-r data-d="3" aria-label="World Desk status and interface details">
+    <div class="world-desk-statusbar" aria-label="World Desk live status">
+      <div><span>Live feed</span><strong>Major outlets</strong></div>
+      <div><span>Coverage</span><strong>30 countries</strong></div>
+      <div><span>Layer</span><strong>News + signals</strong></div>
+      <div><span>Update</span><strong id="worldDeskUpdatedInline">Latest pull</strong></div>
     </div>
-    <div class="globe-ch-item">
-      <span>Format</span>
-      <strong>3D briefing canvas</strong>
-    </div>
-    <div class="globe-ch-item">
-      <span>Function</span>
-      <strong>Country signals + live news</strong>
-    </div>
-    <div class="globe-ch-item">
-      <span>Last updated</span>
-      <strong id="worldDeskUpdated">Apr 26, 2026</strong>
+    <div class="globe-chapter" aria-label="World Desk interface details">
+      <div class="globe-ch-item">
+        <span>Chapter 02</span>
+        <strong>Interactive World Desk</strong>
+      </div>
+      <div class="globe-ch-item">
+        <span>Format</span>
+        <strong>3D briefing canvas</strong>
+      </div>
+      <div class="globe-ch-item">
+        <span>Function</span>
+        <strong>Country signals + live news</strong>
+      </div>
+      <div class="globe-ch-item">
+        <span>Last updated</span>
+        <strong id="worldDeskUpdated">Apr 26, 2026</strong>
+      </div>
     </div>
   </div>
   <div class="desk-news-window" id="deskNewsWindow" data-r data-d="3">
@@ -5895,7 +7617,7 @@ body.modal-open{
       <div>
         <div class="desk-news-kicker">Global News Window</div>
         <div class="desk-news-title">Latest international headlines</div>
-        <div class="desk-news-copy">A separate live news window for fresh global developments, so the map briefing and the wider news cycle stay visible at the same time.</div>
+        <div class="desk-news-copy">Fresh global developments alongside the map briefing.</div>
       </div>
       <button class="desk-news-refresh" id="deskNewsRefresh" type="button">Refresh</button>
     </div>
@@ -5923,12 +7645,12 @@ body.modal-open{
         <div class="globe-stage">
           <div class="globe-core"></div>
           <div class="globe-aura"></div>
-          <canvas id="gc"></canvas>
+          <canvas id="gc" role="img" aria-label="Interactive World Desk globe. Use the country buttons above or click a country on the globe to open a geopolitical briefing."></canvas>
         </div>
         <div class="globe-tooltip" id="gtt"></div>
         <div class="globe-foot">
           <div class="globe-hint">drag to rotate · click a country</div>
-          <div class="globe-caption">A sharpened world desk with live briefings, latest headlines, and additional country signals layered into each selection.</div>
+          <div class="globe-caption">Live briefings, headlines, and country signals in one interface.</div>
         </div>
       </div>
     </div>
@@ -5943,7 +7665,7 @@ body.modal-open{
 <div class="sec-divider" data-r></div>
 
 <!-- LATEST BRIEFING -->
-<section class="briefing-sec" id="latest-briefing">
+<section class="briefing-sec" id="latest-briefing" data-section-num="05">
   <div class="briefing-shell">
     <div class="briefing-main" data-r>
       <div class="briefing-kicker">Published Briefing</div>
@@ -5988,11 +7710,11 @@ body.modal-open{
 <div class="sec-divider" data-r></div>
 
 <!-- ARTICLES -->
-<section class="articles-sec" id="articles">
+<section class="articles-sec" id="articles" data-section-num="06">
   <div style="max-width:1100px;margin:0 auto">
     <div class="sn" data-r>PUBLISHING</div>
     <h2 class="sh" data-r data-d="1">Published work and <em>pipeline.</em></h2>
-    <p class="section-note" data-r data-d="2">The portfolio now leads with one real briefing and uses the pipeline for work that is honestly still being developed. One published piece is more credible than three empty links.</p>
+    <p class="section-note" data-r data-d="2">One published briefing, with the next pieces shown honestly as work in progress.</p>
     <div class="publishing-note" data-r data-d="3">
       <span class="publishing-note-kicker">Upcoming Project</span>
       <strong>An additional project beyond the core article pipeline is planned to be finished by the end of the summer.</strong>
@@ -6031,7 +7753,7 @@ body.modal-open{
 </section>
 
 <!-- FOCUS -->
-<section class="sec" id="focus">
+<section class="sec" id="focus" data-section-num="07">
   <div style="max-width:950px;margin:0 auto">
     <div class="sn" data-r>RESEARCH FOCUS</div>
     <h2 class="sh" data-r data-d="1">Where scholarship<br>meets <em>urgency.</em></h2>
@@ -6051,7 +7773,7 @@ body.modal-open{
 <div class="sec-divider" data-r></div>
 
 <!-- SUPPORT UKRAINE -->
-<section class="donate-sec" id="support">
+<section class="donate-sec" id="support" data-section-num="08">
   <div class="donate-inner">
     <div class="donate-left" data-r>
       <span class="donate-flag">🇺🇦</span>
@@ -6092,22 +7814,21 @@ body.modal-open{
 </section>
 
 <!-- CONTACT -->
-<section class="cta-sec" id="contact">
+<section class="cta-sec" id="contact" data-section-num="09">
   <div class="cta-shell">
     <div class="section-fx contact-fx" aria-hidden="true">
       <video class="section-fx-video" autoplay muted loop playsinline preload="metadata" data-fx-video>
-        <source src="a2_remix (1).webm" type="video/webm">
+        <source data-src="a2_remix (1).webm" type="video/webm">
       </video>
     </div>
     <div class="cta-kicker" data-r style="justify-content:center">PRIMARY NEXT STEP</div>
     <h2 class="cta-h" data-r data-d="1">Get in <em>touch.</em></h2>
-    <p class="cta-p" data-r data-d="2">The clearest next move on this site is collaboration: research support, policy writing, speaking, and international-affairs projects that need clarity, credibility, and strong framing.</p>
-    <p class="cta-focus" data-r data-d="2"><strong>Main focus:</strong> collaboration first. The globe, publishing pipeline, and research sections are here to show the quality of the work behind that conversation.</p>
+    <p class="cta-p" data-r data-d="2">Open for research support, policy writing, public speaking, and international-affairs projects.</p>
+    <p class="cta-focus" data-r data-d="2"><strong>Main focus:</strong> collaboration, writing, and serious policy work.</p>
     <div class="contact-grid">
       <div class="contact-side" data-r data-d="3">
         <a href="mailto:olehtsumbek1@gmail.com" class="cta-email">olehtsumbek1@gmail.com</a>
-        <div class="contact-proof"><strong>Best use of this site:</strong> serious collaboration in international affairs, research support, policy writing, public speaking, and projects that need disciplined framing.</div>
-        <div class="contact-proof"><strong>References and materials:</strong> writing samples, initiative context, and additional background can be shared directly in conversation.</div>
+        <div class="contact-proof"><strong>Best use of this site:</strong> collaboration in international affairs, policy writing, research, and public speaking.</div>
         <div class="cta-btns">
           <a href="mailto:olehtsumbek1@gmail.com" class="cb"><span>Direct Email</span></a>
           <a href="https://www.linkedin.com/in/oleh-tsumbek-5044573ab" target="_blank" rel="noopener" class="cb"><span>LinkedIn</span></a>
@@ -6156,9 +7877,6 @@ body.modal-open{
     </svg>
     <span>Oleh Tsumbek</span>
   </div>
-  <div class="footer-row">
-    <span>Built by Oleh Tsumbek</span>
-  </div>
 </footer>
 
 <div class="briefing-modal" id="briefingModal" aria-hidden="true" role="dialog" aria-labelledby="briefingModalTitle">
@@ -6193,7 +7911,7 @@ body.modal-open{
   </article>
 </div>
 
-<button class="btt" id="btt" aria-label="Back to top">↑</button>
+<button class="btt" id="btt" type="button" aria-label="Back to top">↑</button>
 
 
 
@@ -6325,6 +8043,7 @@ const chipsEl=document.getElementById('chips');
 const countryCountEl=document.getElementById('countryCount');
 const activeCountryLabel=document.getElementById('activeCountryLabel');
 const worldDeskUpdatedEl=document.getElementById('worldDeskUpdated');
+const worldDeskUpdatedInlineEl=document.getElementById('worldDeskUpdatedInline');
 const deskNewsListEl=document.getElementById('deskNewsList');
 const deskNewsRefreshEl=document.getElementById('deskNewsRefresh');
 let worldNewsCache=null;
@@ -6369,7 +8088,8 @@ function getCountryFlag(country){
 }
 if(countryCountEl)countryCountEl.textContent=String(COUNTRIES.length);
 if(worldDeskUpdatedEl)worldDeskUpdatedEl.textContent=WORLD_DESK_LAST_UPDATED;
-COUNTRIES.forEach(c=>{const b=document.createElement('button');b.className='chip';const flag=getCountryFlag(c);b.textContent=(flag?flag+' ':'')+c.name;b.addEventListener('click',()=>selectCountry(c));chipsEl.appendChild(b)});
+if(worldDeskUpdatedInlineEl)worldDeskUpdatedInlineEl.textContent=WORLD_DESK_LAST_UPDATED;
+COUNTRIES.forEach(c=>{const b=document.createElement('button');b.className='chip';b.type='button';b.dataset.countryId=String(c.id);b.setAttribute('aria-pressed','false');const flag=getCountryFlag(c);b.textContent=(flag?flag+' ':'')+c.name;b.setAttribute('aria-label',`Open ${c.name} World Desk briefing`);b.addEventListener('click',()=>selectCountry(c));chipsEl.appendChild(b)});
 if(deskNewsRefreshEl)deskNewsRefreshEl.addEventListener('click',()=>loadWorldNews(true));
 
 function clampMetric(value,min=42,max=99){
@@ -6488,11 +8208,11 @@ function traceProjectedRing(ring){
   return started;
 }
 const canvas=document.getElementById('gc');
-const ctx=canvas.getContext('2d');
+const ctx=canvas.getContext('2d',{alpha:true,desynchronized:true});
 const tooltip=document.getElementById('gtt');
 const wrap=document.querySelector('.globe-wrap');
 const stage=document.querySelector('.globe-stage');
-const DPR=window.devicePixelRatio||1;
+const DPR=Math.min(window.devicePixelRatio||1,window.matchMedia('(max-width: 760px)').matches?1.35:1.75);
 let W=0,H=0;
 let countriesGeo=null,bordersMesh=null;
 let rotation=[18,-16,0],targetRot=[18,-16,0];
@@ -6512,12 +8232,49 @@ function resize(){
   canvas.style.width=W+'px';canvas.style.height=H+'px';
   draw();
 }
+let resizeFrame=0;
+function requestResize(){
+  if(resizeFrame)return;
+  resizeFrame=requestAnimationFrame(()=>{
+    resizeFrame=0;
+    resize();
+  });
+}
 
-d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json').then(w=>{
-  countriesGeo=topojson.feature(w,w.objects.countries);
-  bordersMesh=topojson.mesh(w,w.objects.countries,(a,b)=>a!==b);
-  resize();window.addEventListener('resize',resize);
-});
+let globeDataLoading=false;
+function loadGlobeData(){
+  if(countriesGeo||globeDataLoading)return;
+  globeDataLoading=true;
+  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json').then(w=>{
+    countriesGeo=topojson.feature(w,w.objects.countries);
+    bordersMesh=topojson.mesh(w,w.objects.countries,(a,b)=>a!==b);
+    resize();
+    if(selCountry){
+      const f=findGeoFeatureById(selCountry.id);
+      if(f){
+        const cn=d3.geoCentroid(f);
+        targetRot=[-cn[0],-cn[1],0];
+        targetScale=.374;
+        animating=true;
+        autoRot=false;
+        needsRedraw=true;
+      }
+    }
+  }).catch(()=>{globeDataLoading=false});
+}
+window.addEventListener('resize',requestResize,{passive:true});
+if('IntersectionObserver' in window&&wrap){
+  const globeDataObserver=new IntersectionObserver(entries=>{
+    const entry=entries[0];
+    if(entry&&entry.isIntersecting){
+      loadGlobeData();
+      globeDataObserver.disconnect();
+    }
+  },{rootMargin:'720px 0px',threshold:0});
+  globeDataObserver.observe(wrap);
+}else{
+  loadGlobeData();
+}
 
 function applyProj(){
   const rad=Math.min(W,H)*scaleFactor;
@@ -6680,7 +8437,7 @@ function renderCountryPanel(country,newsState){
   const signals=getCountrySignals(country);
   const flag=getCountryFlag(country);
   const why=getWhyItMatters(country,briefing);
-  let html='<button class="np-close" onclick="closePanel()">&times;</button>';
+  let html='<button class="np-close" type="button" onclick="closePanel()" aria-label="Close country briefing">&times;</button>';
   html+=`<div class="np-title">${flag?`<span class="fl">${flag}</span>`:''}${escapeHtml(country.name)}</div><div class="np-sub">Country briefing</div>`;
   html+=`<p class="np-desc">${escapeHtml(briefing.d)}</p>`;
   html+=renderVisualBrief(country,newsState,flag);
@@ -6711,6 +8468,22 @@ function renderCountryPanel(country,newsState){
   }
   html+='</div>';
   document.getElementById('np').innerHTML=html;
+}
+function focusCountryPanel(){
+  const panel=document.getElementById('np');
+  if(!panel)return;
+  panel.scrollTop=0;
+  requestAnimationFrame(()=>{
+    const rect=panel.getBoundingClientRect();
+    const isMobile=window.matchMedia('(max-width: 900px)').matches;
+    const topOffset=isMobile?88:96;
+    const shouldMove=isMobile||rect.top<topOffset||rect.bottom>window.innerHeight-18;
+    if(!shouldMove)return;
+    window.scrollTo({
+      top:Math.max(0,window.scrollY+rect.top-topOffset),
+      behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'
+    });
+  });
 }
 async function loadCountryNews(country){
   const cacheKey=country.name;
@@ -6750,76 +8523,76 @@ function draw(){
   ctx.fill();
 
   const glow=ctx.createRadialGradient(cx,cy,rad*.18,cx,cy,rad*1.74);
-  glow.addColorStop(0,'rgba(164,194,236,.1)');
-  glow.addColorStop(.38,'rgba(88,114,164,.07)');
-  glow.addColorStop(.72,'rgba(28,38,58,.02)');
+  glow.addColorStop(0,'rgba(0,0,0,0)');
+  glow.addColorStop(.38,'rgba(0,0,0,0)');
+  glow.addColorStop(.72,'rgba(0,0,0,0)');
   glow.addColorStop(1,'transparent');
   ctx.beginPath();ctx.arc(cx,cy,rad*1.48,0,Math.PI*2);ctx.fillStyle=glow;ctx.fill();
   const shellGlow=ctx.createRadialGradient(cx,cy,rad*.7,cx,cy,rad*1.22);
   shellGlow.addColorStop(0,'rgba(255,255,255,0)');
-  shellGlow.addColorStop(.7,'rgba(136,164,210,.05)');
-  shellGlow.addColorStop(1,'rgba(212,228,248,.06)');
+  shellGlow.addColorStop(.7,'rgba(70,96,150,.018)');
+  shellGlow.addColorStop(1,'rgba(92,120,176,.024)');
   ctx.beginPath();ctx.arc(cx,cy,rad*1.1,0,Math.PI*2);ctx.fillStyle=shellGlow;ctx.fill();
   const atmosphere=ctx.createRadialGradient(cx,cy,rad*.88,cx,cy,rad*1.28);
   atmosphere.addColorStop(0,'rgba(255,255,255,0)');
-  atmosphere.addColorStop(.66,'rgba(116,142,190,.04)');
-  atmosphere.addColorStop(.9,'rgba(126,158,214,.11)');
-  atmosphere.addColorStop(1,'rgba(194,214,242,.06)');
+  atmosphere.addColorStop(.66,'rgba(62,84,132,.018)');
+  atmosphere.addColorStop(.9,'rgba(78,104,154,.035)');
+  atmosphere.addColorStop(1,'rgba(92,120,176,.026)');
   ctx.beginPath();ctx.arc(cx,cy,rad*1.14,0,Math.PI*2);ctx.fillStyle=atmosphere;ctx.fill();
 
   const ocean=ctx.createRadialGradient(cx-rad*.3,cy-rad*.42,rad*.06,cx,cy,rad*1.22);
-  ocean.addColorStop(0,'rgba(234,244,255,.24)');
-  ocean.addColorStop(.1,'rgba(154,182,226,.16)');
-  ocean.addColorStop(.32,'rgba(22,38,62,.96)');
-  ocean.addColorStop(.72,'rgba(5,8,14,.998)');
+  ocean.addColorStop(0,'rgba(10,22,40,.98)');
+  ocean.addColorStop(.1,'rgba(8,18,34,.99)');
+  ocean.addColorStop(.32,'rgba(14,28,48,.98)');
+  ocean.addColorStop(.72,'rgba(4,7,12,.998)');
   ocean.addColorStop(1,'rgba(2,4,8,1)');
   ctx.beginPath();pathGen({type:'Sphere'});ctx.fillStyle=ocean;ctx.fill();
 
   ctx.save();
   ctx.beginPath();pathGen({type:'Sphere'});ctx.clip();
   const polarLight=ctx.createLinearGradient(0,cy-rad,0,cy+rad);
-  polarLight.addColorStop(0,'rgba(216,230,248,.06)');
-  polarLight.addColorStop(.28,'rgba(255,255,255,.016)');
-  polarLight.addColorStop(.52,'rgba(255,255,255,.034)');
+  polarLight.addColorStop(0,'rgba(0,0,0,0)');
+  polarLight.addColorStop(.28,'rgba(0,0,0,0)');
+  polarLight.addColorStop(.52,'rgba(0,0,0,0)');
   polarLight.addColorStop(.74,'rgba(12,18,28,.03)');
   polarLight.addColorStop(1,'rgba(0,0,0,.08)');
   ctx.fillStyle=polarLight;
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
   const subsolar=ctx.createRadialGradient(cx-rad*.34,cy-rad*.42,0,cx-rad*.2,cy-rad*.28,rad*.82);
-  subsolar.addColorStop(0,'rgba(255,255,255,.22)');
-  subsolar.addColorStop(.18,'rgba(216,232,255,.1)');
-  subsolar.addColorStop(.42,'rgba(88,118,170,.05)');
+  subsolar.addColorStop(0,'rgba(0,0,0,0)');
+  subsolar.addColorStop(.18,'rgba(0,0,0,0)');
+  subsolar.addColorStop(.42,'rgba(0,0,0,0)');
   subsolar.addColorStop(1,'rgba(255,255,255,0)');
   ctx.fillStyle=subsolar;
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
   const sheen=ctx.createLinearGradient(cx-rad*.96,cy-rad*.28,cx+rad*.98,cy+rad*.64);
-  sheen.addColorStop(0,'rgba(255,255,255,.12)');
-  sheen.addColorStop(.24,'rgba(255,255,255,.05)');
-  sheen.addColorStop(.58,'rgba(255,255,255,.012)');
+  sheen.addColorStop(0,'rgba(0,0,0,0)');
+  sheen.addColorStop(.24,'rgba(0,0,0,0)');
+  sheen.addColorStop(.58,'rgba(0,0,0,0)');
   sheen.addColorStop(1,'rgba(8,14,24,.24)');
   ctx.fillStyle=sheen;
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
   const terminator=ctx.createLinearGradient(cx-rad*.74,cy-rad*.12,cx+rad*.88,cy+rad*.3);
   terminator.addColorStop(0,'rgba(255,255,255,0)');
-  terminator.addColorStop(.46,'rgba(0,0,0,.06)');
-  terminator.addColorStop(.72,'rgba(0,0,0,.3)');
-  terminator.addColorStop(1,'rgba(0,0,0,.66)');
+  terminator.addColorStop(.44,'rgba(0,0,0,.08)');
+  terminator.addColorStop(.7,'rgba(0,0,0,.34)');
+  terminator.addColorStop(1,'rgba(0,0,0,.72)');
   ctx.fillStyle=terminator;
   ctx.fillRect(0,0,canvas.width,canvas.height);
   const specular=ctx.createRadialGradient(cx-rad*.28,cy-rad*.38,0,cx-rad*.14,cy-rad*.24,rad*.68);
-  specular.addColorStop(0,'rgba(255,255,255,.16)');
-  specular.addColorStop(.24,'rgba(214,228,248,.08)');
-  specular.addColorStop(.58,'rgba(130,158,204,.03)');
+  specular.addColorStop(0,'rgba(0,0,0,0)');
+  specular.addColorStop(.24,'rgba(0,0,0,0)');
+  specular.addColorStop(.58,'rgba(0,0,0,0)');
   specular.addColorStop(1,'rgba(255,255,255,0)');
   ctx.fillStyle=specular;
   ctx.fillRect(0,0,canvas.width,canvas.height);
   ctx.restore();
 
-  ctx.beginPath();pathGen(grat);ctx.lineWidth=.76*DPR;ctx.strokeStyle='rgba(224,236,252,.1)';ctx.stroke();
-  ctx.beginPath();pathGen(grat);ctx.lineWidth=.26*DPR;ctx.strokeStyle='rgba(255,255,255,.14)';ctx.stroke();
+  ctx.beginPath();pathGen(grat);ctx.lineWidth=.72*DPR;ctx.strokeStyle='rgba(206,224,248,.085)';ctx.stroke();
+  ctx.beginPath();pathGen(grat);ctx.lineWidth=.24*DPR;ctx.strokeStyle='rgba(255,255,255,.12)';ctx.stroke();
 
   if(countriesGeo){
     const sid=selCountry?selCountry.id:null;
@@ -6828,49 +8601,25 @@ function draw(){
       ctx.beginPath();pathGen(f);
       const hl=COUNTRIES.some(c=>String(c.id)===String(f.id));
       const hov=String(f.id)===String(hoverId);
-      ctx.fillStyle=hov?'rgba(188,214,252,.24)':hl?'rgba(112,148,204,.17)':'rgba(255,255,255,.032)';
+      ctx.fillStyle=hov?'rgba(214,230,252,.24)':hl?'rgba(136,160,206,.19)':'rgba(120,132,150,.085)';
       ctx.fill();
       if(hl||hov){
         ctx.beginPath();pathGen(f);
-        ctx.lineWidth=.86*DPR;ctx.strokeStyle=hov?'rgba(232,242,255,.4)':'rgba(176,198,232,.22)';ctx.stroke();
+        ctx.lineWidth=.82*DPR;ctx.strokeStyle=hov?'rgba(236,244,255,.42)':'rgba(186,206,236,.24)';ctx.stroke();
       }
     }
     if(bordersMesh){
-      ctx.beginPath();pathGen(bordersMesh);ctx.lineWidth=.54*DPR;ctx.strokeStyle='rgba(230,238,252,.12)';ctx.stroke();
-      ctx.beginPath();pathGen(bordersMesh);ctx.lineWidth=.22*DPR;ctx.strokeStyle='rgba(255,255,255,.18)';ctx.stroke();
+      ctx.beginPath();pathGen(bordersMesh);ctx.lineWidth=.52*DPR;ctx.strokeStyle='rgba(214,228,248,.11)';ctx.stroke();
+      ctx.beginPath();pathGen(bordersMesh);ctx.lineWidth=.2*DPR;ctx.strokeStyle='rgba(255,255,255,.15)';ctx.stroke();
     }
     if(selCountry){
       const sf=findGeoFeatureById(selCountry.id);
       if(sf){
-        ctx.save();ctx.shadowColor='rgba(118,168,238,.22)';ctx.shadowBlur=22*DPR;
-        ctx.beginPath();pathGen(sf);ctx.fillStyle='rgba(96,138,206,.2)';ctx.fill();ctx.restore();
-        ctx.save();ctx.shadowColor='rgba(210,226,248,.16)';ctx.shadowBlur=10*DPR;
-        ctx.beginPath();pathGen(sf);ctx.fillStyle='rgba(188,206,232,.28)';ctx.fill();ctx.restore();
-        ctx.beginPath();pathGen(sf);ctx.lineWidth=1.08*DPR;ctx.strokeStyle='rgba(228,238,252,.44)';ctx.stroke();
-        const centroid=projection(d3.geoCentroid(sf));
-        if(centroid){
-          const [px,py]=centroid;
-          ctx.save();
-          const beacon=ctx.createRadialGradient(px,py,0,px,py,24*DPR);
-          beacon.addColorStop(0,'rgba(255,255,255,.96)');
-          beacon.addColorStop(.45,'rgba(146,188,244,.32)');
-          beacon.addColorStop(1,'rgba(255,255,255,0)');
-          ctx.beginPath();
-          ctx.arc(px,py,9*DPR,0,Math.PI*2);
-          ctx.fillStyle=beacon;
-          ctx.fill();
-          ctx.beginPath();
-          ctx.arc(px,py,16*DPR,0,Math.PI*2);
-          ctx.lineWidth=.9*DPR;
-          ctx.strokeStyle='rgba(214,226,242,.24)';
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.arc(px,py,28*DPR,0,Math.PI*2);
-          ctx.lineWidth=.55*DPR;
-          ctx.strokeStyle='rgba(164,184,214,.12)';
-          ctx.stroke();
-          ctx.restore();
-        }
+        ctx.save();ctx.shadowColor='rgba(118,162,226,.16)';ctx.shadowBlur=18*DPR;
+        ctx.beginPath();pathGen(sf);ctx.fillStyle='rgba(108,142,196,.24)';ctx.fill();ctx.restore();
+        ctx.save();ctx.shadowColor='rgba(118,154,216,.08)';ctx.shadowBlur=7*DPR;
+        ctx.beginPath();pathGen(sf);ctx.fillStyle='rgba(130,164,220,.14)';ctx.fill();ctx.restore();
+        ctx.beginPath();pathGen(sf);ctx.lineWidth=1.08*DPR;ctx.strokeStyle='rgba(158,188,232,.38)';ctx.stroke();
       }
     }
     {
@@ -6893,26 +8642,63 @@ function draw(){
       ctx.restore();
     }
   }
+  ctx.save();
+  ctx.beginPath();pathGen({type:'Sphere'});ctx.clip();
+  const surfaceShade=ctx.createLinearGradient(cx-rad*.72,cy-rad*.18,cx+rad*.88,cy+rad*.32);
+  surfaceShade.addColorStop(0,'rgba(0,0,0,0)');
+  surfaceShade.addColorStop(.42,'rgba(0,0,0,0)');
+  surfaceShade.addColorStop(.7,'rgba(0,0,0,.18)');
+  surfaceShade.addColorStop(1,'rgba(0,0,0,.5)');
+  ctx.fillStyle=surfaceShade;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  const depthVignette=ctx.createRadialGradient(cx-rad*.16,cy-rad*.12,rad*.45,cx,cy,rad*1.08);
+  depthVignette.addColorStop(0,'rgba(255,255,255,0)');
+  depthVignette.addColorStop(.68,'rgba(0,0,0,.02)');
+  depthVignette.addColorStop(.92,'rgba(0,0,0,.18)');
+  depthVignette.addColorStop(1,'rgba(0,0,0,.42)');
+  ctx.fillStyle=depthVignette;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  const cloudVeil=ctx.createLinearGradient(cx-rad*.86,cy-rad*.72,cx+rad*.78,cy+rad*.7);
+  cloudVeil.addColorStop(0,'rgba(255,255,255,0)');
+  cloudVeil.addColorStop(.22,'rgba(0,0,0,0)');
+  cloudVeil.addColorStop(.34,'rgba(255,255,255,0)');
+  cloudVeil.addColorStop(.58,'rgba(0,0,0,0)');
+  cloudVeil.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=cloudVeil;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.restore();
   const rim=ctx.createRadialGradient(cx-rad*.12,cy-rad*.16,rad*.74,cx,cy,rad*1.08);
   rim.addColorStop(0,'rgba(255,255,255,0)');
-  rim.addColorStop(.74,'rgba(156,182,222,.06)');
-  rim.addColorStop(1,'rgba(206,224,248,.14)');
+  rim.addColorStop(.74,'rgba(80,104,152,.022)');
+  rim.addColorStop(.94,'rgba(92,120,176,.05)');
+  rim.addColorStop(1,'rgba(112,140,196,.028)');
   ctx.beginPath();ctx.arc(cx,cy,rad*1.08,0,Math.PI*2);ctx.fillStyle=rim;ctx.fill();
   ctx.save();
-  ctx.shadowColor='rgba(124,154,196,.08)';
-  ctx.shadowBlur=14*DPR;
-  ctx.beginPath();pathGen({type:'Sphere'});ctx.lineWidth=1.2*DPR;ctx.strokeStyle='rgba(192,212,238,.12)';ctx.stroke();
+  ctx.shadowColor='rgba(124,154,196,.06)';
+  ctx.shadowBlur=12*DPR;
+  ctx.beginPath();pathGen({type:'Sphere'});ctx.lineWidth=1.15*DPR;ctx.strokeStyle='rgba(192,212,238,.1)';ctx.stroke();
   ctx.restore();
-  ctx.beginPath();pathGen({type:'Sphere'});ctx.lineWidth=1.52*DPR;ctx.strokeStyle='rgba(220,232,248,.32)';ctx.stroke();
-  ctx.beginPath();pathGen({type:'Sphere'});ctx.lineWidth=.44*DPR;ctx.strokeStyle='rgba(176,198,228,.14)';ctx.stroke();
+  ctx.beginPath();pathGen({type:'Sphere'});ctx.lineWidth=1.48*DPR;ctx.strokeStyle='rgba(226,238,252,.28)';ctx.stroke();
+  ctx.beginPath();pathGen({type:'Sphere'});ctx.lineWidth=.42*DPR;ctx.strokeStyle='rgba(176,198,228,.12)';ctx.stroke();
 }
 
 let lastT=performance.now(),needsRedraw=true;
+const lowPowerGlobe=window.matchMedia('(max-width: 760px), (prefers-reduced-motion: reduce)').matches;
+let lastLowPowerFrame=0;
 function tick(t){
+  if(document.hidden){
+    requestAnimationFrame(tick);
+    return;
+  }
+  if(lowPowerGlobe&&t-lastLowPowerFrame<42){
+    requestAnimationFrame(tick);
+    return;
+  }
+  if(lowPowerGlobe)lastLowPowerFrame=t;
   const dt=Math.min(60,t-lastT);lastT=t;
   let shouldDraw=false;
   if(globeInView&&autoRot&&!selCountry&&!dragging){
-    rotation[0]=(rotation[0]+dt*.0048)%360;
+    rotation[0]=(rotation[0]+dt*(lowPowerGlobe ? .0022 : .0048))%360;
     shouldDraw=true;
   }else if(animating){
     let ch=false;
@@ -6944,14 +8730,22 @@ window.addEventListener('mouseup',e=>{
     if(Math.abs(dx)<4&&Math.abs(dy)<4){const r=canvas.getBoundingClientRect();const id=hitTest(e.clientX-r.left,e.clientY-r.top);if(id!=null){const m=COUNTRIES.find(c=>String(c.id)===String(id));if(m)selectCountry(m)}}
   }dragStart=null;if(!selCountry)setTimeout(()=>{autoRot=true},2000);
 });
+let dragMoveFrame=0,dragMoveEvent=null;
 window.addEventListener('mousemove',e=>{
   if(dragging&&dragStart){
-    const dx=e.clientX-dragStart.x,dy=e.clientY-dragStart.y;
-    rotation=[dragStart.rot[0]+dx*.35,Math.max(-80,Math.min(80,dragStart.rot[1]-dy*.35)),0];
-    draw();
+    dragMoveEvent=e;
+    if(dragMoveFrame)return;
+    dragMoveFrame=requestAnimationFrame(()=>{
+      dragMoveFrame=0;
+      if(!dragging||!dragStart||!dragMoveEvent)return;
+      const dx=dragMoveEvent.clientX-dragStart.x,dy=dragMoveEvent.clientY-dragStart.y;
+      rotation=[dragStart.rot[0]+dx*.35,Math.max(-80,Math.min(80,dragStart.rot[1]-dy*.35)),0];
+      draw();
+    });
   }
-});
-canvas.addEventListener('mousemove',e=>{
+},{passive:true});
+let hoverMoveFrame=0,hoverMoveEvent=null;
+function handleCanvasHover(e){
   if(dragging)return;
   const r=canvas.getBoundingClientRect();
   const id=hitTest(e.clientX-r.left,e.clientY-r.top);
@@ -6975,8 +8769,19 @@ canvas.addEventListener('mousemove',e=>{
     draw();
     needsRedraw=false;
   }
-});
+}
+canvas.addEventListener('mousemove',e=>{
+  hoverMoveEvent=e;
+  if(hoverMoveFrame)return;
+  hoverMoveFrame=requestAnimationFrame(()=>{
+    hoverMoveFrame=0;
+    if(hoverMoveEvent)handleCanvasHover(hoverMoveEvent);
+  });
+},{passive:true});
 canvas.addEventListener('mouseleave',()=>{
+  if(hoverMoveFrame)cancelAnimationFrame(hoverMoveFrame);
+  hoverMoveFrame=0;
+  hoverMoveEvent=null;
   if(hoverId!==null){
     hoverId=null;
     needsRedraw=true;
@@ -6994,13 +8799,15 @@ canvas.addEventListener('touchend',e=>{if(!dragging)return;dragging=false;if(dra
 
 function selectCountry(c){
   selCountry=c;
+  if(!countriesGeo)loadGlobeData();
   wrap.classList.add('has-selection');
-  document.querySelectorAll('.chip').forEach(ch=>ch.classList.toggle('on',ch.textContent.includes(c.name)));
+  document.querySelectorAll('.chip').forEach(ch=>{const active=String(ch.dataset.countryId)===String(c.id);ch.classList.toggle('on',active);ch.setAttribute('aria-pressed',active?'true':'false')});
   if(activeCountryLabel)activeCountryLabel.textContent=c.name;
   const f=findGeoFeatureById(c.id);
   if(f){const cn=d3.geoCentroid(f);targetRot=[-cn[0],-cn[1],0];targetScale=.374;animating=true;autoRot=false}
   needsRedraw=true;
   renderCountryPanel(c,{status:'loading',items:[]});
+  focusCountryPanel();
   draw();
   loadCountryNews(c);
 }
@@ -7008,7 +8815,7 @@ function closePanel(){
   selCountry=null;hoverId=null;
   wrap.classList.remove('has-selection');
   if(activeCountryLabel)activeCountryLabel.textContent='World Overview';
-  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  document.querySelectorAll('.chip').forEach(c=>{c.classList.remove('on');c.setAttribute('aria-pressed','false')});
   targetScale=.314;targetRot=[18,-16,0];animating=true;
   needsRedraw=true;
   setTimeout(()=>{autoRot=true},1500);
@@ -7019,7 +8826,9 @@ function closePanel(){
 const heroSection=document.getElementById('hero-sec');
 const heroLightEl=document.getElementById('heroLight');
 const scrollProgressBar=document.getElementById('scrollProgressBar');
+const useHeroScrollMotion=!window.matchMedia('(max-width: 760px), (prefers-reduced-motion: reduce)').matches;
 function updateHeroScrollMotion(){
+  if(!useHeroScrollMotion)return;
   const scrollY=window.scrollY||0;
   const limited=Math.min(scrollY,720);
   document.documentElement.style.setProperty('--hero-shift',`${limited}px`);
@@ -7033,8 +8842,30 @@ function updateScrollProgress(){
 function initFxVideos(){
   const videos=[...document.querySelectorAll('[data-fx-video]')];
   if(!videos.length)return;
+  const shouldDisableFx=window.matchMedia('(max-width: 760px), (prefers-reduced-motion: reduce)').matches||navigator.connection?.saveData;
+  if(shouldDisableFx){
+    videos.forEach(video=>{
+      try{
+        video.pause();
+        video.removeAttribute('autoplay');
+        video.preload='none';
+      }catch(error){}
+    });
+    return;
+  }
+  const hydrateVideo=video=>{
+    let hydrated=false;
+    video.querySelectorAll('source[data-src]').forEach(source=>{
+      if(!source.getAttribute('src')){
+        source.setAttribute('src',source.dataset.src);
+        hydrated=true;
+      }
+    });
+    if(hydrated)video.load();
+  };
   const playVideo=video=>{
     try{
+      hydrateVideo(video);
       video.playbackRate=.72;
       video.preload='metadata';
       const playPromise=video.play();
@@ -7055,6 +8886,16 @@ function initFxVideos(){
       });
     },{threshold:[0,.08,.2,.45]});
     videos.forEach(video=>io.observe(video));
+    document.addEventListener('visibilitychange',()=>{
+      if(document.hidden){
+        videos.forEach(video=>{try{video.pause()}catch(error){}});
+        return;
+      }
+      videos.forEach(video=>{
+        const rect=video.getBoundingClientRect();
+        if(rect.bottom>0&&rect.top<window.innerHeight)playVideo(video);
+      });
+    },{passive:true});
     return;
   }
   videos.forEach(playVideo);
@@ -7114,17 +8955,26 @@ function initGlobePointerMotion(){
   reset();
 }
 function initMagneticButtons(){
-  if(!window.matchMedia('(pointer:fine)').matches)return;
+  if(!window.matchMedia('(pointer:fine)').matches||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   document.querySelectorAll('.hero-btn,.cb,.desk-news-refresh,.ac-open').forEach(el=>{
+    let raf=0,nextX=0,nextY=0;
     el.addEventListener('pointermove',event=>{
       const rect=el.getBoundingClientRect();
-      const dx=(event.clientX-(rect.left+rect.width/2))/rect.width;
-      const dy=(event.clientY-(rect.top+rect.height/2))/rect.height;
-      el.style.transform=`translate3d(${dx*6}px,${dy*6}px,0)`;
-    });
+      nextX=((event.clientX-(rect.left+rect.width/2))/rect.width)*4;
+      nextY=((event.clientY-(rect.top+rect.height/2))/rect.height)*4;
+      if(raf)return;
+      raf=requestAnimationFrame(()=>{
+        el.style.transform=`translate3d(${nextX}px,${nextY}px,0)`;
+        raf=0;
+      });
+    },{passive:true});
+    el.addEventListener('pointerenter',()=>{el.style.willChange='transform'},{passive:true});
     el.addEventListener('pointerleave',()=>{
+      if(raf)cancelAnimationFrame(raf);
+      raf=0;
       el.style.transform='';
-    });
+      el.style.willChange='';
+    },{passive:true});
   });
 }
 
@@ -7133,17 +8983,44 @@ function initBriefingModal(){
   if(!modal)return;
   const openers=document.querySelectorAll('[data-briefing-open]');
   const closers=modal.querySelectorAll('[data-briefing-close]');
-  const openModal=()=>{
-    modal.classList.add('open');
+  const dialog=modal.querySelector('.briefing-dialog');
+  let lastFocused=null;
+  let pausedFxVideos=[];
+  const pauseFxVideos=()=>{
+    pausedFxVideos=[...document.querySelectorAll('[data-fx-video]')].filter(video=>!video.paused);
+    pausedFxVideos.forEach(video=>{try{video.pause()}catch(error){}});
+  };
+  const resumeFxVideos=()=>{
+    const videos=pausedFxVideos;
+    pausedFxVideos=[];
+    videos.forEach(video=>{
+      const rect=video.getBoundingClientRect();
+      if(rect.bottom>0&&rect.top<window.innerHeight){
+        try{
+          const playPromise=video.play();
+          if(playPromise&&typeof playPromise.catch==='function')playPromise.catch(()=>{});
+        }catch(error){}
+      }
+    });
+  };
+  const openModal=event=>{
+    if(event)event.preventDefault();
+    if(modal.classList.contains('open'))return;
+    lastFocused=document.activeElement;
+    pauseFxVideos();
     modal.setAttribute('aria-hidden','false');
-    document.body.classList.add('modal-open');
+    if(dialog)dialog.scrollTop=0;
+    requestAnimationFrame(()=>modal.classList.add('open'));
   };
   const closeModal=()=>{
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden','true');
-    document.body.classList.remove('modal-open');
+    setTimeout(resumeFxVideos,180);
+    if(lastFocused&&typeof lastFocused.focus==='function'){
+      setTimeout(()=>lastFocused.focus({preventScroll:true}),120);
+    }
   };
-  openers.forEach(button=>button.addEventListener('click',openModal));
+  openers.forEach(button=>button.addEventListener('click',openModal,{passive:false}));
   closers.forEach(button=>button.addEventListener('click',closeModal));
   document.addEventListener('keydown',event=>{
     if(event.key==='Escape'&&modal.classList.contains('open'))closeModal();
@@ -7181,6 +9058,7 @@ if(subscribeForm){
   const setSubscribeState=(state,message)=>{
     subscribeForm.classList.remove('is-loading','is-sent','is-error');
     if(state)subscribeForm.classList.add(state);
+    subscribeForm.setAttribute('aria-busy',state==='is-loading'?'true':'false');
     if(subscribeStatus&&message)subscribeStatus.textContent=message;
     if(subscribeButton){
       subscribeButton.disabled=state==='is-loading';
@@ -7243,15 +9121,28 @@ window.addEventListener('DOMContentLoaded',()=>{
   initMagneticButtons();
   initBriefingModal();
   resize();
-  loadWorldNews();
-  setTimeout(()=>document.getElementById('pre').classList.add('go'),900);
+  const worldDeskSection=document.getElementById('globe');
+  if('IntersectionObserver' in window&&worldDeskSection){
+    const worldNewsObserver=new IntersectionObserver(entries=>{
+      if(entries[0]?.isIntersecting){
+        loadWorldNews();
+        worldNewsObserver.disconnect();
+      }
+    },{rootMargin:'640px 0px',threshold:0});
+    worldNewsObserver.observe(worldDeskSection);
+  }else{
+    loadWorldNews();
+  }
+  const loaderDelay=window.matchMedia('(max-width: 760px)').matches?560:900;
+  setTimeout(()=>document.getElementById('pre').classList.add('go'),loaderDelay);
 });
-const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('[data-r]').forEach(el=>obs.observe(el));
 const sects=document.querySelectorAll('section[id]'),nls=document.querySelectorAll('.nl-a');
 const nobs=new IntersectionObserver(ent=>{ent.forEach(e=>{if(e.isIntersecting)nls.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id))})},{threshold:.3,rootMargin:'-80px 0px -50% 0px'});
 sects.forEach(s=>nobs.observe(s));
 const nav=document.querySelector('nav'),btt=document.getElementById('btt');let ls=0;
+const nativeScrollBehavior=window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
 let scrollTicking=false;
 window.addEventListener('scroll',()=>{
   if(scrollTicking)return;
@@ -7265,9 +9156,9 @@ window.addEventListener('scroll',()=>{
     ls=s;
     scrollTicking=false;
   });
-});
-btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)window.scrollTo({top:t.offsetTop-60,behavior:'smooth'})})});
+},{passive:true});
+btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:nativeScrollBehavior}));
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)window.scrollTo({top:t.offsetTop-60,behavior:nativeScrollBehavior})})});
 </script>
 </body>
 </html>
