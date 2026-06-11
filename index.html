@@ -7252,6 +7252,882 @@ footer{
   }
 }
 </style>
+<style id="opt-layer">
+/* ============================================================
+   OPTIMIZATION LAYER — loaded last so it wins the cascade.
+   Goal: lighter, calmer, faster, easier to use. Keeps all
+   content + real features (globe, news, modal, forms).
+   ============================================================ */
+
+/* 1. Remove decorative weight that hurt performance / cluttered the look */
+.noise,
+.particles,
+.hero-light,
+.hero-orbit,
+.hero-gridlines,
+.hero-serial,
+.hero-panel-orbit,
+.pre-orbit,
+.hero-fx-shell,
+.section-fx,
+.ev-map{
+  display:none !important;
+}
+
+/* Stop perpetual ambient animations (battery + repaint cost) */
+.noise,
+#pre::before,
+.pre-logo-shell::before,
+.hero-orbit,
+.hero-panel-orbit{
+  animation:none !important;
+}
+
+/* 2. Faster, calmer loader — no long spin-up before content shows */
+#pre{
+  background:linear-gradient(180deg,#050608,#010102) !important;
+}
+#pre::before{display:none !important;}
+.pre-meter span{animation-duration:.4s !important;}
+
+/* 3. Gentle, consistent motion: shorten reveal transitions a touch */
+[data-r]{transition-duration:.5s !important;}
+
+/* 4. Hero FX area shouldn't reserve empty space once video is gone */
+.hero-fx-shell{display:none !important;}
+
+/* ============================================================
+   5. CLEAN, ACCESSIBLE MOBILE MENU
+   ============================================================ */
+.nav-toggle{
+  display:none;
+  appearance:none;
+  -webkit-appearance:none;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  border-radius:10px;
+  width:42px;
+  height:42px;
+  padding:0;
+  cursor:pointer;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+.nav-toggle:focus-visible{outline:2px solid var(--blue);outline-offset:2px;}
+.nav-toggle .bar{
+  display:block;
+  position:absolute;
+  left:11px;
+  right:11px;
+  height:2px;
+  border-radius:2px;
+  background:var(--fg);
+  transition:transform .28s ease, opacity .2s ease, top .28s ease;
+}
+.nav-toggle .bar:nth-child(1){top:14px;}
+.nav-toggle .bar:nth-child(2){top:20px;}
+.nav-toggle .bar:nth-child(3){top:26px;}
+nav.nav-open .nav-toggle .bar:nth-child(1){top:20px;transform:rotate(45deg);}
+nav.nav-open .nav-toggle .bar:nth-child(2){opacity:0;}
+nav.nav-open .nav-toggle .bar:nth-child(3){top:20px;transform:rotate(-45deg);}
+
+@media(max-width:900px){
+  nav{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    padding:14px 18px !important;
+    width:calc(100% - 20px) !important;
+    gap:12px;
+  }
+  .nav-toggle{display:inline-flex !important;order:3;flex:0 0 auto;}
+
+  /* collapse the link list into a dropdown panel */
+  nav .nav-links{
+    display:none !important;
+    position:absolute !important;
+    top:calc(100% + 8px);
+    left:0;
+    right:0;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:2px !important;
+    padding:10px !important;
+    margin:0 !important;
+    width:auto !important;
+    min-width:0 !important;
+    max-width:none !important;
+    overflow:visible !important;
+    background:rgba(8,10,15,.96);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:0 24px 60px rgba(0,0,0,.5);
+  }
+  nav.nav-open .nav-links{display:flex !important;}
+  nav .nav-links li{width:100%;}
+  nav .nl-a{
+    display:block;
+    width:100%;
+    padding:12px 14px !important;
+    font-size:.82rem !important;
+    letter-spacing:.04em !important;
+    border-radius:10px;
+    color:var(--body) !important;
+  }
+  nav .nl-a::after{display:none !important;}
+  nav .nl-a:hover,
+  nav .nl-a.active{background:rgba(255,255,255,.06);color:var(--fg) !important;}
+
+  /* keep the support CTA visible and tappable in the bar */
+  nav .nav-support{
+    display:inline-flex !important;
+    order:2;
+    font-size:.62rem !important;
+    padding:9px 14px !important;
+    white-space:nowrap;
+  }
+}
+
+@media(max-width:420px){
+  nav .nav-support{display:none !important;}
+}
+
+/* respect users who prefer no motion */
+@media(prefers-reduced-motion:reduce){
+  .tape-in{animation:none !important;}
+  [data-r]{transition:none !important;}
+}
+
+/* ============================================================
+   6. FLAT 2D BUTTONS — remove the 3D "block/hammer" look,
+   glossy highlights, and heavy stacked shadows. Clean, modern,
+   cheap to paint.
+   ============================================================ */
+.nav-support,.hero-btn,.cb,.cta-email,.chip,.np-close,.btt,
+.briefing-preview-link,.ac-read,.ac-open,.desk-news-refresh,
+.subscribe-btn,.proof-link,.briefing-close,.briefing-pill{
+  position:relative;
+  overflow:visible !important;
+  isolation:auto !important;
+  background:rgba(255,255,255,.05) !important;
+  border:1px solid rgba(255,255,255,.16) !important;
+  color:var(--fg) !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  border-radius:11px !important;
+  transition:background .2s ease, border-color .2s ease, color .2s ease, transform .12s ease !important;
+}
+/* kill the glossy top highlight + bottom line ("hammer head") */
+.nav-support::before,.hero-btn::before,.cb::before,.cta-email::before,
+.chip::before,.np-close::before,.btt::before,
+.nav-support::after,.hero-btn::after,.cb::after,.cta-email::after,
+.chip::after,.np-close::after,.btt::after{
+  content:none !important;
+  display:none !important;
+}
+/* hover: subtle fill + brighter border, no lift jank */
+.nav-support:hover,.hero-btn:hover,.cb:hover,.cta-email:hover,
+.np-close:hover,.btt:hover,.briefing-preview-link:hover,
+.ac-read:hover,.ac-open:hover,.desk-news-refresh:hover,
+.proof-link:hover,.briefing-close:hover{
+  background:rgba(255,255,255,.1) !important;
+  border-color:rgba(255,255,255,.34) !important;
+  transform:none !important;
+  color:#fff !important;
+}
+.nav-support:active,.hero-btn:active,.cb:active,.cta-email:active,
+.np-close:active,.btt:active,.chip:active{
+  transform:scale(.97) !important;
+}
+/* keyboard accessibility */
+.nav-support:focus-visible,.hero-btn:focus-visible,.cb:focus-visible,
+.cta-email:focus-visible,.chip:focus-visible,.subscribe-btn:focus-visible,
+.btt:focus-visible,.briefing-preview-link:focus-visible,
+.desk-news-refresh:focus-visible{
+  outline:2px solid #fff !important;
+  outline-offset:2px !important;
+}
+
+/* PRIMARY: crisp solid white fill, dark text — the clear main action */
+.hero-btn.pri,.cb.pri,.subscribe-btn,.form-submit{
+  background:#f3f4f6 !important;
+  border-color:#f3f4f6 !important;
+  color:#0a0b0e !important;
+  font-weight:600 !important;
+}
+.hero-btn.pri:hover,.cb.pri:hover,.subscribe-btn:hover,.form-submit:hover{
+  background:#ffffff !important;
+  border-color:#ffffff !important;
+  color:#0a0b0e !important;
+}
+.nav-support{
+  background:rgba(255,255,255,.08) !important;
+  border-color:rgba(255,255,255,.24) !important;
+}
+
+/* CHIPS: light pills, no per-chip blur (huge paint saver with ~30 chips) */
+.chip{
+  border-radius:999px !important;
+  padding:8px 15px !important;
+  font-size:.74rem !important;
+}
+.chip:hover{
+  background:rgba(255,255,255,.1) !important;
+  border-color:rgba(255,255,255,.3) !important;
+}
+.chip.on,.chip[aria-pressed="true"]{
+  background:#f3f4f6 !important;
+  border-color:#f3f4f6 !important;
+  color:#0a0b0e !important;
+}
+
+/* round, balanced back-to-top + close buttons */
+.btt{border-radius:50% !important;}
+.np-close,.briefing-close{border-radius:50% !important;}
+
+/* ============================================================
+   7. PERFORMANCE PASS — stop the freeze
+   backdrop-filter is the most expensive paint, especially while
+   scrolling/rotating. Keep it ONLY on the nav bar; drop elsewhere.
+   ============================================================ */
+.desk-news-card,.recognition-card,.lead-card,.article-card,
+.hero-panel,.briefing-side,.briefing-main,.np,.contact-form,
+.world-desk-control-panel,.globe-scene,.donate-card,.ev-content,
+.briefing-dialog,.chip{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+/* one tasteful blur left, on the fixed nav */
+nav{backdrop-filter:blur(14px) !important;-webkit-backdrop-filter:blur(14px) !important;}
+
+/* lighten oversized hover shadows on cards (cheaper repaint) */
+.recognition-card:hover,.lead-card:hover,.article-card:hover,.donate-card:hover{
+  box-shadow:0 16px 36px rgba(0,0,0,.32) !important;
+}
+
+/* promote heavy moving layers to their own GPU layer, smoother scroll */
+nav,.tape-in,.scroll-progress{will-change:transform;}
+
+/* ============================================================
+   8. PREMIUM WHITE / PRIMARY BUTTONS
+   Refined depth through a faint gradient + one soft shadow +
+   gentle motion. Cheap to paint, but feels crafted.
+   ============================================================ */
+.hero-btn.pri,.cb.pri,.subscribe-btn,.form-submit{
+  background:linear-gradient(180deg,#ffffff 0%,#eceef2 100%) !important;
+  border:1px solid rgba(255,255,255,.7) !important;
+  color:#0a0b0e !important;
+  font-weight:600 !important;
+  letter-spacing:.015em !important;
+  padding:14px 26px !important;
+  border-radius:12px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 1px 2px rgba(0,0,0,.28),
+    0 8px 20px -6px rgba(0,0,0,.45) !important;
+  transition:transform .16s cubic-bezier(.2,.7,.3,1),
+             box-shadow .22s ease,
+             background .22s ease !important;
+}
+.hero-btn.pri:hover,.cb.pri:hover,.subscribe-btn:hover,.form-submit:hover{
+  background:linear-gradient(180deg,#ffffff 0%,#f4f5f8 100%) !important;
+  color:#0a0b0e !important;
+  transform:translateY(-2px) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    0 2px 4px rgba(0,0,0,.26),
+    0 16px 30px -8px rgba(0,0,0,.5) !important;
+}
+.hero-btn.pri:active,.cb.pri:active,.subscribe-btn:active,.form-submit:active{
+  transform:translateY(0) scale(.985) !important;
+  box-shadow:
+    inset 0 1px 2px rgba(0,0,0,.12),
+    0 2px 6px rgba(0,0,0,.3) !important;
+}
+.hero-btn.pri:focus-visible,.cb.pri:focus-visible,
+.subscribe-btn:focus-visible,.form-submit:focus-visible{
+  outline:2px solid rgba(255,255,255,.85) !important;
+  outline-offset:3px !important;
+}
+
+/* active country chip: same crisp white treatment, lighter */
+.chip.on,.chip[aria-pressed="true"]{
+  background:linear-gradient(180deg,#ffffff,#eceef2) !important;
+  border-color:rgba(255,255,255,.7) !important;
+  color:#0a0b0e !important;
+  font-weight:600 !important;
+  box-shadow:0 4px 12px -4px rgba(0,0,0,.45) !important;
+}
+
+/* ============================================================
+   9. GENERAL DESIGN POLISH
+   ============================================================ */
+/* secondary buttons get a little life on hover (still light) */
+.hero-btn:not(.pri):hover,.cb:not(.pri):hover,.cta-email:hover{
+  transform:translateY(-2px) !important;
+  box-shadow:0 10px 24px -10px rgba(0,0,0,.5) !important;
+}
+
+/* cards: cohesive hover — subtle lift + brighter edge */
+.recognition-card,.lead-card,.article-card,.donate-card{
+  transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease !important;
+}
+.recognition-card:hover,.lead-card:hover,.article-card:hover,.donate-card:hover{
+  transform:translateY(-3px) !important;
+  border-color:rgba(255,255,255,.22) !important;
+  box-shadow:0 18px 40px -16px rgba(0,0,0,.55) !important;
+}
+
+/* inline + proof links: refined animated underline */
+.proof-link,.hero-proof-strip a,.briefing-sources a{
+  position:relative;
+  text-decoration:none;
+  background-image:linear-gradient(currentColor,currentColor);
+  background-size:0% 1px;
+  background-repeat:no-repeat;
+  background-position:0 100%;
+  transition:background-size .3s ease, color .2s ease;
+}
+.proof-link:hover,.hero-proof-strip a:hover,.briefing-sources a:hover{
+  background-size:100% 1px;
+}
+
+/* selection color to match the monochrome theme */
+::selection{background:rgba(255,255,255,.85);color:#0a0b0e;}
+
+/* smoother, consistently rounded section dividers + email pill */
+.cta-email{
+  border-radius:12px !important;
+  font-weight:500 !important;
+}
+.cta-email:hover{color:#fff !important;}
+
+/* ============================================================
+   10. COHESIVE COLOR IDENTITY  (the big visual upgrade)
+   The site was fully grayscale, but its shadows/glows were
+   already designed around a steel-blue. Reactivating one
+   refined azure accent harmonizes all 40+ accent details at
+   once and makes the design feel intentional.
+   ============================================================ */
+:root{
+  --blue:#6ea7f0 !important;
+  --blue-h:#94c0f8 !important;
+  --blue-bg:rgba(110,167,240,.13) !important;
+  --accent:#6ea7f0;
+  --accent-deep:#3f7fd6;
+}
+
+/* PRIMARY CTAs → refined azure gradient with a soft colored glow */
+.hero-btn.pri,.cb.pri,.subscribe-btn,.form-submit{
+  background:linear-gradient(180deg,#62a0f2 0%,#3f7fd6 100%) !important;
+  border:1px solid rgba(150,190,250,.55) !important;
+  color:#ffffff !important;
+  font-weight:600 !important;
+  letter-spacing:.02em !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.28),
+    0 2px 4px rgba(18,38,78,.4),
+    0 14px 28px -10px rgba(63,127,214,.6) !important;
+}
+.hero-btn.pri:hover,.cb.pri:hover,.subscribe-btn:hover,.form-submit:hover{
+  background:linear-gradient(180deg,#74adf5 0%,#4a8ade 100%) !important;
+  color:#ffffff !important;
+  transform:translateY(-2px) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.34),
+    0 3px 6px rgba(18,38,78,.4),
+    0 20px 38px -10px rgba(63,127,214,.72) !important;
+}
+.hero-btn.pri:active,.cb.pri:active,.subscribe-btn:active,.form-submit:active{
+  transform:translateY(0) scale(.985) !important;
+}
+
+/* active country chip → soft azure tint, glowing edge */
+.chip.on,.chip[aria-pressed="true"]{
+  background:rgba(110,167,240,.16) !important;
+  border-color:rgba(130,180,245,.7) !important;
+  color:#eaf2ff !important;
+  font-weight:600 !important;
+  box-shadow:0 0 0 1px rgba(110,167,240,.25), 0 6px 16px -6px rgba(63,127,214,.5) !important;
+}
+
+/* secondary "Support Ukraine" → quiet azure outline, fills on hover */
+.nav-support{
+  background:rgba(110,167,240,.1) !important;
+  border-color:rgba(130,180,245,.45) !important;
+  color:#cfe2ff !important;
+}
+.nav-support:hover{
+  background:linear-gradient(180deg,#62a0f2,#3f7fd6) !important;
+  border-color:rgba(150,190,250,.6) !important;
+  color:#fff !important;
+}
+
+/* accent the scroll-progress bar + focus rings */
+.scroll-progress span,#scrollProgressBar{
+  background:linear-gradient(90deg,#6ea7f0,#94c0f8) !important;
+}
+.hero-btn:focus-visible,.cb:focus-visible,.chip:focus-visible,
+.nav-support:focus-visible,.subscribe-btn:focus-visible,
+.form-submit:focus-visible,.nl-a:focus-visible,.nav-toggle:focus-visible{
+  outline:2px solid #94c0f8 !important;
+  outline-offset:3px !important;
+}
+
+/* inline links lean into the accent */
+.proof-link:hover,.hero-proof-strip a:hover,.briefing-sources a:hover,
+.dc-name,.cta-email:hover{color:#94c0f8 !important;}
+
+/* ============================================================
+   11. ATMOSPHERE & DEPTH  (cheap, static, no repaint cost)
+   ============================================================ */
+.hero{
+  background:
+    radial-gradient(1100px 560px at 70% -8%, rgba(110,167,240,.14), transparent 60%),
+    radial-gradient(800px 500px at 12% 8%, rgba(110,167,240,.07), transparent 62%),
+    var(--bg) !important;
+}
+/* a small accent tick before every section label, for rhythm */
+.sn{display:inline-flex !important;align-items:center;gap:10px;}
+.sn::before{
+  content:'';
+  width:22px;height:1px;
+  background:linear-gradient(90deg,var(--blue),transparent);
+  flex:0 0 auto;
+}
+/* warm the "em" emphasis inside big headings with the accent */
+.sh em,.hero-h .it,.briefing-title em,.cta-h em{
+  color:#9cc2f7 !important;
+  font-style:italic;
+}
+/* tape divider dots pick up the accent */
+.tape-in .d{color:var(--blue) !important;opacity:.7 !important;}
+
+/* ============================================================
+   12. SNAPPY INTRO — the headline used to wait 2.2s (tuned to
+   the old slow loader). Now it arrives right away.
+   ============================================================ */
+.hero-h .ln:nth-child(1) .li{animation-delay:.12s !important;}
+.hero-h .ln:nth-child(2) .li{animation-delay:.24s !important;}
+.hero-h .ln:nth-child(3) .li{animation-delay:.36s !important;}
+
+/* ============================================================
+   13. QUALITY POLISH — premium depth, cohesion, small craft.
+   All cheap to paint (hairlines, tints, one shadow).
+   ============================================================ */
+
+/* custom scrollbar — a quiet quality signal */
+html{scrollbar-width:thin;scrollbar-color:rgba(110,167,240,.45) rgba(255,255,255,.04);}
+::-webkit-scrollbar{width:11px;height:11px;}
+::-webkit-scrollbar-track{background:rgba(255,255,255,.03);}
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,rgba(110,167,240,.55),rgba(63,127,214,.4));
+  border:3px solid transparent;
+  background-clip:padding-box;
+  border-radius:999px;
+}
+::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(180deg,rgba(140,185,245,.7),rgba(80,140,220,.55));
+  background-clip:padding-box;
+}
+
+/* "lit from above" hairline on cards + panels → cohesive depth */
+.recognition-card,.lead-card,.article-card,.hero-panel,.hero-mini,
+.briefing-side,.briefing-main,.np,.contact-form,.world-desk-control-panel,
+.desk-news-window,.desk-news-card,.donate-card,.publishing-note,
+.lead-proof,.recognition-strip,.briefing-dialog{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 14px 34px -22px rgba(0,0,0,.6) !important;
+}
+
+/* cohesive hover: subtle azure-tinted edge + faint accent glow */
+.recognition-card:hover,.lead-card:hover,.article-card:hover,.donate-card:hover{
+  transform:translateY(-3px) !important;
+  border-color:rgba(110,167,240,.32) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 18px 40px -16px rgba(0,0,0,.6),
+    0 0 0 1px rgba(110,167,240,.12) !important;
+}
+
+/* hero mini-cards: accent edge appears on hover */
+.hero-mini{
+  position:relative;
+  transition:background .2s ease, border-color .2s ease, transform .2s ease !important;
+}
+.hero-mini:hover{
+  transform:translateY(-2px) !important;
+  border-color:rgba(110,167,240,.3) !important;
+  background:rgba(110,167,240,.05) !important;
+}
+.hero-mini::before{
+  content:'';
+  position:absolute;left:0;top:14px;bottom:14px;width:2px;
+  border-radius:2px;
+  background:linear-gradient(180deg,var(--blue),transparent);
+  opacity:0;transition:opacity .25s ease;
+}
+.hero-mini:hover::before{opacity:.8;}
+
+/* section dividers → refined accent gradient hairline */
+.sec-divider{
+  width:1px !important;
+  height:48px !important;
+  background:linear-gradient(180deg,transparent,rgba(110,167,240,.6),transparent) !important;
+}
+
+/* chips lift slightly on hover for tactility */
+.chip{transition:background .2s ease, border-color .2s ease, transform .14s ease, box-shadow .2s ease !important;}
+.chip:hover{transform:translateY(-2px) !important;}
+
+/* nav active link: gentle accent glow + the underline stays accent */
+.nl-a.active{color:#eaf2ff !important;text-shadow:0 0 16px rgba(110,167,240,.4);}
+
+/* heading craft: accent emphasis gets a faint glow; tighten tracking a touch */
+.sh,.hero-h,.briefing-title,.cta-h{letter-spacing:-.025em;}
+.sh em,.hero-h .it,.briefing-title em,.cta-h em{
+  text-shadow:0 0 28px rgba(110,167,240,.28) !important;
+}
+
+/* refine the email pill + proof strip into clean accent-aware chips */
+.hero-proof-strip{border-color:rgba(110,167,240,.22) !important;}
+.hero-proof-strip a{color:#9cc2f7 !important;}
+
+/* subtle accent on focus-research arrows + read links */
+.fi:hover .ft{color:#eaf2ff !important;}
+.ac-read,.ac-open{transition:color .2s ease;}
+.ac-read:hover,.ac-open:hover{color:#94c0f8 !important;}
+
+/* ============================================================
+   14. WORLD DESK FILTER UI + functional bits
+   ============================================================ */
+.wd-filter{
+  max-width:980px;
+  margin:6px auto 4px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+}
+.wd-search{
+  position:relative;
+  width:min(440px,92%);
+}
+.wd-search-ico{
+  position:absolute;left:15px;top:50%;transform:translateY(-50%);
+  width:17px;height:17px;color:rgba(255,255,255,.4);pointer-events:none;
+}
+#countrySearch{
+  width:100%;
+  font-family:'Inter',sans-serif;
+  font-size:.92rem;
+  color:var(--fg);
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:13px 44px 13px 42px;
+  outline:none;
+  transition:border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+#countrySearch::placeholder{color:rgba(255,255,255,.4);}
+#countrySearch:focus{
+  border-color:rgba(110,167,240,.55);
+  background:rgba(110,167,240,.06);
+  box-shadow:0 0 0 4px rgba(110,167,240,.12);
+}
+.wd-search-clear{
+  position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  width:28px;height:28px;border-radius:50%;
+  border:none;cursor:pointer;
+  background:rgba(255,255,255,.08);color:var(--fg);
+  font-size:1.1rem;line-height:1;
+  display:grid;place-items:center;
+  transition:background .2s ease;
+}
+.wd-search-clear:hover{background:rgba(110,167,240,.3);}
+.wd-regions{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+}
+.wd-region{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:7px 13px;
+  cursor:pointer;
+  display:inline-flex;align-items:center;gap:7px;
+  transition:color .2s ease, border-color .2s ease, background .2s ease, transform .14s ease;
+}
+.wd-region:hover{color:var(--fg);border-color:rgba(110,167,240,.4);transform:translateY(-1px);}
+.wd-region .wd-region-n{
+  font-size:.56rem;color:var(--muted);
+  background:rgba(255,255,255,.06);border-radius:999px;padding:1px 6px;
+  transition:color .2s ease, background .2s ease;
+}
+.wd-region.is-active{
+  color:#0a0b0e;
+  background:linear-gradient(180deg,#74adf5,#4a8ade);
+  border-color:rgba(150,190,250,.6);
+}
+.wd-region.is-active .wd-region-n{color:#0a0b0e;background:rgba(255,255,255,.35);}
+.wd-region:focus-visible{outline:2px solid #94c0f8;outline-offset:2px;}
+.wd-count{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);
+}
+.chip.is-hidden{display:none !important;}
+
+/* small premium detail pass: fills the flatter interface areas without changing the site language */
+.sn,
+.proof-label,
+.briefing-kicker,
+.desk-news-kicker,
+.publishing-note-kicker,
+.recognition-kicker,
+.wd-count{
+  color:rgba(218,231,248,.72) !important;
+  text-shadow:0 0 22px rgba(92,132,198,.16);
+}
+.sn::before,
+.proof-label::before,
+.briefing-kicker::before,
+.desk-news-kicker::before,
+.recognition-kicker::before{
+  box-shadow:0 0 16px rgba(154,190,242,.18);
+}
+.wd-filter{
+  padding:14px;
+  border:1px solid rgba(226,238,252,.09);
+  border-radius:24px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012)),
+    radial-gradient(circle at 16% 0%,rgba(120,158,220,.07),transparent 36%),
+    linear-gradient(180deg,rgba(7,11,19,.58),rgba(3,5,10,.72));
+}
+.wd-search input,
+.hero-subscribe input,
+.contact-form input,
+.contact-form textarea{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012)),
+    rgba(0,0,0,.2) !important;
+  border-color:rgba(226,238,252,.13) !important;
+}
+.wd-search input:focus,
+.hero-subscribe input:focus,
+.contact-form input:focus,
+.contact-form textarea:focus{
+  border-color:rgba(174,205,248,.38) !important;
+  box-shadow:0 0 0 4px rgba(116,154,218,.07),inset 0 1px 0 rgba(255,255,255,.05) !important;
+}
+.wd-region,
+.chip{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.014)),
+    rgba(8,12,20,.42) !important;
+  border-color:rgba(226,238,252,.115) !important;
+}
+.wd-region.is-active,
+.chip.on{
+  background:
+    linear-gradient(180deg,rgba(164,195,242,.16),rgba(82,116,180,.075)),
+    rgba(10,16,28,.72) !important;
+  border-color:rgba(188,216,250,.34) !important;
+  box-shadow:0 10px 28px rgba(40,78,140,.14),inset 0 1px 0 rgba(255,255,255,.07) !important;
+}
+.world-desk-control-panel,
+.hero-subscribe,
+.publishing-note,
+.recognition-card,
+.lead-card,
+.article-card,
+.contact-proof,
+.contact-form,
+footer{
+  position:relative;
+  overflow:hidden;
+}
+.hero-subscribe::after,
+.publishing-note::after,
+.recognition-card::before,
+.lead-card::before,
+.article-card::before,
+.contact-proof::after,
+.contact-form::before,
+footer::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(120deg,transparent 0%,rgba(255,255,255,.055) 38%,transparent 72%),
+    radial-gradient(circle at 100% 0%,rgba(132,166,224,.075),transparent 36%);
+  opacity:.55;
+}
+.recognition-card::before,
+.lead-card::before,
+.article-card::before{
+  opacity:.38;
+}
+.publishing-note{
+  box-shadow:0 18px 52px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.045);
+}
+.publishing-note strong,
+.recognition-card h3,
+.lead-title,
+.ac-title,
+.contact-form-head strong{
+  text-shadow:0 0 28px rgba(120,158,220,.12);
+}
+.contact-proof{
+  border-color:rgba(226,238,252,.11) !important;
+}
+footer{
+  border-color:rgba(226,238,252,.09) !important;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(120,158,220,.055),transparent 34%),
+    linear-gradient(180deg,rgba(255,255,255,.018),rgba(255,255,255,.008)),
+    rgba(3,5,10,.86) !important;
+}
+footer .footer-sig{
+  border-color:rgba(226,238,252,.1);
+}
+footer .footer-sig svg{
+  opacity:.46;
+  filter:drop-shadow(0 0 12px rgba(164,196,242,.12));
+}
+@media(max-width:760px){
+  .wd-filter{
+    padding:10px;
+    border-radius:18px;
+  }
+  .hero-subscribe::after,
+  .publishing-note::after,
+  .recognition-card::before,
+  .lead-card::before,
+  .article-card::before,
+  .contact-proof::after,
+  .contact-form::before,
+  footer::before{
+    opacity:.32;
+  }
+}
+
+/* copy-email confirmation state */
+#copyEmailBtn.is-copied{
+  background:linear-gradient(180deg,#62a0f2,#3f7fd6) !important;
+  border-color:rgba(150,190,250,.55) !important;
+  color:#fff !important;
+}
+#copyEmailBtn.is-copied span{color:#fff !important;}
+
+/* final type + lighter opening pass */
+html,
+body,
+body *,
+body *::before,
+body *::after,
+button,
+input,
+textarea,
+select{
+  font-family:"Times New Roman",Times,serif !important;
+}
+#pre{
+  background:
+    radial-gradient(circle at 50% 32%,rgba(255,255,255,.22),transparent 15%),
+    radial-gradient(circle at 44% 52%,rgba(118,150,205,.22),transparent 38%),
+    linear-gradient(180deg,#101724 0%,#080d16 100%) !important;
+}
+#pre::before{
+  opacity:.26;
+}
+body{
+  background:
+    radial-gradient(circle at 10% 9%,rgba(176,200,236,.2),transparent 28%),
+    radial-gradient(circle at 62% 7%,rgba(255,255,255,.1),transparent 24%),
+    radial-gradient(circle at 96% 34%,rgba(118,150,205,.075),transparent 28%),
+    linear-gradient(180deg,#121a27 0%,#070b12 34%,#030406 100%) !important;
+}
+nav{
+  background:rgba(15,21,32,.74) !important;
+  border-color:rgba(232,240,252,.16) !important;
+  box-shadow:0 20px 58px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+.hero::before{
+  inset:84px -22px 24px -150px !important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.105),rgba(255,255,255,.026)),
+    radial-gradient(circle at 8% 18%,rgba(210,226,248,.21),transparent 26%),
+    radial-gradient(circle at 54% 16%,rgba(126,160,214,.15),transparent 30%),
+    radial-gradient(circle at 94% 54%,rgba(255,255,255,.055),transparent 26%),
+    linear-gradient(135deg,rgba(50,68,98,.66),rgba(11,18,30,.58) 48%,rgba(4,7,13,.42)) !important;
+  background-position:-42px 0,-56px 0,-34px 0,0 0,0 0 !important;
+  border-color:rgba(239,246,255,.12) !important;
+  box-shadow:0 34px 100px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.1) !important;
+}
+.hero::after{
+  inset:112px 36px 52px -104px !important;
+  border-color:rgba(255,255,255,.075) !important;
+}
+.hero-gridlines{
+  opacity:.34 !important;
+  transform:translateX(-96px) !important;
+  background-position:-92px 0 !important;
+}
+.hero-light{
+  opacity:.72 !important;
+  left:30% !important;
+  top:32% !important;
+  background:radial-gradient(circle,rgba(202,222,252,.2),rgba(128,164,222,.08) 30%,transparent 64%) !important;
+}
+.hero-serial{
+  color:rgba(255,255,255,.085) !important;
+}
+.hero-eyebrow,
+.hero-panel,
+.hero-stat,
+.hero-mini,
+.hero-btn{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.026)),
+    rgba(14,20,31,.54) !important;
+  border-color:rgba(235,244,255,.15) !important;
+}
+.hero-panel{
+  box-shadow:0 24px 76px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+.hero-h,
+.hero-panel-top strong,
+.hero-mini strong,
+.hero-stat strong{
+  color:#ffffff !important;
+}
+.hero-lead,
+.hero-p,
+.hero-positioning,
+.hero-panel-note,
+.hero-mini span,
+.hero-stat span{
+  color:#e0e7f0 !important;
+}
+.hero-tag,
+.hero-architect-meta span,
+.hero-panel-top span,
+.hero-mini label,
+.hero-stat label{
+  color:#eef5ff !important;
+}
+.ac-read{
+  text-decoration:none !important;
+}
+</style>
 <body>
 
 <div id="pre">
@@ -7272,6 +8148,39 @@ footer{
     <div class="pre-meter" aria-hidden="true"><span></span></div>
   </div>
 </div>
+<script>
+/* Resilience layer: keep the page usable even if a CDN script (D3) fails to
+   load and the main bundle never finishes. Preserves normal animations when
+   everything loads correctly. */
+(function(){
+  function reveal(){var p=document.getElementById('pre');if(p)p.classList.add('go');}
+  function showAll(){
+    var n=document.querySelectorAll('[data-r]');
+    for(var i=0;i<n.length;i++)n[i].classList.add('v');
+  }
+  function check(){
+    reveal();
+    if(!window.__siteReady){showAll();} /* main script errored out → show content */
+  }
+  setTimeout(reveal,1000);
+  window.addEventListener('load',function(){setTimeout(check,400);});
+
+  /* Copy-email button (independent of the globe bundle) */
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest&&e.target.closest('#copyEmailBtn');
+    if(!btn)return;
+    var email=btn.getAttribute('data-email')||'';
+    var label=btn.querySelector('span')||btn;
+    var done=function(){var old=label.textContent;label.textContent='Copied ✓';btn.classList.add('is-copied');setTimeout(function(){label.textContent=old;btn.classList.remove('is-copied');},1800);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(email).then(done).catch(function(){window.prompt('Copy this email address:',email);});
+    }else{
+      try{var t=document.createElement('textarea');t.value=email;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);done();}
+      catch(err){window.prompt('Copy this email address:',email);}
+    }
+  });
+})();
+</script>
 <div class="noise"></div>
 <div class="scroll-progress" aria-hidden="true"><span id="scrollProgressBar"></span></div>
 
@@ -7291,7 +8200,7 @@ footer{
 </a>
 
 <nav>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="#about" class="nl-a">About</a></li>
     <li><a href="#globe" class="nl-a">World Desk</a></li>
     <li><a href="#articles" class="nl-a">Articles</a></li>
@@ -7299,6 +8208,11 @@ footer{
     <li><a href="#contact" class="nl-a">Contact</a></li>
   </ul>
   <a href="#support" class="nav-support nav-cta">Support Ukraine</a>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -7378,6 +8292,7 @@ footer{
     </form>
     <div class="hero-actions">
       <a href="#contact" class="hero-btn pri">Start a Conversation</a>
+      <a href="mariupol-evidence-architecture.html" class="hero-btn">Read Mariupol Paper</a>
       <a href="#globe" class="hero-btn">Explore World Desk</a>
       <button class="hero-btn" type="button" data-briefing-open>Read Latest Briefing</button>
     </div>
@@ -7628,6 +8543,15 @@ footer{
       </div>
     </div>
   </div>
+  <div class="wd-filter" data-r data-d="3">
+    <div class="wd-search">
+      <svg class="wd-search-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="countrySearch" type="text" placeholder="Search countries…" autocomplete="off" spellcheck="false" aria-label="Search countries">
+      <button id="countrySearchClear" class="wd-search-clear" type="button" aria-label="Clear search" hidden>×</button>
+    </div>
+    <div class="wd-regions" id="wdRegions" role="group" aria-label="Filter countries by region"></div>
+    <div class="wd-count" id="wdCount" aria-live="polite"></div>
+  </div>
   <div class="chips" data-r data-d="3" id="chips"></div>
   <div class="globe-lay" style="margin-top:28px">
     <div class="globe-wrap" data-r>
@@ -7714,7 +8638,7 @@ footer{
   <div style="max-width:1100px;margin:0 auto">
     <div class="sn" data-r>PUBLISHING</div>
     <h2 class="sh" data-r data-d="1">Published work and <em>pipeline.</em></h2>
-    <p class="section-note" data-r data-d="2">One published briefing, with the next pieces shown honestly as work in progress.</p>
+    <p class="section-note" data-r data-d="2">A published working paper, a World Desk briefing, and the next pieces shown honestly as work in progress.</p>
     <div class="publishing-note" data-r data-d="3">
       <span class="publishing-note-kicker">Upcoming Project</span>
       <strong>An additional project beyond the core article pipeline is planned to be finished by the end of the summer.</strong>
@@ -7723,21 +8647,21 @@ footer{
   </div>
   <div class="articles-grid">
     <article class="article-card" data-r data-d="1">
-      <div class="ac-tag"><span class="ac-dot"></span>Published Briefing</div>
-      <h3 class="ac-title">Eastern Europe's Security Problem Is Now a Logistics Problem</h3>
-      <p class="ac-excerpt">A published World Desk briefing on why deterrence, ICC accountability, and Eastern European security now depend on sustainment, evidence architecture, and political endurance.</p>
+      <div class="ac-tag"><span class="ac-dot"></span>Published Paper</div>
+      <h3 class="ac-title">The Mariupol Evidence Architecture</h3>
+      <p class="ac-excerpt">A working paper on how a destroyed city becomes a legal case, and why Mariupol's record depends on evidence preservation, institutional coordination, and a testimonial layer survivors can recognize.</p>
       <div class="ac-meta">
-        <span class="ac-date">Apr 26, 2026</span>
-        <button class="ac-read ac-open" type="button" data-briefing-open>Read Briefing</button>
+        <span class="ac-date">World Desk Working Paper · 2026</span>
+        <a class="ac-read" href="mariupol-evidence-architecture.html">Read Article</a>
       </div>
     </article>
     <article class="article-card" data-r data-d="2">
-      <div class="ac-tag"><span class="ac-dot"></span>Ukraine</div>
-      <h3 class="ac-title">Mariupol After the Siege: Memory, Identity, and the Politics of Reconstruction</h3>
-      <p class="ac-excerpt">How a city rebuilds not just its infrastructure but its collective memory — and why the politics of reconstruction matter as much as the bricks.</p>
+      <div class="ac-tag"><span class="ac-dot"></span>Published Briefing</div>
+      <h3 class="ac-title">Eastern Europe's Security Problem Is Now a Logistics Problem</h3>
+      <p class="ac-excerpt">A World Desk briefing on why deterrence, ICC accountability, and Eastern European security now depend on sustainment, evidence architecture, and political endurance.</p>
       <div class="ac-meta">
-        <span class="ac-date">Field Essay</span>
-        <span class="ac-read">In Development</span>
+        <span class="ac-date">Apr 26, 2026</span>
+        <button class="ac-read ac-open" type="button" data-briefing-open>Read Briefing</button>
       </div>
     </article>
     <article class="article-card" data-r data-d="3">
@@ -7831,6 +8755,7 @@ footer{
         <div class="contact-proof"><strong>Best use of this site:</strong> collaboration in international affairs, policy writing, research, and public speaking.</div>
         <div class="cta-btns">
           <a href="mailto:olehtsumbek1@gmail.com" class="cb"><span>Direct Email</span></a>
+          <button type="button" class="cb" id="copyEmailBtn" data-email="olehtsumbek1@gmail.com"><span>Copy Email</span></button>
           <a href="https://www.linkedin.com/in/oleh-tsumbek-5044573ab" target="_blank" rel="noopener" class="cb"><span>LinkedIn</span></a>
         </div>
       </div>
@@ -8090,6 +9015,69 @@ if(countryCountEl)countryCountEl.textContent=String(COUNTRIES.length);
 if(worldDeskUpdatedEl)worldDeskUpdatedEl.textContent=WORLD_DESK_LAST_UPDATED;
 if(worldDeskUpdatedInlineEl)worldDeskUpdatedInlineEl.textContent=WORLD_DESK_LAST_UPDATED;
 COUNTRIES.forEach(c=>{const b=document.createElement('button');b.className='chip';b.type='button';b.dataset.countryId=String(c.id);b.setAttribute('aria-pressed','false');const flag=getCountryFlag(c);b.textContent=(flag?flag+' ':'')+c.name;b.setAttribute('aria-label',`Open ${c.name} World Desk briefing`);b.addEventListener('click',()=>selectCountry(c));chipsEl.appendChild(b)});
+
+/* ---- World Desk: search + region filter ---- */
+(function initCountryFilter(){
+  const searchInput=document.getElementById('countrySearch');
+  const clearBtn=document.getElementById('countrySearchClear');
+  const regionsEl=document.getElementById('wdRegions');
+  const countEl=document.getElementById('wdCount');
+  if(!searchInput||!regionsEl||!chipsEl)return;
+  const groupOf=region=>{
+    const r=String(region||'');
+    if(/Middle East|Gulf/.test(r))return 'Middle East';
+    if(/Black Sea/.test(r))return 'Europe';
+    if(/Europe|Nordics|Baltics/.test(r))return 'Europe';
+    if(/Central Asia|Eurasia/.test(r))return 'Eurasia';
+    if(/East Asia|South Asia|Indo-Pacific/.test(r))return 'Asia-Pacific';
+    if(/America/.test(r))return 'Americas';
+    return 'Other';
+  };
+  const idToGroup={};
+  COUNTRIES.forEach(c=>{idToGroup[String(c.id)]=groupOf(c.region);});
+  const order=['Europe','Middle East','Asia-Pacific','Eurasia','Americas','Other'];
+  const present=order.filter(g=>COUNTRIES.some(c=>idToGroup[String(c.id)]===g));
+  const groups=['All'].concat(present);
+  let activeRegion='All';
+  const buttons={};
+  groups.forEach(g=>{
+    const btn=document.createElement('button');
+    btn.type='button';
+    btn.className='wd-region'+(g==='All'?' is-active':'');
+    btn.dataset.region=g;
+    const n=g==='All'?COUNTRIES.length:COUNTRIES.filter(c=>idToGroup[String(c.id)]===g).length;
+    btn.innerHTML=g+' <span class="wd-region-n">'+n+'</span>';
+    btn.setAttribute('aria-pressed',g==='All'?'true':'false');
+    btn.addEventListener('click',()=>{activeRegion=g;Object.values(buttons).forEach(b=>{b.classList.remove('is-active');b.setAttribute('aria-pressed','false');});btn.classList.add('is-active');btn.setAttribute('aria-pressed','true');apply();});
+    buttons[g]=btn;
+    regionsEl.appendChild(btn);
+  });
+  const chips=()=>Array.from(chipsEl.children);
+  function apply(){
+    const term=(searchInput.value||'').trim().toLowerCase();
+    let shown=0;
+    chips().forEach(chip=>{
+      const grp=idToGroup[chip.dataset.countryId]||'Other';
+      const name=chip.textContent.toLowerCase();
+      const matchRegion=activeRegion==='All'||grp===activeRegion;
+      const matchText=!term||name.indexOf(term)!==-1;
+      const ok=matchRegion&&matchText;
+      chip.classList.toggle('is-hidden',!ok);
+      if(ok)shown++;
+    });
+    if(countEl)countEl.textContent='Showing '+shown+' of '+COUNTRIES.length;
+    if(clearBtn)clearBtn.hidden=!term;
+  }
+  searchInput.addEventListener('input',apply);
+  searchInput.addEventListener('keydown',e=>{if(e.key==='Escape'){searchInput.value='';apply();}});
+  if(clearBtn)clearBtn.addEventListener('click',()=>{searchInput.value='';apply();searchInput.focus();});
+  document.addEventListener('keydown',e=>{
+    if(e.key==='/'&&document.activeElement!==searchInput&&!/^(INPUT|TEXTAREA)$/.test((document.activeElement||{}).tagName||'')){
+      e.preventDefault();searchInput.focus();
+    }
+  });
+  apply();
+})();
 if(deskNewsRefreshEl)deskNewsRefreshEl.addEventListener('click',()=>loadWorldNews(true));
 
 function clampMetric(value,min=42,max=99){
@@ -8502,7 +9490,6 @@ async function loadCountryNews(country){
 function hitTest(x,y){
   const p=projection.invert([x*DPR,y*DPR]);
   if(!p)return null;
-  if(pointInRing(p,CRIMEA_UKRAINE_RING))return '804';
   if(!countriesGeo)return null;
   for(const f of countriesGeo.features){if(d3.geoContains(f,p))return f.id}
   return null;
@@ -8623,19 +9610,20 @@ function draw(){
       }
     }
     {
-      const active=String(sid)==='804';
-      const hov=String(hoverId)==='804';
       ctx.save();
-      if(active||hov){
-        ctx.shadowColor=active?'rgba(126,168,236,.18)':'rgba(174,198,232,.09)';
-        ctx.shadowBlur=(active?10:6)*DPR;
-      }
       if(traceProjectedRing(CRIMEA_UKRAINE_RING)){
-        ctx.fillStyle=active?'rgba(96,138,208,.22)':hov?'rgba(204,224,248,.18)':'rgba(118,148,196,.12)';
+        ctx.shadowColor='transparent';
+        ctx.shadowBlur=0;
+        ctx.fillStyle='rgba(47,56,70,.74)';
         ctx.fill();
         if(traceProjectedRing(CRIMEA_UKRAINE_RING)){
-          ctx.lineWidth=.95*DPR;
-          ctx.strokeStyle=active?'rgba(232,240,252,.3)':hov?'rgba(224,236,252,.26)':'rgba(170,194,228,.18)';
+          ctx.lineWidth=2.3*DPR;
+          ctx.strokeStyle='rgba(47,56,70,.9)';
+          ctx.stroke();
+        }
+        if(traceProjectedRing(CRIMEA_UKRAINE_RING)){
+          ctx.lineWidth=.72*DPR;
+          ctx.strokeStyle='rgba(172,188,210,.18)';
           ctx.stroke();
         }
       }
@@ -9027,6 +10015,37 @@ function initBriefingModal(){
   });
 }
 
+function initMobileMenu(){
+  const navEl=document.querySelector('nav');
+  const toggle=document.getElementById('navToggle');
+  const links=document.getElementById('navLinks');
+  if(!navEl||!toggle||!links)return;
+  const close=()=>{
+    navEl.classList.remove('nav-open');
+    toggle.setAttribute('aria-expanded','false');
+    toggle.setAttribute('aria-label','Open menu');
+  };
+  const open=()=>{
+    navEl.classList.add('nav-open');
+    toggle.setAttribute('aria-expanded','true');
+    toggle.setAttribute('aria-label','Close menu');
+  };
+  toggle.addEventListener('click',()=>{
+    navEl.classList.contains('nav-open')?close():open();
+  });
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape')close();
+  });
+  document.addEventListener('click',e=>{
+    if(!navEl.classList.contains('nav-open'))return;
+    if(!navEl.contains(e.target))close();
+  });
+  window.addEventListener('resize',()=>{
+    if(window.innerWidth>900)close();
+  },{passive:true});
+}
+
 const contactForm=document.getElementById('contactForm');
 if(contactForm){
   contactForm.addEventListener('submit',event=>{
@@ -9117,8 +10136,7 @@ if(subscribeForm){
 window.addEventListener('DOMContentLoaded',()=>{
   updateHeroScrollMotion();
   updateScrollProgress();
-  initFxVideos();
-  initMagneticButtons();
+  initMobileMenu();
   initBriefingModal();
   resize();
   const worldDeskSection=document.getElementById('globe');
@@ -9133,7 +10151,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   }else{
     loadWorldNews();
   }
-  const loaderDelay=window.matchMedia('(max-width: 760px)').matches?560:900;
+  const loaderDelay=window.matchMedia('(max-width: 760px)').matches?150:220;
   setTimeout(()=>document.getElementById('pre').classList.add('go'),loaderDelay);
 });
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
@@ -9159,6 +10177,7 @@ window.addEventListener('scroll',()=>{
 },{passive:true});
 btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:nativeScrollBehavior}));
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)window.scrollTo({top:t.offsetTop-60,behavior:nativeScrollBehavior})})});
+window.__siteReady=true;
 </script>
 </body>
 </html>
