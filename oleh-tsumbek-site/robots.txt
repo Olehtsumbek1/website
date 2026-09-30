@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://olehtsumbek.com/sitemap.xml

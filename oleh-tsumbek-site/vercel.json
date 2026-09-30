@@ -1,0 +1,16 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/mariupol-evidence-architecture",
+      "destination": "/mariupol-paper",
+      "permanent": false
+    },
+    {
+      "source": "/article/mariupol-evidence-architecture",
+      "destination": "/mariupol-paper",
+      "permanent": false
+    }
+  ]
+}
